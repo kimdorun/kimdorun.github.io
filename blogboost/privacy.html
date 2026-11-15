@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개인정보 처리방침 — 블로그부스트</title>
+<meta name="description" content="블로그부스트 크롬 확장 프로그램의 개인정보 처리방침. 본문은 수집하지 않으며, 라이선스 확인을 위한 키만 전송됩니다.">
+<style>
+  :root{--ink:#0b1220;--muted:#5b6779;--line:#e6eaf2;--accent:#4f46e5}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    color:var(--ink);line-height:1.75;letter-spacing:-.01em;background:#fff}
+  .wrap{max-width:760px;margin:0 auto;padding:56px 22px 80px}
+  .top{display:flex;align-items:center;gap:10px;font-weight:900;font-size:17px;letter-spacing:-.03em;margin-bottom:32px;text-decoration:none;color:inherit}
+  .top .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#4f46e5,#7c3aed);display:flex;align-items:flex-end;justify-content:center;gap:2px;padding:6px 5px 7px}
+  .top .mark i{display:block;width:3px;background:#fff;border-radius:1px}
+  .top .mark i:nth-child(1){height:5px}.top .mark i:nth-child(2){height:9px}.top .mark i:nth-child(3){height:13px}
+  h1{font-size:29px;font-weight:900;letter-spacing:-.03em;margin-bottom:8px}
+  .meta{font-size:13px;color:var(--muted);margin-bottom:28px}
+  h2{font-size:17px;font-weight:800;margin:32px 0 10px;letter-spacing:-.02em}
+  p,li{font-size:14.5px;color:#28313f}
+  ul{margin:8px 0 0 20px}
+  li{margin-bottom:6px}
+  .box{background:#f7f8fc;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:18px 0;font-size:14px;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+  th,td{border-bottom:1px solid var(--line);padding:10px 8px;text-align:left;vertical-align:top}
+  th{font-size:12.5px;color:var(--muted);font-weight:800;background:#fbfcff}
+  code{background:#f1f5f9;border-radius:5px;padding:1px 5px;font-size:13px}
+  a{color:var(--accent)}
+  .draft{border-left:3px solid #f59e0b;background:#fffbeb;padding:14px 16px;border-radius:10px;font-size:13.5px;color:#7c5308;margin-bottom:26px}
+  footer{border-top:1px solid var(--line);margin-top:44px;padding-top:20px;font-size:12.5px;color:#94a3b8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="top" href="./"><span class="mark"><i></i><i></i><i></i></span>블로그부스트</a>
+
+  <h1>개인정보 처리방침</h1>
+  <p class="meta">최종 수정일: 2026-11-16 · 시행일: 2026-11-16</p>
+
+  <h2>1. 요약</h2>
+  <div class="box">
+    블로그부스트는 <b>이용자가 쓰는 글의 내용을 수집하지 않습니다.</b>
+    본문·제목·키워드는 이용자의 브라우저 안에서만 계산되고 외부로 전송되지 않습니다.
+    외부 통신은 <b>라이선스 키 확인</b> 한 가지뿐입니다.
+  </div>
+
+  <h2>2. 확장 프로그램이 처리하는 정보</h2>
+  <table>
+    <thead><tr><th>항목</th><th>처리 목적</th><th>저장 위치</th><th>외부 전송</th></tr></thead>
+    <tbody>
+      <tr><td>타깃 키워드, 표시 설정, 위젯 위치</td><td>기능 제공</td><td>브라우저 로컬 저장소(<code>chrome.storage.local</code>)</td><td>없음</td></tr>
+      <tr><td>무료 체험 시작 시각·사용 횟수</td><td>체험 기간 관리</td><td>브라우저 로컬 저장소</td><td>없음</td></tr>
+      <tr><td>라이선스 키</td><td>구매 확인(Pro 활성화)</td><td>브라우저 로컬 저장소</td><td>라이선스 검증 API(아래 3항)</td></tr>
+      <tr><td>블로그 본문·제목</td><td>글자수·키워드 밀도 계산</td><td>저장하지 않음(메모리에서만 처리)</td><td>없음</td></tr>
+    </tbody>
+  </table>
+  <p>브라우저의 로컬 저장소는 계정 동기화 대상이 아니며, 확장을 삭제하면 함께 삭제됩니다.</p>
+
+  <h2>3. 라이선스 검증을 위한 전송</h2>
+  <p>Pro 활성화·재검증 시 다음 정보가 결제 대행 서버로 전송됩니다.</p>
+  <ul>
+    <li>라이선스 키, 기기 식별용 인스턴스 이름(브라우저·OS 종류)</li>
+    <li>전송 대상: Lemon Squeezy(<code>api.lemonsqueezy.com</code>) 또는 Paddle 검증 서버 — 판매 설정에 따름</li>
+  </ul>
+  <p>이 정보에는 글 내용, 블로그 주소, 네이버 계정 정보가 포함되지 않습니다.</p>
+
+  <h2>4. 수집하지 않는 정보</h2>
+  <ul>
+    <li>작성 중인 글의 내용, 이미지, 비밀글</li>
+    <li>네이버 아이디·비밀번호·쿠키</li>
+    <li>방문 기록, 검색어, 위치</li>
+    <li>광고 식별자, 분석(애널리틱스) 데이터</li>
+  </ul>
+
+  <h2>5. 권한 사용 이유</h2>
+  <ul>
+    <li><b>storage</b>: 키워드·설정·라이선스 상태를 로컬에 저장</li>
+    <li><b>alarms</b>: 라이선스를 12시간마다 재확인</li>
+    <li><b>blog.naver.com 등 사이트 접근</b>: 에디터의 글자수를 세기 위해 화면의 텍스트를 읽음(전송하지 않음)</li>
+    <li><b>api.lemonsqueezy.com 등</b>: 라이선스 키 검증</li>
+  </ul>
+
+  <h2>6. 보관 및 파기</h2>
+  <p>모든 로컬 데이터는 이용자의 브라우저에만 존재합니다. 확장 프로그램을 삭제하거나 브라우저 데이터를 지우면 즉시 파기됩니다.
+  판매자는 이용자의 로컬 데이터에 접근할 수 없습니다.</p>
+
+  <h2>7. 제3자 제공</h2>
+  <p>판매자는 이용자의 개인정보를 제3자에게 판매·제공하지 않습니다. 결제 및 세금 처리는 결제 대행사(Merchant of Record)가 수행하며,
+  이때의 정보 처리는 해당 사업자의 처리방침을 따릅니다.</p>
+
+  <h2>8. 이용자의 권리</h2>
+  <p>이용자는 언제든지 확장 프로그램을 삭제하여 데이터 처리를 중단할 수 있습니다. 라이선스 키 삭제·해제는 확장 팝업에서 직접 할 수 있습니다.
+  문의: <a href="mailto:rlaehdms5650@gmail.com">rlaehdms5650@gmail.com</a></p>
+
+  <h2>9. 아동의 개인정보</h2>
+  <p>본 제품은 만 14세 미만 아동을 대상으로 하지 않으며, 아동의 개인정보를 의도적으로 수집하지 않습니다.</p>
+
+  <h2>10. 방침의 변경</h2>
+  <p>내용이 변경되면 이 페이지에 게시하고 시행일을 갱신합니다. 중요한 변경은 제품 업데이트 노트로 함께 안내합니다.</p>
+
+  <h2>11. 문의처</h2>
+  <ul>
+    <li>운영: 블로그부스트 (BlogBoost)</li>
+    <li>문의 이메일: <a href="mailto:rlaehdms5650@gmail.com">rlaehdms5650@gmail.com</a></li>
+  </ul>
+
+  <footer>© 2026 BlogBoost. 블로그부스트는 네이버(주)와 제휴 관계가 없는 독립 제품입니다.</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>블로그부스트 — 네이버 블로그 글자수·키워드 밀도 실시간 체커</title>
+<meta name="description" content="네이버 스마트에디터에서 글자수와 키워드 밀도, 제목 길이를 실시간으로 확인하세요. 발행 전 저품질 위험을 쓰는 동안 바로 잡는 크롬 확장 프로그램. 평생 1회 결제.">
+<meta name="keywords" content="네이버 블로그 글자수, 키워드 밀도, 블로그 저품질, 스마트에디터, 체험단 글자수, 크롬 확장프로그램">
+<meta name="theme-color" content="#4f46e5">
+<link rel="canonical" href="https://kimdorun.github.io/blogboost/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="블로그부스트 — 쓰는 동안 글자수·키워드 밀도를 한눈에">
+<meta property="og:description" content="발행 후 진단은 그만. 네이버 블로그 편집 화면에서 실시간으로 밀도 신호등을 확인하세요. 평생 ₩10,900.">
+<meta property="og:url" content="https://kimdorun.github.io/blogboost/">
+<meta property="og:image" content="https://kimdorun.github.io/blogboost/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%236366f1'/%3E%3Cg fill='%23fff'%3E%3Crect x='14' y='38' width='7' height='12' rx='3'/%3E%3Crect x='28' y='30' width='7' height='20' rx='3'/%3E%3Crect x='42' y='20' width='7' height='30' rx='3'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+  :root{
+    --indigo:#4f46e5; --indigo-2:#6366f1; --violet:#7c3aed;
+    --good:#16a34a; --low:#2563eb; --high:#dc2626;
+    --ink:#0b1220; --ink-2:#1e293b; --muted:#64748b; --line:#e6eaf2;
+    --bg:#ffffff; --bg-soft:#f7f8fc;
+    --radius:18px; --max:1080px;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.06);
+    --shadow-md:0 10px 30px rgba(15,23,42,.10);
+    --shadow-lg:0 24px 60px rgba(15,23,42,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:"Pretendard","Pretendard Variable","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.6; letter-spacing:-.01em;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{width:100%;max:var(--max);margin:0 auto;padding:0 22px}
+  .eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;color:var(--indigo);
+    background:#eef2ff;border:1px solid #dfe5ff;padding:6px 12px;border-radius:999px;letter-spacing:-.01em}
+  h1,h2,h3{letter-spacing:-.03em;line-height:1.22}
+  h1{font-size:clamp(32px,5vw,54px);font-weight:900}
+  h2{font-size:clamp(24px,3.4vw,36px);font-weight:900}
+  h3{font-size:18px;font-weight:800}
+  .lead{font-size:clamp(15px,1.6vw,18px);color:var(--muted);line-height:1.7}
+  .section{padding:clamp(56px,8vw,96px) 0}
+  .section.soft{background:var(--bg-soft)}
+  .center{text-align:center}
+  .section-head{max-width:720px;margin:0 auto 44px;text-align:center}
+  .section-head h2{margin:14px 0 12px}
+
+  /* ---------- nav ---------- */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);
+    border-bottom:1px solid transparent;transition:border-color .2s,box-shadow .2s}
+  .nav.scrolled{border-bottom-color:var(--line);box-shadow:var(--shadow-sm)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:17px;letter-spacing:-.03em}
+  .brand .mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--indigo),var(--violet));
+    display:flex;align-items:flex-end;justify-content:center;gap:2.5px;padding:7px 6px 8px}
+  .brand .mark i{display:block;width:3.5px;border-radius:2px;background:#fff}
+  .brand .mark i:nth-child(1){height:6px}.brand .mark i:nth-child(2){height:10px}.brand .mark i:nth-child(3){height:14px}
+  .nav-links{display:flex;align-items:center;gap:26px;font-size:14px;font-weight:600;color:#475569}
+  .nav-links a:hover{color:var(--indigo)}
+  .nav-cta{display:flex;align-items:center;gap:10px}
+  .menu-btn{display:none;border:1px solid var(--line);background:#fff;border-radius:10px;width:40px;height:36px;font-size:17px}
+
+  /* ---------- buttons ---------- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:12px;
+    font-weight:800;font-size:15px;padding:14px 22px;cursor:pointer;transition:transform .12s ease,filter .12s ease,box-shadow .12s ease;white-space:nowrap}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{color:#fff;background:linear-gradient(135deg,#4f46e5,#7c3aed);box-shadow:0 10px 24px rgba(79,70,229,.28)}
+  .btn-primary:hover{filter:brightness(1.06);box-shadow:0 14px 30px rgba(79,70,229,.34)}
+  .btn-ghost{background:#fff;color:var(--ink-2);border:1px solid #d8dee9;box-shadow:var(--shadow-sm)}
+  .btn-ghost:hover{border-color:#c3cbe0;background:#fcfcff}
+  .btn-sm{padding:10px 16px;font-size:14px;border-radius:10px}
+  .btn-block{width:100%}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;padding:clamp(44px,7vw,84px) 0 clamp(40px,6vw,72px)}
+  .hero::before{content:"";position:absolute;inset:-30% -20% auto -20%;height:640px;
+    background:radial-gradient(60% 60% at 50% 40%,rgba(99,102,241,.18),rgba(124,58,237,.06) 60%,transparent 72%);
+    pointer-events:none}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center}
+  .hero h1 span{background:linear-gradient(135deg,#4f46e5,#9333ea);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .lead{margin:18px 0 26px;max-width:520px}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .hero-note{display:flex;flex-wrap:wrap;gap:16px;margin-top:20px;font-size:13px;color:var(--muted);font-weight:600}
+  .hero-note span{display:inline-flex;align-items:center;gap:6px}
+  .check{color:var(--good);font-weight:900}
+  .price-inline{font-size:13px;color:var(--muted);font-weight:700}
+  .price-inline b{color:var(--ink);font-size:15px}
+
+  /* editor mock */
+  .mock{position:relative;border-radius:22px;background:#fff;border:1px solid var(--line);
+    box-shadow:var(--shadow-lg);overflow:hidden;min-height:380px}
+  .mock-bar{display:flex;align-items:center;gap:6px;padding:11px 14px;background:#f8fafc;border-bottom:1px solid var(--line)}
+  .mock-bar i{width:9px;height:9px;border-radius:999px;background:#e2e8f0;display:block}
+  .mock-bar span{margin-left:8px;font-size:11px;color:#94a3b8;font-weight:600}
+  .mock-body{padding:20px 22px;position:relative;min-height:330px}
+  .mock-title{font-size:16px;font-weight:800;color:#0f172a;padding-bottom:10px;border-bottom:1px solid #f1f5f9;margin-bottom:14px}
+  .mock-line{height:9px;border-radius:5px;background:#eef2f7;margin-bottom:9px}
+  .mock-line.w1{width:92%}.mock-line.w2{width:78%}.mock-line.w3{width:88%}.mock-line.w4{width:64%}
+  .mock-line.hl{background:linear-gradient(90deg,#dbeafe,#ede9fe)}
+  .mock-hud{position:absolute;right:16px;bottom:16px;width:196px;border-radius:14px;background:#fff;
+    border:1px solid #e2e8f0;box-shadow:0 12px 28px rgba(15,23,42,.16);overflow:hidden;font-size:10.5px}
+  .mock-hud .h{display:flex;align-items:center;gap:5px;padding:7px 9px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-weight:800;font-size:10px}
+  .mock-hud .h b{margin-left:auto;font-size:8.5px;background:rgba(255,255,255,.22);padding:1px 5px;border-radius:999px}
+  .mock-hud .b{padding:8px 9px}
+  .mock-hud .stats{display:flex;gap:6px;margin-bottom:6px}
+  .mock-hud .stat{flex:1;background:#f8fafc;border:1px solid #e9eef6;border-radius:8px;padding:4px 6px}
+  .mock-hud .stat small{display:block;font-size:7.5px;color:#94a3b8;font-weight:700}
+  .mock-hud .stat b{font-size:14px;font-weight:900;letter-spacing:-.02em}
+  .mock-hud .kw{display:flex;align-items:center;gap:5px;border:1px solid #e9eef6;border-radius:8px;padding:4px 6px;margin-bottom:4px}
+  .mock-hud .dot{width:6px;height:6px;border-radius:999px;flex:0 0 6px}
+  .mock-hud .kw.good .dot{background:var(--good)}.mock-hud .kw.high .dot{background:var(--high)}.mock-hud .kw.low .dot{background:var(--low)}
+  .mock-hud .kw span{font-weight:700;flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .mock-hud .kw em{font-style:normal;font-weight:900;font-size:10px}
+  .mock-hud .kw.good em{color:var(--good)}.mock-hud .kw.high em{color:var(--high)}.mock-hud .kw.low em{color:var(--low)}
+  .mock-hud .title-row{display:flex;justify-content:space-between;border-top:1px dashed #e6eaf2;padding-top:6px;margin-top:2px;color:#64748b;font-weight:700}
+  .mock-hud .title-row b{color:var(--high)}
+  .float-badge{position:absolute;left:-14px;top:28px;background:#fff;border:1px solid var(--line);border-radius:12px;
+    padding:9px 12px;box-shadow:var(--shadow-md);font-size:11.5px;font-weight:800;display:flex;align-items:center;gap:7px}
+  .float-badge .dot{width:8px;height:8px;border-radius:999px;background:var(--good);box-shadow:0 0 0 4px rgba(22,163,74,.14)}
+  .float-badge2{position:absolute;right:-10px;top:96px;background:#fff;border:1px solid var(--line);border-radius:12px;
+    padding:9px 12px;box-shadow:var(--shadow-md);font-size:11.5px;font-weight:800;display:flex;align-items:center;gap:7px}
+  .float-badge2 .dot{width:8px;height:8px;border-radius:999px;background:var(--high);box-shadow:0 0 0 4px rgba(220,38,38,.12)}
+
+  /* ---------- logos / trust ---------- */
+  .trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fbfcfe}
+  .trust-inner{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:center;padding:20px 0;font-size:13px;color:var(--muted);font-weight:700}
+  .trust-inner b{color:var(--ink)}
+
+  /* ---------- pain ---------- */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm)}
+  .card .ico{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;
+    background:#eef2ff;margin-bottom:14px}
+  .card h3{margin-bottom:8px}
+  .card p{font-size:14.5px;color:var(--muted)}
+  .pain-card{position:relative;border-left:3px solid #fca5a5}
+  .pain-card .ico{background:#fef2f2}
+
+  /* ---------- features ---------- */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .feat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+  .feat:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:#d7dee9}
+  .feat .ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;
+    background:linear-gradient(135deg,#eef2ff,#f5f3ff);margin-bottom:13px}
+  .feat h3{font-size:16.5px;margin-bottom:7px}
+  .feat p{font-size:14px;color:var(--muted)}
+  .tag-new{font-size:10px;font-weight:900;color:var(--indigo);background:#eef2ff;border-radius:999px;padding:2px 7px;margin-left:6px;vertical-align:2px}
+
+  /* ---------- demo ---------- */
+  .demo{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow-md);overflow:hidden}
+  .demo-head{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+    padding:16px 20px;border-bottom:1px solid var(--line);background:#fbfcff}
+  .demo-head .t{font-weight:800;font-size:15px}
+  .demo-kw{display:flex;align-items:center;gap:8px}
+  .demo-kw input{border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:14px;font-family:inherit;outline:none;width:220px}
+  .demo-kw input:focus{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(79,70,229,.14)}
+  .demo-body{display:grid;grid-template-columns:1.4fr .9fr;gap:0}
+  .demo-editor{padding:0;border-right:1px solid var(--line)}
+  .demo-editor textarea{width:100%;min-height:280px;border:none;outline:none;resize:vertical;padding:20px;
+    font-family:inherit;font-size:14.5px;line-height:1.85;color:var(--ink-2);background:#fff}
+  .demo-panel{padding:20px;background:#fbfcff}
+  .d-stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+  .d-stat small{display:block;font-size:11.5px;color:var(--muted);font-weight:700;margin-bottom:2px}
+  .d-stat b{font-size:24px;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+  .d-kw{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+  .d-kw .dot{width:9px;height:9px;border-radius:999px;background:#cbd5e1;flex:0 0 9px}
+  .d-kw b{flex:1;font-size:14px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .d-kw em{font-style:normal;font-weight:900;font-size:14px;font-variant-numeric:tabular-nums}
+  .d-kw.good{border-color:#bbf7d0;background:#f0fdf4}.d-kw.good .dot{background:var(--good)}.d-kw.good em{color:var(--good)}
+  .d-kw.low{border-color:#bfdbfe;background:#eff6ff}.d-kw.low .dot{background:var(--low)}.d-kw.low em{color:var(--low)}
+  .d-kw.high{border-color:#fecaca;background:#fef2f2}.d-kw.high .dot{background:var(--high)}.d-kw.high em{color:var(--high)}
+  .d-hint{margin-top:10px;font-size:12.5px;color:var(--muted);line-height:1.55;min-height:38px}
+
+  /* ---------- steps ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:step}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;position:relative}
+  .step::before{counter-increment:step;content:counter(step);position:absolute;top:-14px;left:24px;width:32px;height:32px;border-radius:10px;
+    background:linear-gradient(135deg,var(--indigo),var(--violet));color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 16px rgba(79,70,229,.28);font-size:14px}
+  .step h3{margin:14px 0 8px;font-size:16.5px}
+  .step p{font-size:14px;color:var(--muted)}
+
+  /* ---------- compare ---------- */
+  .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-sm)}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
+  th,td{padding:15px 18px;text-align:left;border-bottom:1px solid #f1f4f9;vertical-align:top}
+  thead th{font-size:12.5px;letter-spacing:.01em;color:var(--muted);background:#fbfcff;font-weight:800;text-transform:none}
+  thead th.us{color:var(--indigo);background:#f5f6ff}
+  tbody tr:last-child td{border-bottom:none}
+  td.us{background:#fbfbff;font-weight:700}
+  .yes{color:var(--good);font-weight:900}
+  .no{color:#cbd5e1;font-weight:900}
+
+  /* ---------- pricing ---------- */
+  .pricing{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:start;max-width:860px;margin:0 auto}
+  .plan{border:1px solid var(--line);border-radius:22px;padding:28px;background:#fff;box-shadow:var(--shadow-sm);position:relative}
+  .plan.main{border:2px solid var(--indigo);box-shadow:var(--shadow-lg);background:linear-gradient(180deg,#fbfbff,#fff)}
+  .plan .ribbon{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--indigo),var(--violet));
+    color:#fff;font-size:11.5px;font-weight:900;padding:5px 14px;border-radius:999px;white-space:nowrap;box-shadow:0 6px 16px rgba(79,70,229,.3)}
+  .plan h3{font-size:16px;color:var(--muted);font-weight:800;letter-spacing:0}
+  .plan .price{display:flex;align-items:baseline;gap:8px;margin:10px 0 4px}
+  .plan .price b{font-size:44px;font-weight:900;letter-spacing:-.04em}
+  .plan .price span{font-size:14px;color:var(--muted);font-weight:700}
+  .plan .sub{font-size:12.5px;color:var(--muted);margin-bottom:18px}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin:18px 0 22px}
+  .plan li{display:flex;gap:9px;font-size:14px;color:var(--ink-2)}
+  .plan li .check{flex:0 0 auto}
+  .plan .fine{font-size:11.5px;color:#94a3b8;text-align:center;margin-top:10px;line-height:1.5}
+
+  /* ---------- faq ---------- */
+  .faq{max-width:820px;margin:0 auto}
+  .faq-item{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+  .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 20px;
+    background:none;border:none;text-align:left;font-size:15px;font-weight:800;font-family:inherit;color:var(--ink);cursor:pointer}
+  .faq-q .chev{color:#94a3b8;transition:transform .2s ease;font-size:13px}
+  .faq-item.open .chev{transform:rotate(180deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .26s ease}
+  .faq-a-inner{padding:0 20px 18px;font-size:14px;color:var(--muted);line-height:1.75}
+  .faq-a-inner b{color:var(--ink-2)}
+
+  /* ---------- cta band ---------- */
+  .band{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-radius:26px;padding:clamp(32px,5vw,54px);text-align:center;
+    box-shadow:0 24px 60px rgba(79,70,229,.28)}
+  .band h2{color:#fff;margin-bottom:12px}
+  .band p{color:rgba(255,255,255,.86);font-size:15px;margin-bottom:24px}
+  .band .btn-ghost{background:#fff;border-color:#fff;color:var(--indigo)}
+  .band .btn-primary{background:rgba(15,23,42,.92);box-shadow:none}
+  .band .btn-primary:hover{background:#0b1220}
+
+  /* ---------- refund ---------- */
+  .policy{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;font-size:13.5px;color:var(--muted);line-height:1.8}
+  .policy h3{font-size:16px;color:var(--ink);margin-bottom:10px}
+  .policy b{color:var(--ink-2)}
+  .policy ul{margin:8px 0 16px 18px}
+  .policy li{margin-bottom:5px}
+
+  /* ---------- footer ---------- */
+  footer{background:#0b1220;color:#94a3b8;padding:52px 0 34px;font-size:13px}
+  footer .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;margin-bottom:36px}
+  footer .fbrand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:900;font-size:17px;margin-bottom:12px}
+  footer h4{color:#fff;font-size:13px;font-weight:800;margin-bottom:12px}
+  footer a:hover{color:#c7d2fe}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .fbottom{border-top:1px solid #1e293b;padding-top:22px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:12px;color:#64748b}
+  .disc{font-size:11.5px;color:#64748b;line-height:1.7}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr}
+    .mock{min-height:340px}
+    .feat-grid,.grid-3,.steps{grid-template-columns:1fr 1fr}
+    .demo-body{grid-template-columns:1fr}
+    .demo-editor{border-right:none;border-bottom:1px solid var(--line)}
+    .pricing{grid-template-columns:1fr}
+    footer .fgrid{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:640px){
+    .nav-links{display:none}
+    .nav-links.open{display:flex;position:absolute;top:66px;left:0;right:0;background:#fff;flex-direction:column;
+      align-items:flex-start;padding:16px 22px;gap:14px;border-bottom:1px solid var(--line);box-shadow:var(--shadow-md)}
+    .menu-btn{display:block}
+    .feat-grid,.grid-3,.steps{grid-template-columns:1fr}
+    .float-badge,.float-badge2{display:none}
+    .hero-actions .btn{width:100%}
+    .demo-kw input{width:100%}
+    footer .fgrid{grid-template-columns:1fr}
+    .plan .price b{font-size:38px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <span class="mark"><i></i><i></i><i></i></span>
+      블로그부스트
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#features">기능</a>
+      <a href="#demo">직접 체험</a>
+      <a href="#compare">비교</a>
+      <a href="#pricing">가격</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </div>
+    <div class="nav-cta">
+      <!-- TODO: 실제 Chrome 웹스토어 URL로 교체 -->
+      <a class="btn btn-ghost btn-sm" href="#pricing" target="_blank" rel="noopener" id="storeTop">설치하기</a>
+      <a class="btn btn-primary btn-sm" href="#pricing">Pro 구매</a>
+      <button class="menu-btn" id="menuBtn" aria-label="메뉴 열기">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">✍️ 네이버 블로그 작성자를 위한 크롬 확장</span>
+      <h1>글자수 세다가<br><span>글 흐름 끊기지</span> 마세요.</h1>
+      <p class="lead">
+        블로그부스트는 스마트에디터 옆에서 <b>글자수 · 키워드 밀도 · 제목 길이</b>를
+        실시간으로 보여줍니다. 발행한 뒤에 진단하지 말고, 쓰는 동안 바로 고치세요.
+      </p>
+      <div class="hero-actions">
+        <!-- TODO: Chrome 웹스토어 URL -->
+        <a class="btn btn-primary" href="#pricing" target="_blank" rel="noopener">무료로 설치하기</a>
+        <a class="btn btn-ghost" href="#demo">30초 체험해보기</a>
+      </div>
+      <div class="hero-note">
+        <span><i class="check">✓</i> 회원가입 없음</span>
+        <span><i class="check">✓</i> 본문 서버 전송 0</span>
+        <span><i class="check">✓</i> 3일 무료 체험</span>
+      </div>
+      <p class="price-inline" style="margin-top:16px">체험 후 Pro <b>평생 ₩10,900</b> (1회 결제 · 구독 아님)</p>
+    </div>
+
+    <div style="position:relative">
+      <div class="float-badge"><span class="dot"></span> 밀도 적정 · 2.1%</div>
+      <div class="float-badge2"><span class="dot"></span> 제목 27자 · 초과</div>
+      <div class="mock" aria-hidden="true">
+        <div class="mock-bar"><i></i><i></i><i></i><span>blog.naver.com — 글쓰기</span></div>
+        <div class="mock-body">
+          <div class="mock-title">원룸 겨울 난방비, 이렇게 줄였습니다</div>
+          <div class="mock-line w1"></div>
+          <div class="mock-line w3 hl"></div>
+          <div class="mock-line w2"></div>
+          <div class="mock-line w4"></div>
+          <div class="mock-line w1" style="margin-top:18px"></div>
+          <div class="mock-line w2 hl"></div>
+          <div class="mock-line w3"></div>
+          <div class="mock-hud">
+            <div class="h">블로그부스트 <b>PRO</b></div>
+            <div class="b">
+              <div class="stats">
+                <div class="stat"><small>공백 포함</small><b>1,842</b></div>
+                <div class="stat"><small>공백 제외</small><b>1,596</b></div>
+              </div>
+              <div class="kw good"><span class="dot"></span><span>원룸 난방비</span><em>2.1%</em></div>
+              <div class="kw high"><span class="dot"></span><span>보일러 외출</span><em>3.4%</em></div>
+              <div class="title-row"><span>제목</span><b>27/25</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= TRUST ================= -->
+<div class="trust">
+  <div class="wrap trust-inner">
+    <span><b>1,500자</b> 이상 요구하는 체험단 가이드</span>
+    <span><b>3%</b> 넘으면 위험한 키워드 반복</span>
+    <span><b>25자</b>에서 잘리는 모바일 제목</span>
+    <span>이 셋을 한 화면에서</span>
+  </div>
+</div>
+
+<!-- ================= PAIN ================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">이런 적 있으시죠</span>
+      <h2>글은 머리에서 나오는데,<br>손은 계산기를 두드리고 있었습니다</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card pain-card reveal">
+        <div class="ico">🔁</div>
+        <h3>글자수 세려고 탭을 오갔다</h3>
+        <p>본문을 복사해서 글자수 세기 사이트에 붙여넣고, 다시 돌아와 이어 쓰는 사이에 문장이 날아갑니다.</p>
+      </div>
+      <div class="card pain-card reveal">
+        <div class="ico">🔍</div>
+        <h3>키워드가 몇 번 들어갔는지 몰라서</h3>
+        <p>Ctrl+F로 하나씩 세다가, 몇 번째부터가 과다인지 기준도 애매합니다. 감으로 발행하고 결과를 기다립니다.</p>
+      </div>
+      <div class="card pain-card reveal">
+        <div class="ico">📉</div>
+        <h3>발행하고 나서야 안 저품질</h3>
+        <p>지수 사이트에 아이디를 넣어 확인하는 건 이미 늦은 뒤입니다. 고칠 수 있는 건 다음 글뿐입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section class="section soft" id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">기능</span>
+      <h2>작성 화면 위에 필요한 숫자만</h2>
+      <p class="lead">화면을 가리지 않는 작은 패널 하나. 원하는 위치로 옮기고, 접으면 수치만 남습니다.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat reveal">
+        <div class="ico">🔢</div>
+        <h3>실시간 글자수</h3>
+        <p>공백 포함·제외를 동시에. 이모지도 1자로 세는 정확한 계산. 250ms 안에 갱신됩니다.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ico">🎯</div>
+        <h3>키워드 밀도 (최대 3개)</h3>
+        <p>키워드를 등록하면 출현 횟수와 글자 점유율을 자동 계산. 띄어쓰기가 달라도 찾아냅니다.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ico">🚦</div>
+        <h3>안전 신호등</h3>
+        <p>1.5% 미만 부족(파랑) · 1.5~3.0% 적정(초록) · 3.0% 초과 과다(빨강). 색만 봐도 판단됩니다.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ico">📱</div>
+        <h3>제목 길이 경고</h3>
+        <p>모바일 피드에서 잘리지 않는 25자를 기준으로 초과 시 즉시 표시. 20/30자로 바꿀 수 있습니다.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ico">💬</div>
+        <h3>한 줄 조언</h3>
+        <p>"밀도가 높습니다. 문장을 늘려 3.0% 아래로." 무엇을 고쳐야 하는지 바로 알려줍니다.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ico">🔒</div>
+        <h3>본문은 브라우저 밖으로 나가지 않음</h3>
+        <p>글 내용을 저장·전송·수집하지 않습니다. 네트워크 요청은 라이선스 확인뿐입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DEMO ================= -->
+<section class="section" id="demo">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">직접 체험</span>
+      <h2>설치 전에, 여기서 먼저 확인하세요</h2>
+      <p class="lead">아래 칸에 글을 쓰고 키워드를 넣어보세요. 실제 확장과 같은 계산 방식으로 밀도를 보여줍니다.</p>
+    </div>
+    <div class="demo reveal">
+      <div class="demo-head">
+        <span class="t">미리보기 — 실시간 밀도 계산</span>
+        <div class="demo-kw">
+          <label for="demoKeyword" style="font-size:13px;font-weight:700;color:#475569">타깃 키워드</label>
+          <input id="demoKeyword" type="text" value="원룸 난방비" maxlength="30" placeholder="키워드 입력">
+        </div>
+      </div>
+      <div class="demo-body">
+        <div class="demo-editor">
+          <textarea id="demoText" spellcheck="false">원룸 난방비가 매달 부담스러워서 이번 겨울에는 방법을 바꿨습니다. 먼저 보일러 외출 기능을 쓰기 시작했고, 창문에는 단열 시트를 붙였습니다.
+
+원룸 난방비를 줄이려면 무엇보다 '켜 두는 시간'을 줄이는 게 중요합니다. 저는 원룸 난방비를 아끼려고 전기요금 앱으로 사용량을 매일 확인했어요.
+
+결과적으로 지난달 원룸 난방비는 14만 원에서 9만 원까지 내려갔습니다.</textarea>
+        </div>
+        <div class="demo-panel">
+          <div class="d-stat"><small>공백 포함 글자수</small><b id="dWith">0</b></div>
+          <div class="d-stat"><small>공백 제외 글자수</small><b id="dNo">0</b></div>
+          <div class="d-kw" id="dKw"><span class="dot"></span><b id="dKwName">원룸 난방비</b><em id="dKwPct">0%</em></div>
+          <div class="d-hint" id="dHint">키워드를 입력하면 밀도를 계산합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEPS ================= -->
+<section class="section soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">사용법</span>
+      <h2>설치하고, 쓰고, 확인하면 끝</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <h3>크롬에 설치</h3>
+        <p>확장 프로그램 압축파일을 받아 브라우저에 등록합니다. 회원가입도, 블로그 ID 입력도 없습니다.</p>
+      </div>
+      <div class="step reveal">
+        <h3>키워드 3개 등록</h3>
+        <p>툴바 아이콘을 눌러 타깃 키워드를 넣습니다. 패널에서 바로 추가·삭제할 수도 있습니다.</p>
+      </div>
+      <div class="step reveal">
+        <h3>글쓰기 화면에서 확인</h3>
+        <p>네이버 블로그 글쓰기를 열면 패널이 자동으로 뜹니다. 발행 전 마지막 점검은 신호등 색으로.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARE ================= -->
+<section class="section" id="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">비교</span>
+      <h2>블로그 지수 사이트와 경쟁이 아닙니다</h2>
+      <p class="lead">그쪽은 발행 후 진단, 블로그부스트는 작성 중 예방. 서로 다른 자리에서 일합니다.</p>
+    </div>
+    <div class="table-wrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>항목</th>
+            <th class="us">블로그부스트</th>
+            <th>글자수 세기 사이트</th>
+            <th>블로그 지수 사이트<br><span style="font-weight:600">(바루다·블덱스·블로그차트 등)</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>확인 시점</td><td class="us"><b>작성 중 실시간</b></td><td>복사·붙여넣기 후</td><td>발행 후</td></tr>
+          <tr><td>키워드 밀도·신호등</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✕</span></td><td>일부 (사후 분석)</td></tr>
+          <tr><td>제목 길이 경고</td><td class="us"><span class="yes">✓</span></td><td>텍스트 붙여넣기 시</td><td><span class="no">✕</span></td></tr>
+          <tr><td>회원가입</td><td class="us"><b>불필요</b></td><td>불필요</td><td>필요</td></tr>
+          <tr><td>블로그 ID 서버 전송</td><td class="us"><b>없음</b></td><td>없음</td><td>있음 (크롤링)</td></tr>
+          <tr><td>일일 조회 제한</td><td class="us"><b>없음</b></td><td>없음</td><td>무료 플랜 제한</td></tr>
+          <tr><td>가격</td><td class="us"><b>평생 ₩10,900</b></td><td>무료</td><td>월 구독형 유료 플랜</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="text-align:center;font-size:12.5px;color:#94a3b8;margin-top:14px">
+      * 각 서비스의 기능과 가격은 2026년 11월 공개 정보 기준이며, 변경될 수 있습니다.
+    </p>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section class="section soft" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">가격</span>
+      <h2>구독 없이, 한 번만</h2>
+      <p class="lead">3일(또는 5회) 무료 체험 후 결정하세요. 체험 후에도 글자수와 제목 길이는 계속 무료입니다.</p>
+    </div>
+    <div class="pricing">
+      <div class="plan main reveal">
+        <span class="ribbon">가장 많이 선택</span>
+        <h3>PRO · 평생 라이선스</h3>
+        <div class="price"><b>₩10,900</b><span>/ $7.99 1회</span></div>
+        <p class="sub">한 번 결제하면 계속 씁니다. 갱신 없음.</p>
+        <ul>
+          <li><span class="check">✓</span> 글자수(공백 포함·제외) 무제한</li>
+          <li><span class="check">✓</span> 키워드 3개 밀도 + 안전 신호등</li>
+          <li><span class="check">✓</span> 제목 길이 경고 (20/25/30자)</li>
+          <li><span class="check">✓</span> 패널 위치·접기 설정 저장</li>
+          <li><span class="check">✓</span> 평생 업데이트 (v1.x)</li>
+          <li><span class="check">✓</span> 기기 3대까지 활성화</li>
+        </ul>
+        <!-- TODO: Lemon Squeezy 체크아웃 링크로 교체 -->
+        <a class="btn btn-primary btn-block" href="REPLACE_WITH_LEMON_SQUEEZY_CHECKOUT_URL" data-plan="lifetime">평생 라이선스 구매</a>
+        <p class="fine">구매 후 7일 이내 전액 환불 · 카드/PayPal 결제</p>
+      </div>
+
+      <div class="plan reveal">
+        <h3>MONTHLY</h3>
+        <div class="price"><b>₩3,900</b><span>/ $2.99 월</span></div>
+        <p class="sub">짧게 써보고 싶다면. 언제든 해지.</p>
+        <ul>
+          <li><span class="check">✓</span> Pro의 모든 기능</li>
+          <li><span class="check">✓</span> 월 단위 결제, 즉시 해지 가능</li>
+          <li><span class="check">✓</span> 기기 3대까지 활성화</li>
+        </ul>
+        <!-- TODO: Lemon Squeezy 구독 체크아웃 링크 -->
+        <a class="btn btn-ghost btn-block" href="REPLACE_WITH_LEMON_SQUEEZY_SUBSCRIPTION_URL" data-plan="monthly">월 구독 시작</a>
+        <p class="fine">3개월 사용 시 평생 라이선스보다 비쌉니다.</p>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:#64748b;margin-top:22px">
+      결제는 Lemon Squeezy를 통해 처리되며, 카드 정보는 판매자에게 저장되지 않습니다.
+    </p>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">자주 묻는 질문</span>
+      <h2>결제 전에 확인하세요</h2>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q">네이버 계정이 정지되거나 불이익을 받을 수 있나요? <span class="chev">▾</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          아닙니다. 블로그부스트는 <b>읽기만 하는 계측기</b>입니다. 글을 자동으로 쓰거나, 자동 발행하거나, 다른 블로그를 크롤링하지 않습니다.
+          화면에 보이는 내 글의 글자수를 세어 보여줄 뿐이라 네이버 약관상 문제되는 동작이 없습니다.
+        </div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">내 글 내용이 어디로 전송되나요? <span class="chev">▾</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <b>어디로도 전송되지 않습니다.</b> 본문·제목·키워드는 브라우저 메모리에서만 계산됩니다.
+          외부 통신은 라이선스 키 확인(구매 검증) 한 가지뿐이고, 그때도 키만 전송됩니다.
+        </div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">무료 체험은 어떻게 끝나나요? <span class="chev">▾</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          설치 후 <b>3일</b> 또는 <b>5회 사용</b> 중 먼저 도달하는 시점에 끝납니다. 체험이 끝나도
+          글자수와 제목 길이는 계속 무료로 쓸 수 있고, 키워드 밀도·신호등만 Pro로 열립니다.
+        </div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">라이선스 키는 어떻게 받나요? <span class="chev">▾</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          결제 완료 후 입력한 이메일로 <b>라이선스 키</b>가 즉시 발송됩니다. 확장 아이콘 → 라이선스 칸에 붙여넣고 [활성화]를 누르면 됩니다.
+          기기 3대까지 같은 키로 사용할 수 있습니다.
+        </div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">환불이 되나요? <span class="chev">▾</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          네. <b>구매 후 7일 이내, 사유를 묻지 않고 전액 환불</b>합니다. 아래 지원 메일로 구매 이메일과 함께 알려주세요.
+          환불 시 라이선스는 비활성화됩니다.
+        </div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">스마트에디터가 바뀌면 못 쓰게 되나요? <span class="chev">▾</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          네이버가 편집기 구조를 바꾸면 감지 로직을 갱신해야 합니다. 블로그부스트는 1.x 기간 내
+          <b>48시간 내 패치</b>를 목표로 관리하며, 평생 라이선스에는 업데이트가 포함됩니다.
+        </div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">엣지·웨일 같은 브라우저에서도 되나요? <span class="chev">▾</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          크롬 기반 브라우저(Edge, 웨일, 브레이브 등)는 크롬 웹스토어 확장을 설치할 수 있어 대부분 동작합니다.
+          공식 지원은 <b>Chrome 최신 버전</b>입니다.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REFUND / POLICY ================= -->
+<section class="section soft" id="refund">
+  <div class="wrap">
+    <div class="policy">
+      <h3>환불 정책</h3>
+      <p>블로그부스트는 디지털 상품입니다. 아래 기준으로 환불해 드립니다.</p>
+      <ul>
+        <li><b>구매 후 7일 이내</b>: 사유와 관계없이 전액 환불</li>
+        <li>7일 이후: 결제 오류·중복 결제·기능이 전혀 동작하지 않는 경우 환불</li>
+        <li>환불 요청 방법: 구매 이메일과 라이선스 키(또는 주문번호)를 <a href="mailto:rlaehdms5650@gmail.com"><b>rlaehdms5650@gmail.com</b></a>로 발송</li>
+        <li>처리 기간: 접수 후 3영업일 내 처리, 카드사에 따라 5~7일 추가 소요</li>
+      </ul>
+      <p style="font-size:12.5px;color:#94a3b8">
+        ※ 전자상거래법상 디지털 콘텐츠는 사용 시작 시 청약철회가 제한될 수 있으나,
+        본 판매자는 위 정책을 임의로 더 넓게 적용합니다. 결제 대행(Lemon Squeezy) 정책과 충돌하는 경우 대행사 정책이 우선합니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="band">
+      <h2>다음 글부터는, 세지 마세요</h2>
+      <p>설치 1분, 회원가입 없음. 3일 동안 모든 기능을 써보고 결정하세요.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn-ghost" href="/blogboost/blogboost-1.0.0.zip" download>무료 다운로드 (ZIP)</a>
+        <a class="btn btn-primary" href="#pricing">가격 보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="fbrand"><span class="mark" style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#6366f1,#7c3aed);display:flex;align-items:flex-end;justify-content:center;gap:2px;padding:6px 5px 7px"><i style="display:block;width:3px;height:5px;background:#fff;border-radius:1px"></i><i style="display:block;width:3px;height:9px;background:#fff;border-radius:1px"></i><i style="display:block;width:3px;height:13px;background:#fff;border-radius:1px"></i></span> 블로그부스트</div>
+        <p class="disc">
+          네이버 블로그 작성자를 위한 실시간 글자수·키워드 밀도 체커.<br>
+          블로그부스트는 네이버(주)와 제휴·후원 관계가 없는 독립 제품입니다.
+        </p>
+      </div>
+      <div>
+        <h4>제품</h4>
+        <ul>
+          <li><a href="#features">기능</a></li>
+          <li><a href="#demo">직접 체험</a></li>
+          <li><a href="#pricing">가격</a></li>
+          <li><a href="#faq">자주 묻는 질문</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>지원 · 정책</h4>
+        <ul>
+          <li><a href="mailto:rlaehdms5650@gmail.com">rlaehdms5650@gmail.com</a></li>
+          <li><a href="#refund">환불 정책</a></li>
+          <li><a href="/blogboost/privacy.html">개인정보 처리방침</a></li>
+          <li><a href="/blogboost/terms.html">이용약관</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbottom">
+      <span>© 2026 BlogBoost. 개인 판매자 제품.</span>
+      <span>결제: Lemon Squeezy (Merchant of Record)</span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "블로그부스트 (BlogBoost)",
+  "applicationCategory": "ProductivityApplication",
+  "operatingSystem": "Chrome",
+  "description": "네이버 블로그 스마트에디터에서 글자수, 키워드 밀도, 제목 길이를 실시간으로 확인하는 크롬 확장 프로그램.",
+  "url": "https://kimdorun.github.io/blogboost/",
+  "offers": [
+    { "@type": "Offer", "name": "PRO 평생 라이선스", "price": "10900", "priceCurrency": "KRW" },
+    { "@type": "Offer", "name": "MONTHLY 구독", "price": "3900", "priceCurrency": "KRW" }
+  ],
+  "aggregateRating": null
+}
+</script>
+
+<script>
+(function () {
+  'use strict';
+
+  // 1) 스크롤 시 nav 그림자
+  var nav = document.getElementById('nav');
+  function onScroll() {
+    if (window.scrollY > 8) { nav.classList.add('scrolled'); }
+    else { nav.classList.remove('scrolled'); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // 2) 모바일 메뉴
+  var menuBtn = document.getElementById('menuBtn');
+  var navLinks = document.getElementById('navLinks');
+  if (menuBtn) {
+    menuBtn.addEventListener('click', function () {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.addEventListener('click', function (ev) {
+      if (ev.target.tagName === 'A') { navLinks.classList.remove('open'); }
+    });
+  }
+
+  // 3) FAQ 아코디언
+  document.querySelectorAll('.faq-q').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item = btn.parentElement;
+      var answer = item.querySelector('.faq-a');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-a').style.maxHeight = '0px';
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // 4) 등장 애니메이션
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+  }
+
+  // 5) 실시간 데모 — 확장과 동일한 계산식
+  var demoText = document.getElementById('demoText');
+  var demoKeyword = document.getElementById('demoKeyword');
+  var dWith = document.getElementById('dWith');
+  var dNo = document.getElementById('dNo');
+  var dKw = document.getElementById('dKw');
+  var dKwName = document.getElementById('dKwName');
+  var dKwPct = document.getElementById('dKwPct');
+  var dHint = document.getElementById('dHint');
+  var DENSITY_MIN = 1.5;
+  var DENSITY_MAX = 3.0;
+
+  function codePoints(str) { return Array.from(str).length; }
+  function format(num) { return num.toLocaleString('ko-KR'); }
+
+  function countOccurrences(haystack, needle) {
+    if (!needle) { return 0; }
+    var count = 0;
+    var from = 0;
+    while (true) {
+      var idx = haystack.indexOf(needle, from);
+      if (idx === -1) { break; }
+      count += 1;
+      from = idx + needle.length;
+    }
+    return count;
+  }
+
+  function updateDemo() {
+    var raw = demoText.value || '';
+    var compact = raw.replace(/\s+/g, '');
+    dWith.textContent = format(codePoints(raw));
+    dNo.textContent = format(codePoints(compact));
+
+    var keyword = (demoKeyword.value || '').replace(/\s+/g, '').trim();
+    dKwName.textContent = demoKeyword.value.trim() || '키워드 없음';
+    dKw.className = 'd-kw';
+
+    if (!keyword) {
+      dKwPct.textContent = '—';
+      dHint.textContent = '키워드를 입력하면 출현 횟수와 밀도를 계산합니다.';
+      return;
+    }
+    var count = countOccurrences(compact.toLowerCase(), keyword.toLowerCase());
+    var total = codePoints(compact);
+    var density = total > 0 ? (codePoints(keyword) * count / total) * 100 : 0;
+    var level = count === 0 ? 'none' : (density < DENSITY_MIN ? 'low' : (density > DENSITY_MAX ? 'high' : 'good'));
+
+    dKwPct.textContent = count === 0 ? '0%' : density.toFixed(1) + '%';
+    if (level === 'good') {
+      dKw.classList.add('good');
+      dHint.textContent = count + '회 등장 · 적정 구간(1.5~3.0%)입니다. 이대로 발행해도 좋습니다.';
+    } else if (level === 'low') {
+      dKw.classList.add('low');
+      dHint.textContent = count + '회 등장 · 밀도가 부족합니다. 본문에 한두 번 더 자연스럽게 넣어보세요.';
+    } else if (level === 'high') {
+      dKw.classList.add('high');
+      dHint.textContent = count + '회 등장 · 밀도가 과다합니다. 문장을 늘리거나 반복을 줄이세요.';
+    } else {
+      dHint.textContent = '본문에 아직 이 키워드가 없습니다.';
+    }
+  }
+
+  if (demoText && demoKeyword) {
+    demoText.addEventListener('input', updateDemo);
+    demoKeyword.addEventListener('input', updateDemo);
+    updateDemo();
+  }
+})();
+</script>
+</body>
+</html>
