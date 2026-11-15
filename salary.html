@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 연봉·월급 실수령액 계산기 | 4대보험·소득세 공제 항목별 계산</title>
+<meta name="description" content="2026년 4대보험 요율(국민연금 4.75%, 건강보험 3.595%, 장기요양 13.14%, 고용보험 0.9%)과 소득세를 반영한 월 실수령액 계산기. 비과세 식대와 부양가족 수를 넣으면 공제 항목별 금액을 원 단위로 보여줍니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://kimdorun.github.io/salary.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026 연봉·월급 실수령액 계산기">
+<meta property="og:description" content="4대보험과 소득세를 항목별로 계산해 세전 연봉이 통장에 얼마로 들어오는지 확인하세요.">
+<meta property="og:url" content="https://kimdorun.github.io/salary.html">
+<meta property="og:locale" content="ko_KR">
+<meta name="theme-color" content="#2257e0">
+<link rel="stylesheet" href="assets/style.css">
+<!-- ADSENSE: 승인 후 주석 해제 + 게시자 ID 교체
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "2026 연봉·월급 실수령액 계산기",
+  "url": "https://kimdorun.github.io/salary.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All",
+  "inLanguage": "ko-KR",
+  "description": "2026년 4대보험 요율과 근로소득세를 반영해 월 실수령액과 공제 항목별 금액을 계산하는 무료 도구.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "비과세 식대는 연봉에 포함해서 입력해야 하나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "네. 연봉에는 식대가 포함된 경우가 많으므로 세전 총액을 입력하고, 그중 비과세로 처리되는 식대를 별도로 입력하세요. 식대 비과세 한도는 월 20만원(연 240만원)이며, 초과분은 과세 대상으로 계산됩니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "부양가족 수는 어떻게 세나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "본인을 포함해 1명으로 시작하고, 배우자와 소득·나이 요건을 충족하는 부양가족을 1명씩 더합니다. 인적공제는 1명당 연 150만원이며, 이 계산기는 부양가족 수에 따라 소득세만 달라지고 4대보험료는 변하지 않도록 설계했습니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "계산한 소득세가 급여명세서와 다른 이유는 무엇인가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "회사는 국세청 근로소득 간이세액표로 매월 원천징수하고, 이 계산기는 연간 소득·공제를 추정해 12로 나눕니다. 카드 사용액, 의료비·월세 세액공제, 회사별 비과세 항목과 원천징수 비율(80%·100%·120%) 선택에 따라 차이가 날 수 있습니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "국민연금은 월급이 아무리 높아도 같은 금액인가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "네. 기준소득월액 상한이 2026년 7월부터 2027년 6월까지 659만원이므로, 월 과세 급여가 659만원을 넘어도 근로자 부담은 659만원의 4.75%인 313,025원에서 멈춥니다. 하한은 41만원입니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "프리랜서 3.3%와 4대보험은 어떻게 다른가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "사업소득으로 처리되는 프리랜서는 근로자용 4대보험 대신 소득세 3%와 지방소득세 0.3%를 원천징수합니다. 근로계약을 맺고 근로를 제공했다면 4대보험 가입 대상이므로, 계약 형태와 실제 근무 실태를 기준으로 판단해야 합니다." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">₩</span>
+      <span class="brand-text">생활금융 계산기<small>LIFE FINANCE CALC</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">메뉴</button>
+    <nav class="site-nav" id="site-nav" aria-label="주요 메뉴">
+      <a href="salary.html">실수령액</a>
+      <a href="severance.html">퇴직금·실업급여</a>
+      <a href="housing.html">전세·월세</a>
+      <a href="living.html">난방비·정산</a>
+      <a href="about.html">소개</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap">
+      <ol class="breadcrumb">
+        <li><a href="index.html">홈</a></li>
+        <li>연봉·월급 실수령액</li>
+      </ol>
+      <span class="eyebrow">2026년 요율 적용</span>
+      <h1>2026 연봉·월급 실수령액 계산기</h1>
+      <p class="lede">세전 연봉을 넣으면 4대보험과 소득세를 항목별로 계산해 월 실수령액을 보여드립니다.
+      비과세 식대와 부양가족 수를 반영해 원 단위까지 확인하세요.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-label="실수령액 계산기">
+    <div class="wrap">
+      <div class="calc-shell">
+        <form class="card calc-panel" id="salary-form" novalidate>
+          <h2><span class="step" aria-hidden="true">1</span> 급여 정보 입력</h2>
+
+          <div class="segmented" id="mode-seg" data-segment="mode" role="group" aria-label="입력 기준 선택">
+            <button type="button" data-value="annual" aria-pressed="true">연봉</button>
+            <button type="button" data-value="monthly" aria-pressed="false">월급</button>
+          </div>
+
+          <div class="field">
+            <label for="amount" id="amount-label">세전 연봉</label>
+            <div class="input-wrap">
+              <input type="text" id="amount" name="amount" data-money inputmode="numeric" value="36,000,000" autocomplete="off">
+              <span class="unit">원</span>
+            </div>
+            <span class="hint" id="amount-hint">성과급·수당을 포함한 세전 총액(비과세 포함)을 입력하세요.</span>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="nonTaxable">비과세 식대 (월)</label>
+              <div class="input-wrap">
+                <input type="text" id="nonTaxable" name="nonTaxable" data-money inputmode="numeric" value="200,000" autocomplete="off">
+                <span class="unit">원</span>
+              </div>
+              <span class="hint">월 20만원까지 비과세. 없으면 0.</span>
+            </div>
+            <div class="field">
+              <label for="dependents">부양가족 수</label>
+              <div class="input-wrap">
+                <input type="text" id="dependents" name="dependents" data-money inputmode="numeric" value="1" autocomplete="off">
+                <span class="unit">명</span>
+              </div>
+              <span class="hint">본인 포함 인원. 인적공제 1인당 연 150만원.</span>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button class="btn btn-block" type="submit">실수령액 계산하기</button>
+          </div>
+          <p class="hint" style="margin-top:12px;">입력값은 서버로 전송되지 않고 브라우저에서만 계산됩니다.</p>
+        </form>
+
+        <div class="card result-panel" id="salary-result" aria-live="polite">
+          <p class="result-label">월 예상 실수령액</p>
+          <div class="result-hero">
+            <strong class="amount" data-out="netMonthly">-</strong>
+            <span class="sub" data-out="netAnnualSub">연 실수령액 -</span>
+          </div>
+          <span class="visually-hidden" data-live role="status"></span>
+
+          <table class="breakdown">
+            <caption>월 기준 공제 내역</caption>
+            <tbody>
+              <tr><th scope="row">세전 월급</th><td data-out="grossMonthly">-</td></tr>
+              <tr><th scope="row">비과세 식대</th><td data-out="nonTaxable">-</td></tr>
+              <tr><th scope="row">국민연금 (4.75%)</th><td class="minus" data-out="pension">-</td></tr>
+              <tr><th scope="row">건강보험 (3.595%)</th><td class="minus" data-out="health">-</td></tr>
+              <tr><th scope="row">장기요양 (건보료의 13.14%)</th><td class="minus" data-out="ltc">-</td></tr>
+              <tr><th scope="row">고용보험 (0.9%)</th><td class="minus" data-out="employment">-</td></tr>
+              <tr><th scope="row">소득세 (추정)</th><td class="minus" data-out="incomeTax">-</td></tr>
+              <tr><th scope="row">지방소득세 (10%)</th><td class="minus" data-out="localTax">-</td></tr>
+              <tr class="total"><th scope="row">공제 합계</th><td data-out="totalDeduction">-</td></tr>
+            </tbody>
+          </table>
+
+          <div class="stat-row">
+            <div class="stat"><span class="k">4대보험 합계</span><span class="v" data-out="insurance">-</span></div>
+            <div class="stat"><span class="k">총 공제율</span><span class="v" data-out="rate">-</span></div>
+            <div class="stat"><span class="k">회사 부담(참고)</span><span class="v" data-out="employer">-</span></div>
+          </div>
+
+          <div class="notice" data-out="notice" hidden></div>
+          <div class="notice info" style="margin-top:10px;">
+            소득세는 연간 소득·공제를 추정해 12로 나눈 값입니다. 실제 원천징수액은 근로소득 간이세액표와 회사 신고 내역에 따라 달라질 수 있습니다.
+          </div>
+          <div class="btn-row" style="margin-top:12px;">
+            <button class="btn btn-ghost" type="button" data-copy="#salary-result">결과 복사</button>
+          </div>
+        </div>
+      </div>
+      <div class="ad-slot" aria-hidden="true">광고 영역 (AdSense 승인 후 표시)</div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="wrap wrap-narrow">
+      <article class="card card-pad">
+        <h2>2026년 실수령액 계산 공식</h2>
+        <p>실수령액은 "세전 월급에서 근로자가 실제로 부담하는 돈"을 빼서 구합니다. 회사가 내는 몫은 급여명세서의 공제 항목에 들어가지 않으므로 실수령액에도 영향을 주지 않습니다. 이 계산기는 아래 순서를 그대로 따릅니다.</p>
+        <div class="formula">1) 과세 대상 월급 = 세전 월급 − 비과세 식대(월 20만원 한도)
+2) 국민연금 = 기준소득월액(41만~659만원) × 4.75%
+3) 건강보험 = 과세 대상 월급 × 3.595%   (10원 미만 절사)
+4) 장기요양보험 = 건강보험료 × 13.14%    (10원 미만 절사)
+5) 고용보험 = 과세 대상 월급 × 0.9%      (10원 미만 절사)
+6) 소득세 = 연간 과세표준 × 기본세율 − 누진공제 − 근로소득세액공제 ÷ 12
+7) <strong>실수령액 = 세전 월급 − (4대보험 + 소득세 + 지방소득세)</strong></div>
+        <p>국민연금만 계산 기준이 조금 다릅니다. 월급 전체가 아니라 <strong>기준소득월액</strong>에 요율을 곱하는데, 2026년 7월 1일부터 2027년 6월 30일까지 하한 41만원·상한 659만원이 적용됩니다. 따라서 월 과세 급여가 700만원이어도 근로자 국민연금은 313,025원(659만원 × 4.75%)에서 더 늘지 않습니다. 반대로 급여가 41만원보다 적으면 41만원을 기준으로 계산합니다.</p>
+        <p>소득세는 회사가 매달 떼는 세금(원천징수)과 1년 뒤 정산하는 세금(연말정산)이 서로 다릅니다. 이 계산기는 연말정산에 가까운 방식으로 근로소득공제, 인적공제, 연금보험료공제, 근로소득세액공제를 반영합니다. 카드 사용액이나 의료비·월세 세액공제는 넣지 않았기 때문에, 실제 결정세액은 이보다 조금 낮아지는 경우가 많습니다.</p>
+
+        <h2>2026년 4대보험 요율과 2025년 비교</h2>
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption>2026년 4대보험 요율 — 근로자 부담분 중심</caption>
+            <thead>
+              <tr><th scope="col">보험</th><th scope="col" class="num">2025년</th><th scope="col" class="num">2026년</th><th scope="col" class="num">근로자 부담</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">국민연금</th><td class="num">9.0%</td><td class="num">9.5%</td><td class="num">4.75%</td></tr>
+              <tr><th scope="row">건강보험</th><td class="num">7.09%</td><td class="num">7.19%</td><td class="num">3.595%</td></tr>
+              <tr><th scope="row">장기요양보험</th><td class="num">건보료의 12.95%</td><td class="num">건보료의 13.14%</td><td class="num">그 절반</td></tr>
+              <tr><th scope="row">고용보험(실업급여)</th><td class="num">1.8%</td><td class="num">1.8%</td><td class="num">0.9%</td></tr>
+              <tr><th scope="row">산재보험</th><td class="num">업종별</td><td class="num">업종별</td><td class="num">없음(사업주 전액)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>2026년에는 국민연금이 27년 만에 9%에서 9.5%로 오르고, 건강보험과 장기요양보험도 함께 인상되었습니다. 월 급여 300만원(비과세 없음) 기준 4대보험료는 291,520원으로, 국민연금 142,500원 · 건강보험 107,850원 · 장기요양 14,170원 · 고용보험 27,000원입니다. 2025년 요율로 계산한 약 28만 2천원대보다 월 1만원 안팎 늘어난 금액입니다.</p>
+
+        <h2>월급별 실수령액 예시</h2>
+        <p>비과세 식대 월 20만원, 부양가족 1명(본인) 기준으로 계산한 예시입니다. 같은 연봉이라도 식대 규모와 부양가족 수에 따라 결과가 달라집니다.</p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption>2026년 월급별 4대보험·소득세·실수령액 (단위: 원)</caption>
+            <thead>
+              <tr><th scope="col">세전 월급</th><th scope="col" class="num">4대보험</th><th scope="col" class="num">소득세+지방세</th><th scope="col" class="num">실수령액</th><th scope="col" class="num">공제율</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="num">2,500,000</td><td class="num">223,490</td><td class="num">43,290</td><td class="num">2,233,220</td><td class="num">10.7%</td></tr>
+              <tr><td class="num">3,000,000</td><td class="num">272,080</td><td class="num">95,040</td><td class="num">2,632,880</td><td class="num">12.2%</td></tr>
+              <tr><td class="num">3,500,000</td><td class="num">320,660</td><td class="num">165,640</td><td class="num">3,013,700</td><td class="num">13.9%</td></tr>
+              <tr><td class="num">4,000,000</td><td class="num">369,260</td><td class="num">235,180</td><td class="num">3,395,560</td><td class="num">15.1%</td></tr>
+              <tr><td class="num">5,000,000</td><td class="num">466,430</td><td class="num">384,080</td><td class="num">4,149,490</td><td class="num">17.0%</td></tr>
+              <tr><td class="num">7,000,000</td><td class="num">650,805</td><td class="num">801,460</td><td class="num">5,547,735</td><td class="num">20.7%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>표에서 볼 수 있듯 월급이 높아질수록 공제율도 올라갑니다. 4대보험은 요율이 고정되어 있지만 소득세는 누진세율 구조라, 월급이 100만원 늘어도 통장에 들어오는 돈은 그보다 적게 늘어납니다. 연봉 협상이나 이직을 앞두고 있다면 "세전 인상액"이 아니라 "실수령 인상액"으로 비교해야 합니다.</p>
+
+        <h2>실수령액을 조금이라도 늘리는 확인 사항</h2>
+        <ul>
+          <li><strong>비과세 항목을 빠뜨리지 않았는지 확인하세요.</strong> 식대 월 20만원, 자가운전보조금 월 20만원, 육아수당 월 10만원 등은 요건을 갖추면 비과세입니다. 회사에 비과세 항목 신고가 되어 있는지 인사팀에 문의해 보세요.</li>
+          <li><strong>부양가족 등록은 연말정산에서 가장 큰 차이를 만듭니다.</strong> 배우자, 20세 이하 자녀, 60세 이상 부모 등은 소득 요건을 충족하면 인적공제 대상입니다. 맞벌이라면 각자의 세율 구간을 보고 누구에게 올릴지 정하는 것이 유리합니다.</li>
+          <li><strong>원천징수 80%·100%·120% 선택 제도가 있습니다.</strong> 매달 덜 떼면 연말정산에서 더 내고, 더 떼면 돌려받습니다. 목돈이 필요한 시점이 있다면 활용할 수 있지만, 총부담이 줄어드는 것은 아닙니다.</li>
+          <li><strong>4대보험료는 회사가 신고한 보수 기준으로 정해집니다.</strong> 실제 급여와 신고 금액이 다르면 다음 해 4월 정산에서 추가로 빠져나갈 수 있습니다.</li>
+        </ul>
+
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+          <details open>
+            <summary>비과세 식대는 연봉에 포함해서 입력해야 하나요?</summary>
+            <div class="faq-body">
+              <p>네. 연봉 계약서의 금액에는 식대가 포함된 경우가 많습니다. 세전 총액을 입력하고, 그중 비과세로 처리되는 식대만 따로 입력하세요. 식대 비과세 한도는 월 20만원(연 240만원)이며, 이를 넘는 금액은 과세 대상으로 계산됩니다. 계산기에서 20만원을 넘게 입력하면 초과분은 자동으로 무시된다는 안내가 표시됩니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>부양가족 수는 어떻게 세나요?</summary>
+            <div class="faq-body">
+              <p>본인을 포함해 1명으로 시작합니다. 배우자, 20세 이하 자녀, 60세 이상 부모처럼 소득·나이 요건을 충족하는 가족을 1명씩 더하면 됩니다. 인적공제는 1명당 연 150만원이며, 부양가족이 늘면 소득세는 줄지만 4대보험료는 거의 변하지 않습니다. 8세 이상 20세 이하 자녀가 있으면 자녀세액공제가 추가로 적용되어 실제 세금은 계산 결과보다 더 낮아질 수 있습니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>계산한 소득세가 급여명세서와 다른 이유는 무엇인가요?</summary>
+            <div class="faq-body">
+              <p>회사는 국세청 근로소득 간이세액표에 따라 매월 원천징수하고, 이 계산기는 연간 소득과 공제를 추정해 12로 나눕니다. 신용카드 공제, 의료비·월세 세액공제, 회사별 비과세 항목, 원천징수 비율 선택(80%·100%·120%)에 따라 차이가 생깁니다. 특히 연말정산에서 카드·의료비 공제를 많이 받는 경우 실제 결정세액이 계산 결과보다 낮아집니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>국민연금은 월급이 아무리 높아도 같은 금액인가요?</summary>
+            <div class="faq-body">
+              <p>네. 2026년 7월부터 2027년 6월까지 기준소득월액 상한이 659만원이므로, 월 과세 급여가 이를 넘어도 근로자 부담은 313,025원에서 멈춥니다. 연봉으로 환산하면 약 8,200만원 이상 구간에서 국민연금 부담이 더 늘지 않는 셈입니다. 상·하한은 매년 7월에 조정되므로 해가 바뀌면 다시 계산해 보세요.</p>
+            </div>
+          </details>
+          <details>
+            <summary>프리랜서 3.3%와 4대보험은 어떻게 다른가요?</summary>
+            <div class="faq-body">
+              <p>사업소득으로 처리되는 프리랜서는 근로자용 4대보험 대신 소득세 3%와 지방소득세 0.3%를 원천징수합니다. 당장 떼는 금액은 적어 보이지만 건강보험료를 지역가입자로 따로 부담하고, 퇴직금·실업급여도 없습니다. 근로계약을 맺고 출퇴근과 업무 지시를 받았다면 4대보험 가입 대상이므로, 계약서상 형태보다 실제 근무 실태가 중요합니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>연봉이 오르면 실수령액은 얼마나 늘어나나요?</summary>
+            <div class="faq-body">
+              <p>구간마다 다릅니다. 월 300만원에서 350만원으로 오르면 실수령액은 약 38만원 늘지만, 350만원에서 400만원으로 오를 때는 약 38만원, 400만원에서 500만원으로 오를 때는 약 75만원 늘어납니다. 소득세 구간이 바뀌는 지점에서는 증가폭이 줄어들 수 있으므로, 인상 협상 전에 두 금액을 각각 계산해 비교하는 것이 정확합니다.</p>
+            </div>
+          </details>
+        </div>
+
+        <h2>함께 보면 좋은 계산기</h2>
+        <ul class="related">
+          <li><a href="severance.html">퇴직금·실업급여 계산</a></li>
+          <li><a href="housing.html">전세 vs 월세 비교</a></li>
+          <li><a href="living.html">자취 난방비 예측</a></li>
+          <li><a href="index.html">전체 계산기 보기</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><span class="brand-mark" aria-hidden="true">₩</span> 생활금융 계산기 허브</div>
+        <p>직장인과 1인가구가 매일 마주치는 돈 계산을 2026년 기준 요율로 정리했습니다.
+        모든 계산은 이용자의 브라우저에서만 이루어지며 참고용입니다.</p>
+      </div>
+      <div>
+        <h3>계산기</h3>
+        <ul>
+          <li><a href="salary.html">연봉·월급 실수령액</a></li>
+          <li><a href="severance.html">퇴직금·실업급여</a></li>
+          <li><a href="housing.html">전세 vs 월세·대출이자</a></li>
+          <li><a href="living.html">난방비·1/N 정산</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>사이트</h3>
+        <ul>
+          <li><a href="about.html">사이트 소개</a></li>
+          <li><a href="contact.html">문의·피드백</a></li>
+          <li><a href="privacy.html">개인정보처리방침</a></li>
+          <li><a href="terms.html">이용약관</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> 생활금융 계산기 허브. All rights reserved.</span>
+      <span>본 사이트의 계산 결과는 참고용이며 법적·세무적 효력이 없습니다.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/calc-core.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  'use strict';
+  var amountEl = document.getElementById('amount');
+  var nonTaxEl = document.getElementById('nonTaxable');
+  var depEl = document.getElementById('dependents');
+  var panel = document.getElementById('salary-result');
+  var label = document.getElementById('amount-label');
+  var hint = document.getElementById('amount-hint');
+  var notice = panel.querySelector('[data-out="notice"]');
+  var modeGroup = document.getElementById('mode-seg');
+
+  function put(key, value) {
+    var el = panel.querySelector('[data-out="' + key + '"]');
+    if (el) el.textContent = value;
+  }
+
+  function render(res) {
+    put('netMonthly', UI.won(res.netMonthly));
+    put('netAnnualSub', '연 실수령액 ' + UI.won(res.netAnnual));
+    put('grossMonthly', UI.won(res.grossMonthly));
+    put('nonTaxable', res.nonTaxable > 0 ? '−' + UI.won(res.nonTaxable) : '없음');
+    put('pension', '−' + UI.won(res.pension));
+    put('health', '−' + UI.won(res.health));
+    put('ltc', '−' + UI.won(res.ltc));
+    put('employment', '−' + UI.won(res.employment));
+    put('incomeTax', '−' + UI.won(res.incomeTax));
+    put('localTax', '−' + UI.won(res.localIncomeTax));
+    put('totalDeduction', '−' + UI.won(res.totalDeduction));
+    put('insurance', UI.won(res.insuranceTotal));
+    put('rate', UI.percent(res.deductionRate * 100));
+    put('employer', UI.won(res.employer.total));
+
+    var messages = [];
+    if (res.nonTaxableIgnored > 0) {
+      messages.push('식대 비과세는 월 20만원까지 인정되어 초과분 ' + UI.won(res.nonTaxableIgnored) + '은 과세 대상에 포함했습니다.');
+    }
+    if (res.pensionBase >= 6590000 && res.taxableMonthly > 6590000) {
+      messages.push('국민연금은 기준소득월액 상한 659만원이 적용되었습니다.');
+    }
+    if (res.grossMonthly < 410000 && res.grossMonthly > 0) {
+      messages.push('국민연금은 기준소득월액 하한 41만원을 적용했습니다.');
+    }
+    if (messages.length) {
+      notice.hidden = false;
+      notice.textContent = messages.join(' ');
+    } else {
+      notice.hidden = true;
+      notice.textContent = '';
+    }
+  }
+
+  function calculate() {
+    var mode = UI.segmentValue('#mode-seg', 'annual');
+    var res = CalcCore.calcSalary({
+      mode: mode,
+      amount: UI.inputValue(amountEl),
+      nonTaxable: UI.inputValue(nonTaxEl),
+      dependents: UI.inputValue(depEl) || 1
+    });
+    render(res);
+    return res;
+  }
+
+  var timer = null;
+  function scheduleCalc() {
+    clearTimeout(timer);
+    timer = setTimeout(calculate, 160);
+  }
+
+  document.getElementById('salary-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    calculate();
+    UI.showResult(panel, true);
+  });
+
+  [amountEl, nonTaxEl, depEl].forEach(function (el) {
+    el.addEventListener('input', scheduleCalc);
+  });
+
+  modeGroup.addEventListener('segmentchange', function (e) {
+    if (e.detail.value === 'monthly') {
+      label.textContent = '세전 월급';
+      hint.textContent = '성과급·수당을 포함한 세전 월 급여(비과세 포함)를 입력하세요.';
+      amountEl.value = UI.comma(3000000);
+    } else {
+      label.textContent = '세전 연봉';
+      hint.textContent = '성과급·수당을 포함한 세전 총액(비과세 포함)을 입력하세요.';
+      amountEl.value = UI.comma(36000000);
+    }
+    calculate();
+  });
+
+  calculate();
+})();
+</script>
+</body>
+</html>

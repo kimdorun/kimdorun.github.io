@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>퇴직금·실업급여·연차수당 계산기 2026 | 평균임금 기반 3가지 계산</title>
+<meta name="description" content="2026년 기준 퇴직금(1일 평균임금×30×재직일수/365), 실업급여(구직급여 1일 66,048~68,100원, 120~270일), 미사용 연차수당을 한 페이지에서 계산합니다. 소정급여일수 표와 계산 공식 수록.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://kimdorun.github.io/severance.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="퇴직금·실업급여·연차수당 계산기 2026">
+<meta property="og:description" content="퇴직금과 실업급여는 계산 방식이 다릅니다. 한 페이지에서 각각 계산하고 수급일수까지 확인하세요.">
+<meta property="og:url" content="https://kimdorun.github.io/severance.html">
+<meta property="og:locale" content="ko_KR">
+<meta name="theme-color" content="#2257e0">
+<link rel="stylesheet" href="assets/style.css">
+<!-- ADSENSE: 승인 후 주석 해제 + 게시자 ID 교체
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "퇴직금·실업급여·연차수당 계산기",
+  "url": "https://kimdorun.github.io/severance.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All",
+  "inLanguage": "ko-KR",
+  "description": "2026년 기준 퇴직금, 구직급여(실업급여), 미사용 연차수당을 계산하는 무료 도구.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">₩</span>
+      <span class="brand-text">생활금융 계산기<small>LIFE FINANCE CALC</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">메뉴</button>
+    <nav class="site-nav" id="site-nav" aria-label="주요 메뉴">
+      <a href="salary.html">실수령액</a>
+      <a href="severance.html">퇴직금·실업급여</a>
+      <a href="housing.html">전세·월세</a>
+      <a href="living.html">난방비·정산</a>
+      <a href="about.html">소개</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap">
+      <ol class="breadcrumb">
+        <li><a href="index.html">홈</a></li>
+        <li>퇴직금·실업급여·연차수당</li>
+      </ol>
+      <span class="eyebrow">2026년 기준</span>
+      <h1>퇴직금 · 실업급여 · 연차수당 계산기</h1>
+      <p class="lede">퇴사를 앞두고 가장 궁금한 세 가지를 한 페이지에 모았습니다.
+      퇴직금은 3개월 평균임금으로, 실업급여는 이직 전 임금의 60%에 상·하한을 적용해, 연차수당은 통상임금으로 계산합니다.</p>
+    </div>
+  </section>
+
+  <!-- ================= 퇴직금 ================= -->
+  <section class="section" aria-labelledby="sev-title">
+    <div class="wrap">
+      <div class="calc-shell">
+        <form class="card calc-panel" id="sev-form" novalidate>
+          <h2 id="sev-title"><span class="step" aria-hidden="true">1</span> 퇴직금 계산</h2>
+          <div class="field">
+            <label for="sev-total">최근 3개월 급여 총액</label>
+            <div class="input-wrap">
+              <input type="text" id="sev-total" data-money inputmode="numeric" value="9,000,000" autocomplete="off">
+              <span class="unit">원</span>
+            </div>
+            <span class="hint">퇴직 전 3개월 동안 받은 임금 총액(기본급·수당·상여금 포함). 월급여의 3배를 기본값으로 넣어 두었습니다.</span>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label for="sev-days">재직일수</label>
+              <div class="input-wrap">
+                <input type="text" id="sev-days" data-money inputmode="numeric" value="730" autocomplete="off">
+                <span class="unit">일</span>
+              </div>
+              <span class="hint">입사일부터 퇴사일까지. 만 1년(365일) 이상이어야 퇴직금이 발생합니다.</span>
+            </div>
+            <div class="field">
+              <label for="sev-period">3개월 총일수</label>
+              <div class="input-wrap">
+                <input type="text" id="sev-period" data-money inputmode="numeric" value="92" autocomplete="off">
+                <span class="unit">일</span>
+              </div>
+              <span class="hint">보통 89~92일. 모르면 92일로 두세요.</span>
+            </div>
+          </div>
+          <button class="btn btn-block" type="submit">퇴직금 계산하기</button>
+        </form>
+
+        <div class="card result-panel" id="sev-result" aria-live="polite">
+          <p class="result-label">예상 퇴직금</p>
+          <div class="result-hero is-alt">
+            <strong class="amount" data-out="severance">-</strong>
+            <span class="sub" data-out="sevSub">1일 평균임금 -</span>
+          </div>
+          <span class="visually-hidden" data-live role="status"></span>
+          <table class="breakdown">
+            <caption>계산 내역</caption>
+            <tbody>
+              <tr><th scope="row">최근 3개월 임금 총액</th><td data-out="sevTotal">-</td></tr>
+              <tr><th scope="row">3개월 총일수</th><td data-out="sevPeriod">-</td></tr>
+              <tr><th scope="row">1일 평균임금</th><td data-out="sevDaily">-</td></tr>
+              <tr><th scope="row">30일분 평균임금</th><td data-out="sevMonthly">-</td></tr>
+              <tr><th scope="row">재직일수 ÷ 365</th><td data-out="sevYears">-</td></tr>
+              <tr class="total"><th scope="row">퇴직금</th><td data-out="sevFinal">-</td></tr>
+            </tbody>
+          </table>
+          <div class="notice" data-out="sevNotice" hidden></div>
+          <div class="notice info">퇴직금은 퇴직 후 14일 이내에 지급되어야 합니다. 지급이 늦어지면 지연이자가 붙을 수 있습니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 실업급여 ================= -->
+  <section class="section" aria-labelledby="unemp-title">
+    <div class="wrap">
+      <div class="calc-shell">
+        <form class="card calc-panel" id="unemp-form" novalidate>
+          <h2 id="unemp-title"><span class="step" aria-hidden="true">2</span> 실업급여(구직급여) 계산</h2>
+          <div class="field">
+            <label for="unemp-wage">이직 전 월평균 임금</label>
+            <div class="input-wrap">
+              <input type="text" id="unemp-wage" data-money inputmode="numeric" value="3,000,000" autocomplete="off">
+              <span class="unit">원</span>
+            </div>
+            <span class="hint">세전 월평균 임금. 1일 평균임금은 월평균 × 12 ÷ 365로 환산합니다.</span>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label for="unemp-hours">1일 소정근로시간</label>
+              <div class="select-wrap">
+                <select id="unemp-hours">
+                  <option value="8" selected>8시간 (주 40시간)</option>
+                  <option value="7">7시간</option>
+                  <option value="6">6시간</option>
+                  <option value="5">5시간</option>
+                  <option value="4">4시간</option>
+                </select>
+              </div>
+              <span class="hint">하한액은 근로시간에 비례합니다.</span>
+            </div>
+            <div class="field">
+              <label for="unemp-age">이직 당시 만 나이</label>
+              <div class="input-wrap">
+                <input type="text" id="unemp-age" data-money inputmode="numeric" value="35" autocomplete="off">
+                <span class="unit">세</span>
+              </div>
+              <span class="hint">50세 이상이면 수급일수가 늘어납니다.</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="unemp-years">고용보험 가입기간</label>
+            <div class="input-wrap">
+              <input type="text" id="unemp-years" inputmode="decimal" value="3.5" autocomplete="off">
+              <span class="unit">년</span>
+            </div>
+            <span class="hint">이전 직장 기간도 합산됩니다(구직급여를 받은 기간 제외).</span>
+          </div>
+          <button class="btn btn-block" type="submit">실업급여 계산하기</button>
+        </form>
+
+        <div class="card result-panel" id="unemp-result" aria-live="polite">
+          <p class="result-label">예상 실업급여 총액</p>
+          <div class="result-hero is-warn">
+            <strong class="amount" data-out="unempTotal">-</strong>
+            <span class="sub" data-out="unempSub">1일 - · -일</span>
+          </div>
+          <span class="visually-hidden" data-live role="status"></span>
+          <table class="breakdown">
+            <caption>계산 내역</caption>
+            <tbody>
+              <tr><th scope="row">1일 평균임금</th><td data-out="unempDaily">-</td></tr>
+              <tr><th scope="row">평균임금의 60%</th><td data-out="unempSixty">-</td></tr>
+              <tr><th scope="row">하한액 (최저임금×시간×80%)</th><td data-out="unempMin">-</td></tr>
+              <tr><th scope="row">상한액</th><td data-out="unempMax">-</td></tr>
+              <tr><th scope="row">적용 1일 구직급여</th><td data-out="unempApplied">-</td></tr>
+              <tr><th scope="row">소정급여일수</th><td data-out="unempDays">-</td></tr>
+              <tr class="total"><th scope="row">예상 총 수급액</th><td data-out="unempFinal">-</td></tr>
+            </tbody>
+          </table>
+          <div class="notice" data-out="unempNotice" hidden></div>
+          <div class="notice info">실제 수급은 피보험단위기간 180일 이상, 비자발적 이직 등 요건을 충족해야 하며 7일 대기기간이 있습니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 연차수당 ================= -->
+  <section class="section" aria-labelledby="leave-title">
+    <div class="wrap">
+      <div class="calc-shell">
+        <form class="card calc-panel" id="leave-form" novalidate>
+          <h2 id="leave-title"><span class="step" aria-hidden="true">3</span> 미사용 연차수당 계산</h2>
+          <div class="field">
+            <label for="leave-wage">월 통상임금</label>
+            <div class="input-wrap">
+              <input type="text" id="leave-wage" data-money inputmode="numeric" value="3,000,000" autocomplete="off">
+              <span class="unit">원</span>
+            </div>
+            <span class="hint">기본급과 고정수당을 합한 금액. 1일 통상임금 = 월 통상임금 ÷ 209 × 8시간.</span>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label for="leave-days">미사용 연차일수</label>
+              <div class="input-wrap">
+                <input type="text" id="leave-days" data-money inputmode="numeric" value="5" autocomplete="off">
+                <span class="unit">일</span>
+              </div>
+              <span class="hint">연말까지 쓰지 못한 연차 일수.</span>
+            </div>
+            <div class="field">
+              <label for="leave-tenure">근속연수</label>
+              <div class="input-wrap">
+                <input type="text" id="leave-tenure" inputmode="decimal" value="3" autocomplete="off">
+                <span class="unit">년</span>
+              </div>
+              <span class="hint">발생 연차일수를 함께 계산합니다.</span>
+            </div>
+          </div>
+          <button class="btn btn-block" type="submit">연차수당 계산하기</button>
+        </form>
+
+        <div class="card result-panel" id="leave-result" aria-live="polite">
+          <p class="result-label">예상 연차수당</p>
+          <div class="result-hero">
+            <strong class="amount" data-out="leavePay">-</strong>
+            <span class="sub" data-out="leaveSub">1일 통상임금 -</span>
+          </div>
+          <span class="visually-hidden" data-live role="status"></span>
+          <table class="breakdown">
+            <caption>계산 내역</caption>
+            <tbody>
+              <tr><th scope="row">월 통상임금</th><td data-out="leaveWage">-</td></tr>
+              <tr><th scope="row">통상시급 (÷209)</th><td data-out="leaveHourly">-</td></tr>
+              <tr><th scope="row">1일 통상임금 (×8)</th><td data-out="leaveDaily">-</td></tr>
+              <tr><th scope="row">미사용 연차일수</th><td data-out="leaveUsed">-</td></tr>
+              <tr><th scope="row">올해 발생 연차(추정)</th><td data-out="leaveEntitled">-</td></tr>
+              <tr class="total"><th scope="row">연차수당</th><td data-out="leaveFinal">-</td></tr>
+            </tbody>
+          </table>
+          <div class="notice info">연차수당은 근로기준법상 임금에 해당합니다. 퇴직 전 미사용 연차는 퇴직금 산정의 평균임금에도 포함됩니다.</div>
+        </div>
+      </div>
+      <div class="ad-slot" aria-hidden="true">광고 영역 (AdSense 승인 후 표시)</div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="wrap wrap-narrow">
+      <article class="card card-pad">
+        <h2>퇴직금 계산 공식과 평균임금의 범위</h2>
+        <p>퇴직금은 근로자퇴직급여보장법에 따라 계속 근로기간 1년 이상인 근로자에게 발생합니다. 계산의 출발점은 <strong>1일 평균임금</strong>입니다. 평균임금은 퇴직일 이전 3개월 동안 지급된 임금 총액을 그 기간의 달력상 총일수로 나눈 값으로, 근로기준법 제2조가 정한 방식입니다.</p>
+        <div class="formula">1일 평균임금 = 최근 3개월 임금 총액 ÷ 3개월 총일수(89~92일)
+퇴직금 = 1일 평균임금 × 30일 × (재직일수 ÷ 365)
+
+예) 3개월 임금 총액 9,000,000원, 총일수 92일, 재직 730일
+    1일 평균임금 = 9,000,000 ÷ 92 = 97,826.09원
+    퇴직금 = 97,826.09 × 30 × 2 = 5,869,565원</div>
+        <p>평균임금에 들어가는 임금은 기본급만이 아닙니다. 정기적으로 지급된 수당, 연차수당, 상여금(3개월분에 해당하는 금액)이 포함되고, 실비 성격의 출장비나 식대 일부는 제외될 수 있습니다. 반대로 3개월 총일수는 그 달의 날짜 수에 따라 89일에서 92일까지 달라지므로, 같은 월급이라도 퇴직 시점에 따라 퇴직금이 조금씩 달라집니다.</p>
+        <h3>퇴직금이 발생하지 않는 경우</h3>
+        <ul>
+          <li>계속 근로기간이 1년 미만인 경우(수습기간 포함해 계산)</li>
+          <li>1주 소정근로시간이 15시간 미만인 초단시간 근로자</li>
+          <li>법인이 아닌 사업장으로서 상시 근로자 4명 이하인 사업장에서 2025년 이후 퇴직한 경우 등 법령상 예외</li>
+        </ul>
+        <p>퇴직금은 퇴직일로부터 14일 이내에 지급해야 하며, 당사자 합의로 기일을 연장할 수 있습니다. 지급이 늦어지면 지연일수에 대한 이자가 가산됩니다.</p>
+
+        <h2>실업급여(구직급여) 계산 — 상한과 하한이 핵심</h2>
+        <p>실업급여는 정식 명칭이 구직급여이며, 고용보험에 가입한 근로자가 비자발적으로 이직했을 때 재취업 활동을 지원하는 급여입니다. 금액은 이직 전 평균임금의 60%로 계산하지만, 2026년에는 상한과 하한이 매우 좁아서 대부분의 근로자가 하루 6만 6천원대에서 6만 8천원대 사이를 받습니다.</p>
+        <div class="formula">1일 평균임금 = 이직 전 3개월 월평균임금 × 12 ÷ 365
+1일 구직급여 = 1일 평균임금 × 60%  →  하한·상한 적용
+  · 2026년 상한: 1일 68,100원 (기초일액 상한 113,500원 × 60%)
+  · 2026년 하한: 1일 66,048원 (최저임금 10,320원 × 8시간 × 80%)
+총 수급액 = 1일 구직급여 × 소정급여일수</div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption>소정급여일수 — 이직 당시 나이와 고용보험 가입기간 기준</caption>
+            <thead>
+              <tr><th scope="col">고용보험 가입기간</th><th scope="col" class="num">50세 미만</th><th scope="col" class="num">50세 이상·장애인</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1년 미만</td><td class="num">120일</td><td class="num">120일</td></tr>
+              <tr><td>1년 이상 3년 미만</td><td class="num">150일</td><td class="num">180일</td></tr>
+              <tr><td>3년 이상 5년 미만</td><td class="num">180일</td><td class="num">210일</td></tr>
+              <tr><td>5년 이상 10년 미만</td><td class="num">210일</td><td class="num">240일</td></tr>
+              <tr><td>10년 이상</td><td class="num">240일</td><td class="num">270일</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>금액보다 수급일수가 총액을 더 크게 좌우합니다. 하한액 66,048원을 받는 사람이 120일을 받으면 7,925,760원, 270일을 받으면 17,832,960원으로 두 배 이상 차이가 납니다. 가입기간은 마지막 직장뿐 아니라 이전 직장 기간도 합산되지만, 과거에 구직급여를 받은 기간은 제외됩니다.</p>
+        <h3>수급 요건과 주의할 점</h3>
+        <ul>
+          <li>이직일 이전 18개월 동안 피보험단위기간이 합산 180일 이상이어야 합니다. 근무 기간이 6~7개월이면 180일을 채우지 못할 수 있습니다.</li>
+          <li>권고사직·계약만료·정리해고 등 비자발적 이직이 원칙이고, 자발적 퇴사는 정당한 사유가 인정되어야 합니다.</li>
+          <li>실업 신고일부터 7일은 대기기간으로 지급되지 않으며, 이직 다음 날부터 12개월 안에 소정급여일수를 모두 사용해야 합니다.</li>
+          <li>2028년부터는 산정 기준이 '이직 전 3개월 평균임금'에서 '1년간 월평균 보수'로 바뀔 예정입니다.</li>
+        </ul>
+
+        <h2>연차수당 계산 — 통상임금과 209시간</h2>
+        <p>사용하지 못한 연차휴가는 연차수당으로 보상받습니다. 금액은 <strong>미사용 일수 × 1일 통상임금</strong>이며, 1일 통상임금은 월 통상임금을 월 소정근로시간 209시간으로 나눈 통상시급에 8시간을 곱해 구합니다. 209시간은 주 40시간 근로자의 주휴시간을 포함한 월 기준시간입니다.</p>
+        <div class="formula">통상시급 = 월 통상임금 ÷ 209
+1일 통상임금 = 통상시급 × 8시간
+연차수당 = 미사용 연차일수 × 1일 통상임금
+
+예) 월 3,000,000원, 미사용 5일
+    통상시급 14,354.07원 → 1일 114,832.5원 → 연차수당 574,162원</div>
+        <p>연차 발생일수는 1년 이상 근속 시 15일이 기본이고, 최초 3년을 넘긴 1년마다 1일씩 늘어 최대 25일까지 부여됩니다. 1년 미만 근로자는 1개월 개근 시 1일씩 최대 11일이 발생합니다. 회사 취업규칙이 법보다 유리하면 그 기준이 적용되므로, 사내 규정을 함께 확인하는 것이 좋습니다.</p>
+
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+          <details open>
+            <summary>퇴직금과 실업급여를 동시에 받을 수 있나요?</summary>
+            <div class="faq-body">
+              <p>네. 퇴직금은 회사가 지급하는 근로 대가이고, 실업급여는 고용보험 기금에서 지급하는 급여라 성격이 다릅니다. 두 금액은 서로 영향을 주지 않으며 각각 요건을 충족하면 모두 받을 수 있습니다. 다만 실업급여는 비자발적 이직이어야 하고 피보험단위기간 180일 이상이어야 합니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>퇴직금 계산에 상여금과 연차수당도 들어가나요?</summary>
+            <div class="faq-body">
+              <p>네. 평균임금에는 기본급뿐 아니라 정기적으로 지급된 상여금과 수당, 연차수당이 포함됩니다. 상여금은 1년분을 12개월로 나눈 뒤 3개월분을 반영하는 방식으로 산입됩니다. 다만 지급 사유가 발생한 시점과 실제 지급 시점이 다르면 해석이 달라질 수 있으므로, 정확한 금액은 회사 회계 기준과 노무사 확인을 거치는 것이 안전합니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>실업급여는 언제까지 신청해야 하나요?</summary>
+            <div class="faq-body">
+              <p>이직일 다음 날부터 12개월 이내에 소정급여일수를 모두 사용해야 합니다. 신청이 늦으면 남은 일수가 있어도 12개월이 지나면 받을 수 없으므로, 퇴사 후 가급적 빨리 고용24에서 수급자격 신청을 하는 것이 좋습니다. 실업 신고일부터 7일은 대기기간으로 지급되지 않습니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>아르바이트나 단시간 근로도 실업급여를 받을 수 있나요?</summary>
+            <div class="faq-body">
+              <p>주 15시간 이상 근무하고 고용보험에 가입되어 있었다면 신청할 수 있습니다. 다만 하한액이 1일 소정근로시간에 비례해 낮아집니다. 2026년 기준으로 하루 4시간 근무자는 하한이 33,024원, 6시간은 49,536원입니다. 실제 수급 여부는 고용센터가 이직확인서와 피보험단위기간을 확인해 결정합니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>연차수당과 퇴직금은 어떤 관계가 있나요?</summary>
+            <div class="faq-body">
+              <p>퇴직 전에 지급된 연차수당은 퇴직금 산정의 기준이 되는 평균임금에 포함됩니다. 따라서 연차를 돈으로 받으면 그만큼 퇴직금도 조금 올라갑니다. 반대로 연차를 모두 사용하고 퇴직하면 평균임금이 낮아져 퇴직금이 줄어들 수 있습니다. 어느 쪽이 유리한지는 남은 연차 일수와 급여 수준에 따라 달라집니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>육아휴직이나 병가 기간도 재직일수에 들어가나요?</summary>
+            <div class="faq-body">
+              <p>육아휴직 기간은 계속 근로기간에 포함되지만, 그 기간에 지급된 임금이 적으면 평균임금이 낮아져 퇴직금이 줄어들 수 있습니다. 근로기준법 시행령은 육아휴직 기간을 평균임금 산정에서 제외하는 특례를 두고 있어, 휴직 전 3개월 임금으로 계산하는 경우가 많습니다. 병가·휴직은 사유와 기간에 따라 처리가 달라지므로, 인사팀이나 노무사에게 본인 사례를 확인하는 것이 안전합니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>퇴직금 중간정산을 받으면 어떻게 되나요?</summary>
+            <div class="faq-body">
+              <p>중간정산을 받으면 그 시점까지의 퇴직금이 지급되고, 이후 재직기간에 대해 새로 퇴직금이 적립됩니다. 주택 구입, 임금체불, 6개월 이상 요양 등 법령이 정한 사유가 있어야 하며, 회사가 임의로 중간정산을 요구할 수는 없습니다. 중간정산 이후에는 이전 기간이 퇴직금에서 제외되므로, 총액이 줄어들 수 있다는 점을 감안해야 합니다.</p>
+            </div>
+          </details>
+        </div>
+
+        <h2>함께 보면 좋은 계산기</h2>
+        <ul class="related">
+          <li><a href="salary.html">연봉·월급 실수령액</a></li>
+          <li><a href="housing.html">전세 vs 월세·대출이자</a></li>
+          <li><a href="living.html">난방비·1/N 정산</a></li>
+          <li><a href="index.html">전체 계산기 보기</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><span class="brand-mark" aria-hidden="true">₩</span> 생활금융 계산기 허브</div>
+        <p>직장인과 1인가구가 매일 마주치는 돈 계산을 2026년 기준 요율로 정리했습니다.
+        모든 계산은 이용자의 브라우저에서만 이루어지며 참고용입니다.</p>
+      </div>
+      <div>
+        <h3>계산기</h3>
+        <ul>
+          <li><a href="salary.html">연봉·월급 실수령액</a></li>
+          <li><a href="severance.html">퇴직금·실업급여</a></li>
+          <li><a href="housing.html">전세 vs 월세·대출이자</a></li>
+          <li><a href="living.html">난방비·1/N 정산</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>사이트</h3>
+        <ul>
+          <li><a href="about.html">사이트 소개</a></li>
+          <li><a href="contact.html">문의·피드백</a></li>
+          <li><a href="privacy.html">개인정보처리방침</a></li>
+          <li><a href="terms.html">이용약관</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> 생활금융 계산기 허브. All rights reserved.</span>
+      <span>본 사이트의 계산 결과는 참고용이며 법적·세무적 효력이 없습니다.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/calc-core.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  function put(panel, key, value) {
+    var el = panel.querySelector('[data-out="' + key + '"]');
+    if (el) el.textContent = value;
+  }
+
+  /* ---------- 퇴직금 ---------- */
+  var sevPanel = document.getElementById('sev-result');
+  function calcSeverance() {
+    var res = CalcCore.calcSeverance({
+      recent3MonthTotal: UI.inputValue(document.getElementById('sev-total')),
+      daysWorked: UI.inputValue(document.getElementById('sev-days')),
+      daysInPeriod: UI.inputValue(document.getElementById('sev-period')) || 92
+    });
+    put(sevPanel, 'severance', UI.won(res.severance));
+    put(sevPanel, 'sevSub', '1일 평균임금 ' + UI.won(res.averageDailyWage));
+    put(sevPanel, 'sevTotal', UI.won(res.recent3MonthTotal));
+    put(sevPanel, 'sevPeriod', res.daysInPeriod + '일');
+    put(sevPanel, 'sevDaily', UI.won(res.averageDailyWage));
+    put(sevPanel, 'sevMonthly', UI.won(res.monthlyAverageWage));
+    put(sevPanel, 'sevYears', (res.daysWorked / 365).toFixed(2) + '년');
+    put(sevPanel, 'sevFinal', UI.won(res.severance));
+    var notice = sevPanel.querySelector('[data-out="sevNotice"]');
+    if (!res.eligible) {
+      notice.hidden = false;
+      notice.className = 'notice bad';
+      notice.textContent = '계속 근로기간이 1년(365일) 미만이면 법정 퇴직금이 발생하지 않습니다. 위 금액은 참고용 계산입니다.';
+    } else {
+      notice.hidden = true;
+    }
+  }
+
+  /* ---------- 실업급여 ---------- */
+  var unempPanel = document.getElementById('unemp-result');
+  function calcUnemployment() {
+    var res = CalcCore.calcUnemployment({
+      avgMonthlyWage: UI.inputValue(document.getElementById('unemp-wage')),
+      dailyHours: parseFloat(document.getElementById('unemp-hours').value),
+      age: UI.inputValue(document.getElementById('unemp-age')),
+      insuredYears: parseFloat(document.getElementById('unemp-years').value) || 0
+    });
+    put(unempPanel, 'unempTotal', UI.won(res.total));
+    put(unempPanel, 'unempSub', '1일 ' + UI.won(res.daily) + ' · ' + res.days + '일');
+    put(unempPanel, 'unempDaily', UI.won(res.averageDailyWage));
+    put(unempPanel, 'unempSixty', UI.won(res.sixtyPercent));
+    put(unempPanel, 'unempMin', UI.won(res.minDaily));
+    put(unempPanel, 'unempMax', UI.won(res.maxDaily));
+    put(unempPanel, 'unempApplied', UI.won(res.daily));
+    put(unempPanel, 'unempDays', res.days + '일');
+    put(unempPanel, 'unempFinal', UI.won(res.total));
+    var notice = unempPanel.querySelector('[data-out="unempNotice"]');
+    var text = '';
+    if (res.applied === 'max') text = '1일 평균임금의 60%가 상한액을 넘어 상한액 68,100원이 적용되었습니다.';
+    else if (res.applied === 'min') text = '평균임금의 60%가 하한액보다 낮아 2026년 하한액이 적용되었습니다. 근무시간이 짧으면 하한액도 낮아집니다.';
+    else text = '평균임금의 60%가 상·하한 사이에 있어 그대로 적용되었습니다.';
+    notice.hidden = false;
+    notice.className = 'notice';
+    notice.textContent = text;
+  }
+
+  /* ---------- 연차수당 ---------- */
+  var leavePanel = document.getElementById('leave-result');
+  function calcLeave() {
+    var res = CalcCore.calcAnnualLeave({
+      monthlyWage: UI.inputValue(document.getElementById('leave-wage')),
+      unusedDays: UI.inputValue(document.getElementById('leave-days')),
+      tenureYears: parseFloat(document.getElementById('leave-tenure').value) || 0
+    });
+    put(leavePanel, 'leavePay', UI.won(res.pay));
+    put(leavePanel, 'leaveSub', '1일 통상임금 ' + UI.won(res.dailyWage));
+    put(leavePanel, 'leaveWage', UI.won(UI.inputValue(document.getElementById('leave-wage'))));
+    put(leavePanel, 'leaveHourly', UI.won(res.hourlyWage));
+    put(leavePanel, 'leaveDaily', UI.won(res.dailyWage));
+    put(leavePanel, 'leaveUsed', res.unusedDays + '일');
+    put(leavePanel, 'leaveEntitled', res.entitledDays + '일');
+    put(leavePanel, 'leaveFinal', UI.won(res.pay));
+  }
+
+  function bindForm(id, fn) {
+    var form = document.getElementById(id);
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      fn();
+      var anchor = { 'sev-form': sevPanel, 'unemp-form': unempPanel, 'leave-form': leavePanel }[id];
+      UI.showResult(anchor, true);
+    });
+    form.addEventListener('input', function () {
+      clearTimeout(form._t);
+      form._t = setTimeout(fn, 160);
+    });
+    form.addEventListener('change', fn);
+  }
+
+  bindForm('sev-form', calcSeverance);
+  bindForm('unemp-form', calcUnemployment);
+  bindForm('leave-form', calcLeave);
+  calcSeverance();
+  calcUnemployment();
+  calcLeave();
+})();
+</script>
+</body>
+</html>

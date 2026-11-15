@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자취 난방비 예측 계산기 &amp; 1/N 더치페이 정산기 | 생활금융 계산기</title>
+<meta name="description" content="도시가스·전기 사용량과 단가로 이번 달 난방비를 예측하고 절약 시나리오를 확인하세요. 모임 비용은 인원수와 개별 추가 항목을 반영해 1원 단위까지 정확히 나누는 더치페이 계산기입니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://kimdorun.github.io/living.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="자취 난방비 예측 계산기 &amp; 1/N 더치페이 정산기">
+<meta property="og:description" content="겨울 고지서를 미리 가늠하고, 모임 비용은 개별 항목까지 반영해 정확히 나눕니다.">
+<meta property="og:url" content="https://kimdorun.github.io/living.html">
+<meta property="og:locale" content="ko_KR">
+<meta name="theme-color" content="#2257e0">
+<link rel="stylesheet" href="assets/style.css">
+<!-- ADSENSE: 승인 후 주석 해제 + 게시자 ID 교체
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "난방비 예측 · 1/N 더치페이 정산기",
+  "url": "https://kimdorun.github.io/living.html",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
+  "inLanguage": "ko-KR",
+  "description": "가스·전기 사용량으로 난방비를 예측하고, 개별 추가 항목을 반영해 모임 비용을 정확히 나누는 무료 도구.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">₩</span>
+      <span class="brand-text">생활금융 계산기<small>LIFE FINANCE CALC</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">메뉴</button>
+    <nav class="site-nav" id="site-nav" aria-label="주요 메뉴">
+      <a href="salary.html">실수령액</a>
+      <a href="severance.html">퇴직금·실업급여</a>
+      <a href="housing.html">전세·월세</a>
+      <a href="living.html">난방비·정산</a>
+      <a href="about.html">소개</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap">
+      <ol class="breadcrumb">
+        <li><a href="index.html">홈</a></li>
+        <li>난방비·1/N 정산</li>
+      </ol>
+      <span class="eyebrow">1인가구 생활 계산</span>
+      <h1>자취 난방비 예측 &amp; 1/N 더치페이 정산기</h1>
+      <p class="lede">고지서를 받기 전에 이번 달 난방비를 가늠해 보세요.
+      모임 비용은 총액을 인원수로 나누기 전에 개별 추가 항목을 먼저 빼야 정확합니다.</p>
+    </div>
+  </section>
+
+  <!-- ================= 난방비 ================= -->
+  <section class="section" aria-labelledby="heat-title">
+    <div class="wrap">
+      <div class="calc-shell">
+        <form class="card calc-panel" id="heat-form" novalidate>
+          <h2 id="heat-title"><span class="step" aria-hidden="true">1</span> 난방비 예측</h2>
+          <div class="field">
+            <label for="heat-type">요금 종류</label>
+            <div class="select-wrap">
+              <select id="heat-type">
+                <option value="gas" selected>도시가스 (m³)</option>
+                <option value="electric">전기 (kWh)</option>
+              </select>
+            </div>
+            <span class="hint">고지서에 적힌 단위를 선택하세요. 전환하면 기본 단가가 함께 바뀝니다.</span>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label for="heat-usage">이번 달 예상 사용량</label>
+              <div class="input-wrap">
+                <input type="text" id="heat-usage" inputmode="decimal" value="60" autocomplete="off">
+                <span class="unit" data-out="usageUnit">m³</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="heat-price">단가</label>
+              <div class="input-wrap">
+                <input type="text" id="heat-price" inputmode="decimal" value="900" autocomplete="off">
+                <span class="unit" data-out="priceUnit">원/m³</span>
+              </div>
+              <span class="hint">고지서의 평균 단가 또는 요금표 참고</span>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label for="heat-base">기본료</label>
+              <div class="input-wrap">
+                <input type="text" id="heat-base" data-money inputmode="numeric" value="1,100" autocomplete="off">
+                <span class="unit">원</span>
+              </div>
+              <span class="hint">없으면 0</span>
+            </div>
+            <div class="field">
+              <label for="heat-last">지난달 사용량</label>
+              <div class="input-wrap">
+                <input type="text" id="heat-last" inputmode="decimal" value="45" autocomplete="off">
+                <span class="unit" data-out="usageUnit2">m³</span>
+              </div>
+              <span class="hint">비교용 (모르면 0)</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="heat-people">함께 사는 인원</label>
+            <div class="input-wrap">
+              <input type="text" id="heat-people" data-money inputmode="numeric" value="1" autocomplete="off">
+              <span class="unit">명</span>
+            </div>
+            <span class="hint">1인당 부담액을 함께 계산합니다.</span>
+          </div>
+          <button class="btn btn-block" type="submit">난방비 예측하기</button>
+        </form>
+
+        <div class="card result-panel" id="heat-result" aria-live="polite">
+          <p class="result-label">이번 달 예상 요금</p>
+          <div class="result-hero is-warn">
+            <strong class="amount" data-out="heatTotal">-</strong>
+            <span class="sub" data-out="heatSub">지난달 대비 -</span>
+          </div>
+          <span class="visually-hidden" data-live role="status"></span>
+          <table class="breakdown">
+            <caption>요금 구성</caption>
+            <tbody>
+              <tr><th scope="row">사용량 요금</th><td data-out="heatUsageCost">-</td></tr>
+              <tr><th scope="row">기본료</th><td data-out="heatBase">-</td></tr>
+              <tr><th scope="row">지난달 예상 요금</th><td data-out="heatLastTotal">-</td></tr>
+              <tr><th scope="row">증감액</th><td data-out="heatDelta">-</td></tr>
+              <tr class="total"><th scope="row">1인당 부담</th><td data-out="heatPer">-</td></tr>
+            </tbody>
+          </table>
+          <div class="stat-row">
+            <div class="stat"><span class="k">사용량 10% 절감</span><span class="v" data-out="heatSave10">-</span></div>
+            <div class="stat"><span class="k">사용량 20% 절감</span><span class="v" data-out="heatSave20">-</span></div>
+          </div>
+          <div class="notice info">단가는 지역·계절·요금제에 따라 다릅니다. 도시가스는 m³당 800~1,000원대, 전기는 주택용 누진제로 사용량 구간마다 단가가 달라집니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 더치페이 ================= -->
+  <section class="section" aria-labelledby="dutch-title">
+    <div class="wrap">
+      <div class="calc-shell">
+        <form class="card calc-panel" id="dutch-form" novalidate>
+          <h2 id="dutch-title"><span class="step" aria-hidden="true">2</span> 1/N 더치페이 정산</h2>
+          <div class="grid-2">
+            <div class="field">
+              <label for="dutch-total">총 결제 금액</label>
+              <div class="input-wrap">
+                <input type="text" id="dutch-total" data-money inputmode="numeric" value="240,000" autocomplete="off">
+                <span class="unit">원</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="dutch-people">참석 인원</label>
+              <div class="input-wrap">
+                <input type="text" id="dutch-people" data-money inputmode="numeric" value="4" autocomplete="off">
+                <span class="unit">명</span>
+              </div>
+            </div>
+          </div>
+
+          <fieldset class="field" style="border:0;padding:0;margin:0 0 14px;">
+            <legend style="font-size:.875rem;font-weight:700;margin-bottom:8px;">개별 추가 항목 (선택)</legend>
+            <p class="hint" style="margin:0 0 10px;">특정인이 더 부담할 금액을 먼저 빼고 나머지를 1/N로 나눕니다. 예: 추가 주류, 안주, 택시비.</p>
+            <div id="extra-rows"></div>
+            <button class="btn btn-ghost" type="button" id="add-extra" style="padding:9px 14px;font-size:.875rem;">+ 항목 추가</button>
+          </fieldset>
+
+          <button class="btn btn-block" type="submit">정산 금액 계산하기</button>
+        </form>
+
+        <div class="card result-panel" id="dutch-result" aria-live="polite">
+          <p class="result-label">1인당 기본 부담액</p>
+          <div class="result-hero">
+            <strong class="amount" data-out="dutchBase">-</strong>
+            <span class="sub" data-out="dutchSub">총 -원 · -명</span>
+          </div>
+          <span class="visually-hidden" data-live role="status"></span>
+          <div id="dutch-list" style="margin-top:6px;"></div>
+          <div class="notice" data-out="dutchNotice" hidden></div>
+          <div class="notice good" data-out="dutchCheck">합계가 총액과 일치하는지 자동으로 확인합니다.</div>
+          <div class="btn-row" style="margin-top:12px;">
+            <button class="btn btn-ghost" type="button" data-copy="#dutch-result">결과 복사</button>
+          </div>
+        </div>
+      </div>
+      <div class="ad-slot" aria-hidden="true">광고 영역 (AdSense 승인 후 표시)</div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="wrap wrap-narrow">
+      <article class="card card-pad">
+        <h2>도시가스 요금은 어떻게 구성되나요</h2>
+        <p>도시가스 고지서는 크게 <strong>기본료</strong>와 <strong>사용량 요금</strong>으로 나뉩니다. 기본료는 사용량과 관계없이 매달 붙는 고정 비용이고, 사용량 요금은 m³ 단위로 부과됩니다. 여기에 부가가치세와 지방소비세가 더해지고, 계절별로 원료비가 조정되기 때문에 같은 사용량이라도 1월과 5월의 요금이 크게 다릅니다.</p>
+        <div class="formula">예상 요금 = (사용량 × 단가) + 기본료
+1인당 부담 = 예상 요금 ÷ 함께 사는 인원
+절감액 = 사용량 × 절감률 × 단가
+
+예) 60m³ × 900원 + 1,100원 = 55,100원
+    사용량 10% 절감 시 5,400원 절약</div>
+        <p>전기요금은 구조가 더 복잡합니다. 주택용 전기는 누진제가 적용되어 사용량이 구간을 넘으면 그 구간 전체에 높은 단가가 적용됩니다. 여름·겨울에는 기후환경요금과 연료비조정요금이 붙고, 복지할인 대상이면 할인액이 차감됩니다. 따라서 전기로 난방을 하는 경우에는 "평균 단가"를 쓰기보다 고지서의 청구 금액을 사용량으로 나눈 실제 단가를 입력하는 편이 정확합니다.</p>
+        <h3>난방비를 실제로 줄이는 방법</h3>
+        <ul>
+          <li><strong>외출 시 보일러를 끄지 말고 '외출 모드'로 두세요.</strong> 완전히 끄면 실내가 식어 다시 난방할 때 더 많은 가스가 듭니다.</li>
+          <li><strong>실내 온도 1도 낮추기.</strong> 난방 온도를 1도 낮추면 난방 에너지의 약 7%를 아낄 수 있다고 알려져 있습니다.</li>
+          <li><strong>창문과 문틈을 막으세요.</strong> 문풍지와 단열시트는 비용이 적고 효과가 빠릅니다. 특히 원룸은 창문 면적 비율이 높아 차이가 큽니다.</li>
+          <li><strong>가습기를 함께 쓰면 체감 온도가 올라갑니다.</strong> 같은 온도에서 덜 춥게 느껴져 설정 온도를 낮출 수 있습니다.</li>
+          <li><strong>사용량을 주 1회 기록하세요.</strong> 이 계산기로 중간 점검하면 예상보다 많이 나온 주를 바로 알 수 있습니다.</li>
+        </ul>
+        <p>월세에 관리비가 포함된 경우에는 난방비가 별도로 청구되지 않을 수 있습니다. 반대로 개별 난방이 아니라 중앙난방이라면 세대별 사용량이 아니라 면적 기준으로 분배되므로, 이 계산기는 참고용으로만 활용하세요.</p>
+
+        <h2>1/N 더치페이, 왜 총액을 인원수로 나누면 안 되나요</h2>
+        <p>모임에서 누군가 술을 마시지 않았거나, 한 사람이 추가 메뉴를 주문했다면 단순히 총액을 인원수로 나누는 것은 공정하지 않습니다. 이때는 <strong>개별 부담 항목을 먼저 빼고, 남은 금액을 1/N로 나눈 뒤</strong> 각자에게 다시 더하는 방식이 정확합니다.</p>
+        <div class="formula">기본 1/N = (총액 − 개별 추가 항목 합계) ÷ 인원
+각자 부담 = 기본 1/N + 그 사람의 개별 추가 항목
+
+예) 총액 240,000원, 4명, A가 추가 주류 20,000원
+    기본 1/N = (240,000 − 20,000) ÷ 4 = 55,000원
+    A = 75,000원, 나머지 3명 = 55,000원 (합계 240,000원)</div>
+        <p>원 단위로 나누면 1~2원의 차이가 생깁니다. 이 계산기는 소수점 이하가 큰 사람부터 1원씩 배분해 <strong>합계가 총액과 정확히 일치</strong>하도록 처리하고, 화면 아래에서 합계 검증 결과를 보여줍니다. 더치페이 앱을 쓰지 않아도 계좌이체 금액을 바로 정할 수 있습니다.</p>
+        <h3>정산할 때 흔히 놓치는 항목</h3>
+        <ul>
+          <li>카드 결제 포인트·할인 — 실제 결제액 기준으로 나누는 것이 맞습니다.</li>
+          <li>팁·봉사료 — 총액에 포함되어 있다면 함께 나눕니다.</li>
+          <li>택시비·주차비 — 별도 항목으로 추가하면 누가 탔는지 반영하기 쉽습니다.</li>
+          <li>술을 마시지 않은 사람 — 음식값만 나누고 주류는 별도로 계산하는 방식이 일반적입니다.</li>
+        </ul>
+
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+          <details open>
+            <summary>도시가스 단가는 얼마로 입력해야 하나요?</summary>
+            <div class="faq-body">
+              <p>가장 정확한 방법은 최근 고지서의 청구 금액에서 기본료를 뺀 뒤 사용량으로 나누는 것입니다. 대략적인 값으로는 도시가스 m³당 800~1,000원대를 쓰면 됩니다. 지역과 계절에 따라 차이가 크고, 같은 지역에서도 원료비 조정으로 매달 달라지므로, 겨울철 예측에는 최근 1~2개월 고지서의 단가를 쓰는 것이 좋습니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>전기요금 누진제는 어떻게 반영하나요?</summary>
+            <div class="faq-body">
+              <p>이 계산기는 평균 단가 방식이라 누진 구간을 자동으로 나누지 않습니다. 전기 난방을 쓴다면 지난달 고지서의 청구 금액을 사용량으로 나눈 실효 단가를 입력하세요. 사용량이 크게 늘어 다음 구간에 진입하면 실제 요금은 계산 결과보다 높게 나올 수 있습니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>더치페이에서 개별 항목에 음수를 넣을 수 있나요?</summary>
+            <div class="faq-body">
+              <p>가능합니다. 술을 마시지 않은 사람에게 마이너스 금액을 넣으면 그만큼 덜 부담하게 됩니다. 다만 음수 합계가 너무 커서 기본 1/N이 0보다 작아지면 계산이 성립하지 않으므로, 그런 경우에는 화면에 경고가 표시됩니다. 이때는 총액이나 인원을 다시 확인하세요.</p>
+            </div>
+          </details>
+          <details>
+            <summary>1원 단위 차이는 어떻게 처리되나요?</summary>
+            <div class="faq-body">
+              <p>나눈 금액의 소수점 이하가 큰 사람부터 1원씩 더해 합계를 총액과 일치시킵니다. 예를 들어 10만원을 3명이 나누면 33,334원·33,333원·33,333원처럼 배분됩니다. 실제 송금에서는 10원 단위로 반올림해도 무리가 없습니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>관리비에 난방비가 포함되어 있으면 어떻게 하나요?</summary>
+            <div class="faq-body">
+              <p>관리비 고지서에 난방비 항목이 따로 표시되어 있다면 그 금액을 그대로 쓰는 것이 가장 정확합니다. 표시되지 않고 관리비 총액만 있다면 이 계산기로 추정하기 어렵습니다. 중앙난방 방식은 세대별 사용량이 아니라 면적·세대수 기준으로 분배되는 경우가 많아, 계산 결과와 실제 부담액이 달라질 수 있습니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>여름 냉방비도 같은 방식으로 계산할 수 있나요?</summary>
+            <div class="faq-body">
+              <p>네. 전기 요금 종류를 선택하고 에어컨 사용량(kWh)과 단가를 넣으면 같은 방식으로 예측할 수 있습니다. 다만 냉방은 난방보다 사용 시간이 불규칙하고, 주택용 전기요금은 누진제라 사용량이 구간을 넘는 순간 단가가 크게 올라갑니다. 여름철에는 지난해 같은 달 고지서의 실효 단가를 넣는 것이 가장 현실에 가깝습니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>한 사람이 늦게 와서 덜 먹었을 때는 어떻게 나누나요?</summary>
+            <div class="faq-body">
+              <p>그 사람에게 음수 금액을 넣으면 됩니다. 예를 들어 4명이 24만원을 쓰고 한 명이 3만원어치를 덜 먹었다면, 그 사람의 개별 항목을 −30,000원으로 입력하세요. 그러면 기본 1/N은 (240,000 + 30,000) ÷ 4 = 67,500원이 되고, 그 사람만 37,500원을 부담하게 됩니다. 합계는 그대로 24만원으로 유지됩니다.</p>
+            </div>
+          </details>
+        </div>
+
+        <h2>함께 보면 좋은 계산기</h2>
+        <ul class="related">
+          <li><a href="salary.html">연봉·월급 실수령액</a></li>
+          <li><a href="severance.html">퇴직금·실업급여</a></li>
+          <li><a href="housing.html">전세 vs 월세 비교</a></li>
+          <li><a href="index.html">전체 계산기 보기</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><span class="brand-mark" aria-hidden="true">₩</span> 생활금융 계산기 허브</div>
+        <p>직장인과 1인가구가 매일 마주치는 돈 계산을 2026년 기준 요율로 정리했습니다.
+        모든 계산은 이용자의 브라우저에서만 이루어지며 참고용입니다.</p>
+      </div>
+      <div>
+        <h3>계산기</h3>
+        <ul>
+          <li><a href="salary.html">연봉·월급 실수령액</a></li>
+          <li><a href="severance.html">퇴직금·실업급여</a></li>
+          <li><a href="housing.html">전세 vs 월세·대출이자</a></li>
+          <li><a href="living.html">난방비·1/N 정산</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>사이트</h3>
+        <ul>
+          <li><a href="about.html">사이트 소개</a></li>
+          <li><a href="contact.html">문의·피드백</a></li>
+          <li><a href="privacy.html">개인정보처리방침</a></li>
+          <li><a href="terms.html">이용약관</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> 생활금융 계산기 허브. All rights reserved.</span>
+      <span>본 사이트의 계산 결과는 참고용이며 법적·세무적 효력이 없습니다.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/calc-core.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  function put(panel, key, value) {
+    var el = panel.querySelector('[data-out="' + key + '"]');
+    if (el) el.textContent = value;
+  }
+
+  /* ---------- 난방비 ---------- */
+  var heatPanel = document.getElementById('heat-result');
+  var typeEl = document.getElementById('heat-type');
+  var usageEl = document.getElementById('heat-usage');
+  var priceEl = document.getElementById('heat-price');
+  var baseEl = document.getElementById('heat-base');
+  var lastEl = document.getElementById('heat-last');
+  var peopleEl = document.getElementById('heat-people');
+
+  function syncUnits() {
+    var isGas = typeEl.value === 'gas';
+    var unit = isGas ? 'm³' : 'kWh';
+    document.querySelectorAll('[data-out="usageUnit"],[data-out="usageUnit2"]').forEach(function (el) {
+      el.textContent = unit;
+    });
+    var priceUnit = heatPanel.querySelector('[data-out="priceUnit"]') || document.querySelector('form [data-out="priceUnit"]');
+    if (priceUnit) priceUnit.textContent = '원/' + unit;
+  }
+
+  function calcHeat() {
+    var res = CalcCore.calcHeating({
+      type: typeEl.value,
+      usage: UI.number(usageEl.value),
+      unitPrice: UI.number(priceEl.value),
+      baseFee: UI.inputValue(baseEl),
+      people: UI.inputValue(peopleEl) || 1,
+      lastUsage: UI.number(lastEl.value)
+    });
+    put(heatPanel, 'heatTotal', UI.won(res.total));
+    put(heatPanel, 'heatSub', res.changeRate === null ? '지난달 사용량을 입력하면 비교됩니다' :
+      (res.delta >= 0 ? '지난달 대비 +' : '지난달 대비 −') + UI.comma(Math.abs(res.delta)) + '원 (' + UI.percent(Math.abs(res.changeRate)) + ')');
+    put(heatPanel, 'heatUsageCost', UI.won(res.usageCost));
+    put(heatPanel, 'heatBase', UI.won(res.baseFee));
+    put(heatPanel, 'heatLastTotal', res.lastTotal > 0 ? UI.won(res.lastTotal) : '—');
+    put(heatPanel, 'heatDelta', (res.delta >= 0 ? '+' : '−') + UI.comma(Math.abs(res.delta)) + '원');
+    put(heatPanel, 'heatPer', UI.won(res.perPerson) + ' / ' + res.people + '명');
+    put(heatPanel, 'heatSave10', UI.won(res.save10));
+    put(heatPanel, 'heatSave20', UI.won(res.save20));
+  }
+
+  typeEl.addEventListener('change', function () {
+    if (typeEl.value === 'electric') {
+      priceEl.value = '187';
+      usageEl.value = '320';
+    } else {
+      priceEl.value = '900';
+      usageEl.value = '60';
+    }
+    syncUnits();
+    calcHeat();
+  });
+
+  var heatForm = document.getElementById('heat-form');
+  heatForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    calcHeat();
+    UI.showResult(heatPanel, true);
+  });
+  heatForm.addEventListener('input', function () {
+    clearTimeout(heatForm._t);
+    heatForm._t = setTimeout(calcHeat, 160);
+  });
+
+  /* ---------- 더치페이 ---------- */
+  var dutchPanel = document.getElementById('dutch-result');
+  var totalEl = document.getElementById('dutch-total');
+  var peopleEl2 = document.getElementById('dutch-people');
+  var extraRows = document.getElementById('extra-rows');
+
+  function addExtraRow(name, amount) {
+    var row = document.createElement('div');
+    row.className = 'extra-row';
+    row.style.cssText = 'display:flex;gap:8px;margin-bottom:8px;';
+    row.innerHTML =
+      '<input type="text" class="extra-name" placeholder="이름 (예: 추가 주류)" value="' + (name || '') + '" style="flex:1 1 40%;" aria-label="이름">' +
+      '<input type="text" class="extra-amount" inputmode="numeric" placeholder="0" value="' + (amount || '') + '" data-money style="flex:1 1 35%;text-align:right;" aria-label="추가 금액">' +
+      '<button type="button" class="btn btn-ghost extra-remove" style="padding:8px 12px;font-size:.8125rem;" aria-label="항목 삭제">삭제</button>';
+    extraRows.appendChild(row);
+    UI.bindMoneyInputs(row);
+    row.querySelector('.extra-remove').addEventListener('click', function () {
+      row.remove();
+      calcDutch();
+    });
+    row.querySelectorAll('input').forEach(function (input) {
+      input.addEventListener('input', function () {
+        clearTimeout(extraRows._t);
+        extraRows._t = setTimeout(calcDutch, 180);
+      });
+    });
+  }
+
+  function collectExtras() {
+    var rows = extraRows.querySelectorAll('.extra-row');
+    var extras = [];
+    rows.forEach(function (row) {
+      var name = row.querySelector('.extra-name').value.trim();
+      var amount = UI.inputValue(row.querySelector('.extra-amount'));
+      if (amount !== 0 || name) extras.push({ name: name, amount: amount });
+    });
+    return extras;
+  }
+
+  function calcDutch() {
+    var extras = collectExtras();
+    var people = Math.max(1, Math.round(UI.inputValue(peopleEl2) || 1));
+    var total = UI.inputValue(totalEl);
+    var res = CalcCore.splitDutch({ total: total, people: people, extras: extras });
+
+    put(dutchPanel, 'dutchBase', UI.won(res.base));
+    put(dutchPanel, 'dutchSub', '총 ' + UI.comma(res.total) + '원 · ' + res.people + '명');
+
+    var list = document.getElementById('dutch-list');
+    var html = '<table class="breakdown"><caption>참석자별 부담액</caption><tbody>';
+    res.rows.forEach(function (row) {
+      html += '<tr><th scope="row">' + escapeHtml(row.name) + (row.extra !== 0 ? ' <span class="tag">' + (row.extra > 0 ? '+' : '') + UI.comma(row.extra) + '원</span>' : '') +
+        '</th><td>' + UI.won(row.amount) + '</td></tr>';
+    });
+    html += '<tr class="total"><th scope="row">합계</th><td>' + UI.won(res.sumResult) + '</td></tr></tbody></table>';
+    list.innerHTML = html;
+
+    var notice = dutchPanel.querySelector('[data-out="dutchNotice"]');
+    if (res.negative) {
+      notice.hidden = false;
+      notice.className = 'notice bad';
+      notice.textContent = '개별 추가 항목이 총액보다 커서 1/N 기본 금액이 음수가 됩니다. 총액과 항목을 다시 확인하세요.';
+    } else if (res.sumExtras > res.total) {
+      notice.hidden = false;
+      notice.className = 'notice bad';
+      notice.textContent = '개별 추가 항목 합계가 총액보다 큽니다.';
+    } else {
+      notice.hidden = true;
+    }
+
+    var check = dutchPanel.querySelector('[data-out="dutchCheck"]');
+    if (res.sumResult === res.total) {
+      check.className = 'notice good';
+      check.textContent = '합계가 총액 ' + UI.comma(res.total) + '원과 정확히 일치합니다.';
+    } else {
+      check.className = 'notice bad';
+      check.textContent = '합계(' + UI.comma(res.sumResult) + '원)가 총액과 다릅니다. 인원과 항목을 확인하세요.';
+    }
+  }
+
+  function escapeHtml(text) {
+    return String(text).replace(/[&<>"']/g, function (ch) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+    });
+  }
+
+  document.getElementById('add-extra').addEventListener('click', function () {
+    addExtraRow('', '');
+    calcDutch();
+  });
+
+  var dutchForm = document.getElementById('dutch-form');
+  dutchForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    calcDutch();
+    UI.showResult(dutchPanel, true);
+  });
+  dutchForm.addEventListener('input', function () {
+    clearTimeout(dutchForm._t);
+    dutchForm._t = setTimeout(calcDutch, 160);
+  });
+
+  syncUnits();
+  addExtraRow('추가 주류', '20,000');
+  calcHeat();
+  calcDutch();
+})();
+</script>
+</body>
+</html>

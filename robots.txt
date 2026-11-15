@@ -1,0 +1,15 @@
+# 생활금융 계산기 허브 — robots.txt
+# 배포 도메인: https://kimdorun.github.io
+# 모든 검색엔진과 애드센스 크롤러의 접근을 허용합니다.
+
+User-agent: *
+Allow: /
+
+# 애드센스 크롤러(Mediapartners-Google)는 별도 허용이 필요 없지만 명시해 둡니다.
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+Sitemap: https://kimdorun.github.io/sitemap.xml
