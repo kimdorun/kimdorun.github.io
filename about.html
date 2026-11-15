@@ -13,6 +13,10 @@
 <meta property="og:url" content="https://kimdorun.github.io/about.html">
 <meta property="og:locale" content="ko_KR">
 <meta name="theme-color" content="#2257e0">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon-180.png">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -73,6 +77,38 @@
           <li>퇴직금·평균임금 — 근로기준법 제2조, 근로자퇴직급여보장법</li>
         </ul>
 
+        <h2>데이터 출처와 갱신 시점</h2>
+        <p>아래 표는 각 계산기가 참조하는 공식 기준과 반영 시점입니다. 요율이나 법령이 바뀌면 이 표와
+        계산 엔진(<code>assets/calc-core.js</code>)을 함께 수정하고, 페이지의 기준일도 갱신합니다.</p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption>계산 기준과 출처 (2026년 11월 확인)</caption>
+            <thead>
+              <tr><th scope="col">항목</th><th scope="col">기준값</th><th scope="col">출처·근거</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">국민연금</th><td>총 9.5% (근로자 4.75%), 기준소득월액 41만~659만원</td><td>국민연금법 개정(2025.4) · 국민연금공단</td></tr>
+              <tr><th scope="row">건강보험</th><td>총 7.19% (근로자 3.595%)</td><td>국민건강보험공단 보험료율 고시</td></tr>
+              <tr><th scope="row">장기요양보험</th><td>건강보험료의 13.14%</td><td>노인장기요양보험법 시행령</td></tr>
+              <tr><th scope="row">고용보험(실업급여)</th><td>총 1.8% (근로자 0.9%)</td><td>고용보험법 · 고용노동부</td></tr>
+              <tr><th scope="row">소득세</th><td>기본세율 6~45%, 근로소득공제·근로소득세액공제</td><td>소득세법 제47조·제55조·제59조</td></tr>
+              <tr><th scope="row">퇴직금</th><td>1일 평균임금 × 30 × (재직일수 ÷ 365)</td><td>근로자퇴직급여보장법 · 근로기준법 제2조</td></tr>
+              <tr><th scope="row">실업급여</th><td>평균임금의 60%, 1일 상한 68,100원·하한 66,048원</td><td>고용보험법 별표 1 · 고용노동부 고시</td></tr>
+              <tr><th scope="row">최저임금</th><td>2026년 시급 10,320원</td><td>최저임금위원회 결정·고시</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>2026년에는 국민연금이 9%에서 9.5%로, 건강보험이 7.09%에서 7.19%로, 장기요양보험이 12.95%에서
+        13.14%로 인상되었습니다. 국민연금은 2033년까지 매년 0.5%포인트씩 인상될 예정이므로, 2027년 이후에는
+        이 사이트의 숫자도 달라집니다. 화면 상단의 기준 연도와 이 표의 날짜를 함께 확인해 주세요.</p>
+
+        <h2>제공하는 가이드</h2>
+        <ul>
+          <li><a href="guide-salary-2026.html">2026년 월급 명세서 해부</a> — 4대보험 인상 폭, 비과세 식대 20만원의 실제 효과, 부양가족별 실수령액 비교표, 이직·연봉협상 체크리스트.</li>
+          <li><a href="guide-severance-unemployment.html">퇴직금 vs 실업급여 vs 연차수당</a> — 평균임금에 상여금이 포함되는 구조, 180일 피보험단위기간과 소정급여일수, 퇴사 전 체크리스트.</li>
+          <li><a href="guide-jeonse-vs-wolse.html">전세 vs 월세 손익분기</a> — 대출이자·기회비용·보증보험료를 월 단위로 비교하는 법, 보증금을 지키는 확인 항목.</li>
+        </ul>
+
         <h2>편집 원칙</h2>
         <ol>
           <li><strong>추정과 사실을 구분합니다.</strong> 공식 요율은 그대로 쓰고, 계산할 수 없는 값은 추정임을 화면에 표시합니다.</li>
@@ -81,9 +117,23 @@
           <li><strong>입력값을 수집하지 않습니다.</strong> 모든 계산은 브라우저에서만 이루어지며, 서버로 전송되지 않습니다.</li>
         </ol>
 
+        <h2>이 사이트가 하지 않는 것</h2>
+        <p>무엇을 하지 않는지 밝히는 것이 신뢰의 일부라고 생각합니다.</p>
+        <ul>
+          <li><strong>금융 상품을 권유하거나 중개하지 않습니다.</strong> 대출·보험·투자 상품의 광고나 제휴 링크를 두지 않습니다.</li>
+          <li><strong>개인정보를 수집하지 않습니다.</strong> 회원가입·로그인이 없고, 입력값은 브라우저 밖으로 나가지 않습니다.</li>
+          <li><strong>법률·세무 자문을 제공하지 않습니다.</strong> 계산 결과는 참고용이며, 계약·신고·소송의 근거로 쓸 수 없습니다.</li>
+          <li><strong>회사 내부 자료에 접근하지 않습니다.</strong> 급여명세서·퇴직 정산 내역은 이용자가 직접 입력한 값만 사용합니다.</li>
+        </ul>
+
         <h2>운영</h2>
-        <p>이 사이트는 <strong>도은 컴퍼니 운영팀</strong>이 운영합니다. 문의는 <a href="contact.html">문의·피드백</a> 페이지의 안내를 참고해 주세요. 계산 결과에 대한 법적·세무적 판단은 제공하지 않으며, 계약이나 신고 전에는 관계 기관의 확인을 권합니다.</p>
-        <p class="meta">최초 게시: 2026년 11월 · 최근 개정: 2026년 11월 15일</p>
+        <p>이 사이트는 <strong>도은 컴퍼니(Doeun Company) 운영팀</strong>이 운영합니다. 계산 기준에 대한 문의,
+        오류 제보, 개선 제안은 <a href="contact.html">문의·피드백</a> 페이지 또는
+        <a href="mailto:rlaehdms5650@gmail.com">rlaehdms5650@gmail.com</a>으로 보내주세요. 영업일 기준 3일 이내에
+        확인하는 것을 목표로 합니다.</p>
+        <p>계산 결과에 대한 법적·세무적 판단은 제공하지 않으며, 계약이나 신고 전에는 국민연금공단,
+        국민건강보험공단, 근로복지공단, 고용24, 국세청 홈택스 또는 세무사·노무사의 확인을 권합니다.</p>
+        <p class="meta">최초 게시: 2026년 11월 · 최근 개정: 2026년 11월 16일 · 계산 기준: 2026년 요율</p>
       </article>
     </div>
   </section>
@@ -109,6 +159,9 @@
       <div>
         <h3>사이트</h3>
         <ul>
+          <li><a href="guide-salary-2026.html">가이드: 월급 명세서 해부</a></li>
+          <li><a href="guide-severance-unemployment.html">가이드: 퇴직금·실업급여</a></li>
+          <li><a href="guide-jeonse-vs-wolse.html">가이드: 전세 vs 월세</a></li>
           <li><a href="about.html">사이트 소개</a></li>
           <li><a href="contact.html">문의·피드백</a></li>
           <li><a href="privacy.html">개인정보처리방침</a></li>
