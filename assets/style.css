@@ -404,7 +404,7 @@ select { appearance: none; background-image: none; padding-right: 34px; }
 .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
 
 /* ---------- 결과 ---------- */
-.result-panel { padding: 22px; position: sticky; top: 80px; }
+.result-panel { padding: 22px; position: sticky; top: 80px; scroll-margin-top: 84px; }
 @media (max-width: 880px) { .result-panel { position: static; } }
 .result-panel .result-label {
   font-size: .8125rem;
@@ -601,6 +601,71 @@ select { appearance: none; background-image: none; padding-right: 34px; }
   color: var(--ink-mute);
   font-size: .75rem;
   letter-spacing: .08em;
+}
+
+/* ---------- 파일 점검기 (hwpx-check) ---------- */
+.drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 148px;
+  padding: 22px 18px;
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--radius);
+  background: #fbfcff;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.drop-zone:hover,
+.drop-zone.is-drop {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+}
+.drop-zone .drop-icon { font-size: 1.6rem; line-height: 1; }
+.drop-zone .drop-title { font-weight: 700; font-size: .95rem; color: var(--ink); }
+.drop-zone .drop-sub { font-size: .7813rem; color: var(--ink-mute); }
+.file-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--mint-soft);
+  font-size: .875rem;
+  min-width: 0;
+}
+.file-chip .file-name {
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.file-chip .file-size { color: var(--ink-soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.file-chip .chip-clear {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: .95rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.file-chip .chip-clear:hover { background: rgba(15, 27, 45, .08); color: var(--ink); }
+.content code {
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: var(--bg-deep);
+  font-family: var(--mono);
+  font-size: .875em;
+  word-break: break-word;
 }
 
 /* ---------- 개인정보/약관 문서 ---------- */

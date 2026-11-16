@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026년 귀속 연말정산 미리보기 계산기 | 카드·월세·연금저축 공제 한도 시뮬레이션</title>
+<meta name="description" content="2026년 귀속 연말정산 미리보기(12월 18일 마감) 전에 카드 소득공제 한도, 12월 체크카드 전환 효과, 월세·연금저축·IRP 세액공제를 직접 계산해 보세요. 총급여 25% 최저사용금액부터 한도까지 원 단위로 보여줍니다.">
+<meta name="keywords" content="연말정산 미리보기, 2026 연말정산, 신용카드 소득공제 계산, 체크카드 전환, 월세 세액공제, 연금저축 세액공제, IRP 세액공제, 총급여 25%">
+<meta name="robots" content="index,follow">
+<meta name="naver-site-verification" content="55b7a76e51ff5834807ed6a75e122349536f48b0" />
+<link rel="canonical" href="https://kimdorun.github.io/yearend-tax.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026년 귀속 연말정산 미리보기 · 카드·월세·연금 공제 계산">
+<meta property="og:description" content="총급여 25% 문턱, 카드별 공제율, 한도, 12월 체크카드 전환 효과까지 한 화면에서 계산합니다. 12월 18일 미리보기 마감 전에 확인하세요.">
+<meta property="og:url" content="https://kimdorun.github.io/yearend-tax.html">
+<meta property="og:locale" content="ko_KR">
+<meta name="theme-color" content="#2257e0">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<link rel="stylesheet" href="assets/style.css">
+<!-- ADSENSE: 승인 후 주석 해제 + 게시자 ID 교체
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "2026년 귀속 연말정산 미리보기 계산기",
+  "url": "https://kimdorun.github.io/yearend-tax.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "All",
+  "inLanguage": "ko-KR",
+  "description": "총급여 25% 최저사용금액, 신용카드·체크카드·전통시장 공제율, 기본한도와 자녀 추가한도, 12월 체크카드 전환 효과, 월세·연금저축·IRP 세액공제를 브라우저에서 계산하는 무료 도구.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "연말정산 미리보기는 언제까지 볼 수 있나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "2026년 귀속 연말정산 미리보기는 2026년 10월 28일부터 12월 18일까지 홈택스에서 운영됩니다. 홈택스 로그인 후 장려금·연말정산·기부금 → 편리한 연말정산 → 연말정산 미리보기 순서로 들어갑니다. 이 기간이 지나면 1월 연말정산 간소화 자료가 열릴 때까지 예상 세액을 다시 계산하기 어렵습니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "총급여 25% 문턱은 어떤 카드 사용액으로 채우나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "신용카드·체크카드·현금영수증·전통시장·대중교통 사용액을 모두 합쳐 총급여의 25%를 넘으면 그 초과분부터 소득공제가 시작됩니다. 다만 차감 순서는 공제율이 낮은 신용카드부터이고, 그다음 체크카드·현금영수증, 마지막으로 전통시장·대중교통 순입니다. 그래서 문턱은 신용카드로 채우고 넘긴 뒤에 체크카드를 쓰는 조합이 유리합니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "12월에 체크카드로 바꾸면 정말 세금이 줄어드나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "이미 쓸 돈의 결제수단만 바꾸는 경우라면 소득공제가 늘어납니다. 신용카드 15%와 체크카드 30%의 차이인 15%p가 그대로 공제액 증가분이 되고, 여기에 본인의 한계세율을 곱한 만큼 세금이 줄어듭니다. 다만 공제 한도를 이미 채웠다면 결제수단을 바꿔도 공제는 늘지 않고, 공제를 위해 소비 자체를 늘리는 것은 손해입니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "월세 세액공제는 세대원도 받을 수 있나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "아니요. 월세 세액공제는 무주택 세대주만 신청할 수 있습니다. 총급여 5,500만원 이하는 연 1,000만원 한도에서 17%, 5,500만원 초과 8,000만원 이하는 15%가 적용되고, 8,000만원을 넘으면 공제가 없습니다. 계약서, 주민등록등본, 전입일이 확인되는 현황, 월세 지급 증빙이 필요합니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "연금저축과 IRP는 합쳐서 900만원인가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "네. 연금저축(600만원)과 IRP·퇴직연금 DC(300만원)를 합쳐 연 900만원까지 세액공제 대상입니다. 총급여 5,500만원 이하는 16.5%, 초과는 13.2%를 곱해 공제액을 계산합니다. 납입하지 않은 여력이 있다면 12월 말까지 넣는 금액도 올해 공제에 포함됩니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "계산 결과와 실제 환급액이 다른 이유는 무엇인가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "이 계산기는 카드·월세·연금 공제만 반영하고, 의료비·교육비·기부금·보험료·주택자금 공제와 기납부세액은 넣지 않았습니다. 실제 환급액은 결정세액에서 이미 낸 세금을 뺀 값이므로, 기납부세액이 적으면 오히려 추가 납부가 될 수 있습니다. 정확한 예상액은 홈택스 미리보기와 회사 연말정산 결과로 확인하세요." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">₩</span>
+      <span class="brand-text">생활금융 계산기<small>LIFE FINANCE CALC</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">메뉴</button>
+    <nav class="site-nav" id="site-nav" aria-label="주요 메뉴">
+      <a href="salary.html">실수령액</a>
+      <a href="severance.html">퇴직금·실업급여</a>
+      <a href="housing.html">전세·월세</a>
+      <a href="living.html">난방비·정산</a>
+      <a href="yearend-tax.html">연말정산</a>
+      <a href="hwpx-check.html">HWPX 점검</a>
+      <a href="about.html">소개</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap">
+      <ol class="breadcrumb">
+        <li><a href="index.html">홈</a></li>
+        <li>연말정산 미리보기</li>
+      </ol>
+      <span class="eyebrow">2026년 귀속 · 12월 18일 마감</span>
+      <h1>2026년 귀속 연말정산 미리보기 계산기</h1>
+      <p class="lede">올해 1~11월 카드 사용액을 넣으면 총급여 25% 문턱을 넘겼는지, 남은 12월에 체크카드로
+      바꿀 때 공제가 얼마나 늘어나는지 바로 보여드립니다. 월세·연금저축 공제까지 합쳐 예상 절세액을 계산합니다.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-label="연말정산 계산기">
+    <div class="wrap">
+      <div class="calc-shell">
+        <form class="card calc-panel" id="yearend-form" novalidate>
+          <h2><span class="step" aria-hidden="true">1</span> 소득과 지출 입력</h2>
+
+          <div class="field">
+            <label for="grossSalary">총급여 (연간)</label>
+            <div class="input-wrap">
+              <input type="text" id="grossSalary" name="grossSalary" data-money inputmode="numeric" value="4,000" autocomplete="off">
+              <span class="unit">만원</span>
+            </div>
+            <span class="hint">비과세를 제외한 근로소득입니다. 원천징수영수증의 ‘총급여’ 칸 금액을 넣으세요.</span>
+          </div>
+
+          <div class="field">
+            <label for="creditCard">신용카드 사용액 (1~11월 누적)</label>
+            <div class="input-wrap">
+              <input type="text" id="creditCard" name="creditCard" data-money inputmode="numeric" value="1,200" autocomplete="off">
+              <span class="unit">만원</span>
+            </div>
+            <span class="hint">공제 제외 항목(관리비·국세·통신비·신차·해외결제)은 빼고 넣으세요.</span>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="debitCash">체크카드·현금영수증</label>
+              <div class="input-wrap">
+                <input type="text" id="debitCash" name="debitCash" data-money inputmode="numeric" value="500" autocomplete="off">
+                <span class="unit">만원</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="marketTransit">전통시장·대중교통</label>
+              <div class="input-wrap">
+                <input type="text" id="marketTransit" name="marketTransit" data-money inputmode="numeric" value="100" autocomplete="off">
+                <span class="unit">만원</span>
+              </div>
+            </div>
+          </div>
+          <span class="hint" style="margin:-6px 0 14px;display:block;">전통시장·대중교통은 공제율 40%로, 기본한도와 별도로 최대 300만원(총급여 7천만원 초과 200만원)까지 더 공제됩니다.</span>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="children">부양자녀 수</label>
+              <div class="select-wrap">
+                <select id="children" name="children">
+                  <option value="0" selected>없음</option>
+                  <option value="1">1명</option>
+                  <option value="2">2명 이상</option>
+                </select>
+              </div>
+              <span class="hint">2026년 지출분부터 자녀 1명당 한도가 늘어납니다.</span>
+            </div>
+            <div class="field">
+              <label for="switchAmount">12월 체크카드 전환액</label>
+              <div class="input-wrap">
+                <input type="text" id="switchAmount" name="switchAmount" data-money inputmode="numeric" value="200" autocomplete="off">
+                <span class="unit">만원</span>
+              </div>
+              <span class="hint">12월에 신용카드 대신 쓸 금액(추가 지출 아님).</span>
+            </div>
+          </div>
+
+          <h2 style="margin-top:22px;"><span class="step" aria-hidden="true">2</span> 세액공제 항목</h2>
+
+          <div class="segmented" id="house-seg" data-segment="household" role="group" aria-label="주거 형태 선택">
+            <button type="button" data-value="owner" aria-pressed="true">무주택 세대주</button>
+            <button type="button" data-value="member" aria-pressed="false">세대원</button>
+          </div>
+
+          <div class="field">
+            <label for="monthlyRent">월세 월 납입액</label>
+            <div class="input-wrap">
+              <input type="text" id="monthlyRent" name="monthlyRent" data-money inputmode="numeric" value="60" autocomplete="off">
+              <span class="unit">만원</span>
+            </div>
+            <span class="hint">연 1,000만원 한도. 세대원은 공제 대상이 아닙니다.</span>
+          </div>
+
+          <div class="field">
+            <label for="pension">연금저축·IRP 납입액</label>
+            <div class="input-wrap">
+              <input type="text" id="pension" name="pension" data-money inputmode="numeric" value="300" autocomplete="off">
+              <span class="unit">만원</span>
+            </div>
+            <span class="hint">연금저축 600만원 + IRP 300만원, 합쳐 연 900만원 한도.</span>
+          </div>
+
+          <div class="btn-row">
+            <button class="btn btn-block" type="submit">예상 절세액 계산하기</button>
+          </div>
+          <p class="hint" style="margin-top:12px;">입력값은 서버로 전송되지 않고 브라우저에서만 계산됩니다.</p>
+        </form>
+
+        <div class="card result-panel" id="yearend-result" aria-live="polite">
+          <p class="result-label">예상 절세액 합계</p>
+          <div class="result-hero">
+            <strong class="amount" data-out="totalSaving">-</strong>
+            <span class="sub" data-out="savingSub">총급여 대비 -</span>
+          </div>
+          <span class="visually-hidden" data-live role="status"></span>
+
+          <table class="breakdown">
+            <caption>공제 항목별 내역</caption>
+            <tbody>
+              <tr><th scope="row">최저사용금액 (총급여 25%)</th><td data-out="threshold">-</td></tr>
+              <tr><th scope="row">공제대상 사용액 (25% 초과분)</th><td data-out="eligible">-</td></tr>
+              <tr><th scope="row">카드 소득공제 (한도 적용)</th><td data-out="cardDeduction">-</td></tr>
+              <tr><th scope="row">└ 카드 절세 추정</th><td class="plus" data-out="cardSaving">-</td></tr>
+              <tr><th scope="row">월세 세액공제</th><td class="plus" data-out="rentSaving">-</td></tr>
+              <tr><th scope="row">연금저축·IRP 세액공제</th><td class="plus" data-out="pensionSaving">-</td></tr>
+              <tr class="total"><th scope="row">예상 절세액 합계</th><td data-out="totalSaving2">-</td></tr>
+            </tbody>
+          </table>
+
+          <div class="stat-row">
+            <div class="stat"><span class="k">기본한도</span><span class="v" data-out="cap">-</span></div>
+            <div class="stat"><span class="k">한도 잔여</span><span class="v" data-out="room">-</span></div>
+            <div class="stat"><span class="k">12월 전환 효과</span><span class="v" data-out="switchExtra">-</span></div>
+          </div>
+
+          <div data-out="notices"></div>
+
+          <div class="notice info" style="margin-top:10px;">
+            카드 소득공제의 절세액은 추정 한계세율(현재 <strong data-out="marginalRate">-</strong>)을 곱한 참고값입니다.
+            실제 환급액은 의료비·교육비 공제와 기납부세액에 따라 달라집니다.
+          </div>
+          <div class="btn-row" style="margin-top:12px;">
+            <button class="btn btn-ghost" type="button" data-copy="#yearend-result">결과 복사</button>
+          </div>
+        </div>
+      </div>
+      <div class="ad-slot" aria-hidden="true">광고 영역 (AdSense 승인 후 표시)</div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="wrap wrap-narrow">
+      <article class="card card-pad">
+        <h2>2026년 귀속 연말정산, 지금 확인할 수 있는 것</h2>
+        <p>2026년 귀속 연말정산 미리보기는 <strong>2026년 10월 28일부터 12월 18일까지</strong> 홈택스에서 열립니다.
+        홈택스에 로그인한 뒤 장려금·연말정산·기부금 → 편리한 연말정산 → 연말정산 미리보기 순서로 들어가면,
+        1월부터 9월까지의 신용카드·체크카드·현금영수증 사용액과 지난해 신고한 공제 내역이 자동으로 불러와집니다.
+        여기에 올해 예상 총급여, 이미 낸 세금(기납부세액), 10~12월 예상 지출을 직접 넣으면 예상 세액이 계산됩니다.</p>
+        <p>중요한 점은 미리보기가 <strong>확정 환급액이 아니라는 것</strong>입니다. 지난해 자료를 기준으로 시작하고,
+        남은 두 달의 지출은 이용자가 추정해 넣는 값이기 때문입니다. 그래서 미리보기의 진짜 쓸모는 “얼마 받는다”를
+        확정하는 데 있지 않고, <strong>남은 12월의 결제수단과 납입 계획을 바꿀지 판단하는 데</strong> 있습니다.
+        이 계산기는 그 판단에 필요한 숫자, 즉 문턱까지 남은 금액과 한도 잔여분, 전환 효과를 먼저 보여줍니다.</p>
+
+        <h2>카드 소득공제의 구조: 25% 문턱부터 이해하기</h2>
+        <p>신용카드 등 소득공제는 쓴 돈 전부에 붙지 않습니다. 신용카드·체크카드·현금영수증·전통시장·대중교통 사용액을
+        모두 합친 금액이 <strong>총급여의 25%</strong>를 넘어야 하고, 넘긴 금액에만 공제율이 적용됩니다.
+        총급여 4,000만원이라면 1,000만원까지는 어떤 카드로 결제해도 결과가 같고, 1,000만원을 넘긴 1,200만원부터
+        결제수단에 따라 공제액이 갈립니다.</p>
+        <div class="formula">1) 최저사용금액 = 총급여 × 25%   (원 단위 절사)
+2) 최저사용금액은 <strong>신용카드 → 체크·현금영수증 → 전통시장·대중교통</strong> 순서로 차감
+3) 공제대상금액 = 신용카드 초과분 × 15% + 체크·현금 초과분 × 30% + 전통시장·대중교통 초과분 × 40%
+4) 카드 소득공제 = min(공제대상금액, 기본한도)
+   + min(한도 초과분, 전통시장·대중교통 공제몫, 추가한도)
+5) 카드 절세 추정 = 카드 소득공제 × 한계세율</div>
+        <p>2번이 실전에서 가장 중요한 부분입니다. 최저사용금액을 채울 때 공제율이 낮은 신용카드 사용분이 먼저 깎이기 때문에,
+        <strong>연초에는 혜택이 좋은 신용카드로 문턱을 채우고, 문턱을 넘긴 뒤에는 체크카드로 바꾸는 것</strong>이 유리합니다.
+        반대로 이미 신용카드로 문턱을 한참 넘겼다면 12월에 체크카드를 써도 남은 금액 전체가 30% 공제 대상이 됩니다.</p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption>결제수단별 소득공제율과 2026년 기본한도</caption>
+            <thead>
+              <tr><th scope="col">구분</th><th scope="col" class="num">공제율</th><th scope="col">설명</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">신용카드</th><td class="num">15%</td><td>문턱을 채우는 데 먼저 쓰이는 결제수단</td></tr>
+              <tr><th scope="row">체크카드·현금영수증</th><td class="num">30%</td><td>신용카드의 두 배. 12월 전환의 핵심</td></tr>
+              <tr><th scope="row">전통시장·대중교통</th><td class="num">40%</td><td>기본한도와 별도 추가한도 적용</td></tr>
+              <tr><th scope="row">기본한도</th><td class="num">300만 / 250만</td><td>총급여 7천만원 이하 300만원, 초과 250만원</td></tr>
+              <tr><th scope="row">자녀 추가한도</th><td class="num">+50만 / +25만</td><td>자녀 1명당, 2명 이상은 2배(총급여 7천만원 초과는 최대 300만원)</td></tr>
+              <tr><th scope="row">전통시장·대중교통 추가한도</th><td class="num">300만 / 200만</td><td>총급여 7천만원 이하 300만원, 초과 200만원</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>12월에 체크카드로 바꾸면 얼마가 달라지나</h2>
+        <p>국세청이 드는 예시는 이렇습니다. 총급여 5,000만원 직장인이 9월까지 신용카드로 최저사용금액 1,250만원을
+        채웠고, 남은 4분기에 450만원을 더 쓸 계획이라면 이 금액을 신용카드(15%) 대신 체크카드(30%)로 결제할 때
+        소득공제가 67만 5,000원 늘어납니다. 15%p 차이에 450만원을 곱한 값입니다.
+        여기에 본인의 한계세율 15%를 적용하면 세금은 약 11만 1,000원 줄어듭니다(지방소득세 포함).</p>
+        <p>같은 돈을 쓰고 카드만 바꿨는데 결과가 달라지는 구조입니다. 다만 두 가지 예외를 꼭 기억해야 합니다.
+        첫째, <strong>기본한도를 이미 다 채웠다면</strong> 체크카드로 바꿔도 공제는 1원도 늘지 않습니다.
+        둘째, 공제를 받으려고 <strong>소비를 늘리면 손해</strong>입니다. 450만원을 더 쓰면 세금은 11만원 줄지만
+        나가는 돈은 450만원입니다. 공제는 어차피 쓸 돈의 결제수단을 바꾸는 일에만 적용됩니다.</p>
+
+        <h2>월세와 연금저축: 소득공제가 아닌 ‘세액공제’</h2>
+        <p>카드 공제는 과세표준을 줄이는 소득공제라서 한계세율만큼만 세금이 줄지만, 월세와 연금저축은 세금에서
+        직접 빼는 세액공제입니다. 그래서 납입액에 공제율을 곱한 금액이 그대로 세금 감소분이 됩니다.</p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption>2026년 귀속 세액공제율 (지방소득세 처리 포함 여부 주의)</caption>
+            <thead>
+              <tr><th scope="col">항목</th><th scope="col" class="num">총급여 5,500만 이하</th><th scope="col" class="num">5,500만 초과</th><th scope="col" class="num">한도</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">월세 세액공제</th><td class="num">17%</td><td class="num">15%</td><td class="num">연 1,000만원</td></tr>
+              <tr><th scope="row">연금저축·IRP</th><td class="num">16.5%</td><td class="num">13.2%</td><td class="num">연 900만원</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>월세 공제율은 국세(소득세) 기준이고 지방소득세 10%를 더하면 실효 공제율은 18.7%·16.5%가 됩니다.
+        연금저축 공제율은 지방소득세를 포함한 수치입니다. 월세는 <strong>무주택 세대주</strong>만 대상이고,
+        총급여 8,000만원을 넘으면 적용되지 않습니다. 계약서와 주민등록등본, 전입일, 월세 지급 내역을 함께 보관하세요.
+        연금저축은 연금저축 600만원과 IRP 300만원을 합쳐 900만원까지이며, 12월 31일까지 넣은 금액이 올해 공제에 포함됩니다.</p>
+
+        <h2>공제에서 빠지는 지출은 따로 있습니다</h2>
+        <p>카드사 앱의 누적 결제액을 그대로 넣으면 문턱을 넘긴 것처럼 보여도 실제 공제 대상은 아닌 경우가 많습니다.
+        아파트 관리비, 국세·지방세, 이동통신요금, 신차 구매비, 해외 결제액은 카드 실적에는 잡히지만 공제 대상에서
+        전액 빠집니다. 중고차는 결제액의 10%만 인정됩니다. 반대로 2025년 7월 이후 결제한 헬스장·수영장 이용료는
+        총급여 7천만원 이하인 경우 30% 공제 대상에 들어가므로, 해당된다면 사용액에 포함해 계산해야 합니다.</p>
+
+        <h2>12월 18일 전에 정리할 체크리스트</h2>
+        <ol>
+          <li><strong>홈택스 미리보기에서 1~9월 카드 사용액을 확인합니다.</strong> 카드사 자료 제출이 늦으면 누락될 수 있으니, 카드사 앱 합계와 숫자가 크게 다르면 카드사에 문의하세요.</li>
+          <li><strong>이 계산기로 문턱과 한도 잔여분을 확인합니다.</strong> 남은 금액이 있다면 12월 결제수단을 체크카드·전통시장으로 돌리는 것만으로 공제가 늘어납니다.</li>
+          <li><strong>월세·연금저축 납입 계획을 세웁니다.</strong> 연금저축은 12월 말까지 넣어야 하므로 여유 자금이 있다면 미리 납입일을 정해 두세요.</li>
+          <li><strong>부양가족 변동을 확인합니다.</strong> 결혼·출산·부모님 소득 요건 변경은 기본공제와 자녀 추가한도에 영향을 줍니다.</li>
+          <li><strong>증빙을 한곳에 모읍니다.</strong> 월세 계약서, 주민등록등본, 기부금 영수증, 의료비 영수증처럼 간소화 자료에 잡히지 않는 항목을 정리해 두면 1월 정산이 빨라집니다.</li>
+        </ol>
+        <div class="notice" style="margin-bottom:1.2em;">
+          <p><strong>계산 기준과 한계</strong> — 이 계산기의 카드 소득공제는 2026년 지출분 기준 공제율(15%·30%·40%)과
+          기본한도(300만·250만원), 자녀 추가한도, 전통시장·대중교통 추가한도를 반영했습니다. 총급여 1억 2천만원 초과
+          구간의 기본한도 200만원, 문화체육 사용분 30% 공제, 의료비·교육비·보험료·주택자금 공제, 기납부세액은
+          반영하지 않았습니다. 카드 절세액은 근로소득공제와 국민연금보험료만 반영한 추정 한계세율로 계산한 참고값입니다.
+          실제 세액은 회사 연말정산 결과와 홈택스 미리보기로 확인하세요.</p>
+        </div>
+
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+          <details open>
+            <summary>연말정산 미리보기는 언제까지 볼 수 있나요?</summary>
+            <div class="faq-body">
+              <p>2026년 귀속 연말정산 미리보기는 2026년 10월 28일부터 <strong>12월 18일</strong>까지 홈택스에서 운영됩니다.
+              홈택스 로그인 후 장려금·연말정산·기부금 → 편리한 연말정산 → 연말정산 미리보기 순서로 들어갑니다.
+              이 기간이 지나면 1월 연말정산 간소화 자료가 열릴 때까지 예상 세액을 다시 계산하기 어렵습니다.
+              미리보기 마감일은 회사의 공제신고서 제출 마감일과 다르므로, 제출 일정은 회사 안내를 따로 확인하세요.</p>
+            </div>
+          </details>
+          <details>
+            <summary>총급여 25% 문턱은 어떤 카드 사용액으로 채우나요?</summary>
+            <div class="faq-body">
+              <p>신용카드·체크카드·현금영수증·전통시장·대중교통 사용액을 모두 합쳐 총급여의 25%를 넘으면 그 초과분부터
+              소득공제가 시작됩니다. 다만 차감 순서는 공제율이 낮은 신용카드부터이고, 그다음 체크카드·현금영수증,
+              마지막으로 전통시장·대중교통 순입니다. 그래서 문턱은 신용카드로 채우고 넘긴 뒤에 체크카드를 쓰는 조합이 유리합니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>12월에 체크카드로 바꾸면 정말 세금이 줄어드나요?</summary>
+            <div class="faq-body">
+              <p>이미 쓸 돈의 결제수단만 바꾸는 경우라면 소득공제가 늘어납니다. 신용카드 15%와 체크카드 30%의 차이인
+              15%p가 그대로 공제액 증가분이 되고, 여기에 본인의 한계세율을 곱한 만큼 세금이 줄어듭니다.
+              다만 공제 한도를 이미 채웠다면 결제수단을 바꿔도 공제는 늘지 않고, 공제를 위해 소비 자체를 늘리는 것은 손해입니다.
+              이 계산기의 ‘12월 전환 효과’는 한도 잔여분까지만 인정해 계산합니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>월세 세액공제는 세대원도 받을 수 있나요?</summary>
+            <div class="faq-body">
+              <p>아니요. 월세 세액공제는 무주택 세대주만 신청할 수 있습니다. 총급여 5,500만원 이하는 연 1,000만원 한도에서 17%,
+              5,500만원 초과 8,000만원 이하는 15%가 적용되고, 8,000만원을 넘으면 공제가 없습니다.
+              계약서, 주민등록등본, 전입일이 확인되는 현황, 월세 지급 증빙이 필요합니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>연금저축과 IRP는 합쳐서 900만원인가요?</summary>
+            <div class="faq-body">
+              <p>네. 연금저축(600만원)과 IRP·퇴직연금 DC(300만원)를 합쳐 연 900만원까지 세액공제 대상입니다.
+              총급여 5,500만원 이하는 16.5%, 초과는 13.2%를 곱해 공제액을 계산합니다. 납입하지 않은 여력이 있다면
+              12월 말까지 넣는 금액도 올해 공제에 포함됩니다. 다만 중도 해지하면 그동안 받은 세액공제에 기타소득세가
+              부과되므로, 여유 자금으로 장기 납입이 가능한 범위에서 결정하세요.</p>
+            </div>
+          </details>
+          <details>
+            <summary>계산 결과와 실제 환급액이 다른 이유는 무엇인가요?</summary>
+            <div class="faq-body">
+              <p>이 계산기는 카드·월세·연금 공제만 반영하고, 의료비·교육비·기부금·보험료·주택자금 공제와 기납부세액은 넣지 않았습니다.
+              실제 환급액은 결정세액에서 이미 낸 세금을 뺀 값이므로, 기납부세액이 적으면 오히려 추가 납부가 될 수 있습니다.
+              정확한 예상액은 홈택스 미리보기와 회사 연말정산 결과로 확인하세요.</p>
+            </div>
+          </details>
+          <details>
+            <summary>카드 사용액에 자녀 학원비나 보험료를 넣어도 되나요?</summary>
+            <div class="faq-body">
+              <p>학원비·보험료를 카드로 결제했다면 카드 사용액에는 포함됩니다. 다만 교육비·보험료 공제와 카드 소득공제는
+              각각 별도로 계산되는 항목이라, 같은 지출이 이중으로 세금을 줄여 주지는 않습니다. 이 계산기는 카드 사용액만
+              반영하므로, 교육비·의료비·보험료 공제는 홈택스 미리보기에서 따로 확인하는 것이 정확합니다.</p>
+            </div>
+          </details>
+        </div>
+
+        <h2>함께 보면 좋은 도구</h2>
+        <ul class="related">
+          <li><a href="salary.html">연봉·월급 실수령액 계산</a></li>
+          <li><a href="guide-salary-2026.html">2026년 월급 명세서 해부 가이드</a></li>
+          <li><a href="hwpx-check.html">HWPX 공문서 규격 점검기</a></li>
+          <li><a href="index.html">전체 계산기 보기</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><span class="brand-mark" aria-hidden="true">₩</span> 생활금융 계산기 허브</div>
+        <p>직장인과 1인가구가 매일 마주치는 돈 계산을 2026년 기준 요율로 정리했습니다.
+        모든 계산은 이용자의 브라우저에서만 이루어지며 참고용입니다.</p>
+      </div>
+      <div>
+        <h3>계산기</h3>
+        <ul>
+          <li><a href="salary.html">연봉·월급 실수령액</a></li>
+          <li><a href="severance.html">퇴직금·실업급여</a></li>
+          <li><a href="housing.html">전세 vs 월세·대출이자</a></li>
+          <li><a href="living.html">난방비·1/N 정산</a></li>
+          <li><a href="yearend-tax.html">연말정산 미리보기</a></li>
+          <li><a href="hwpx-check.html">HWPX 서식 점검</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>사이트</h3>
+        <ul>
+          <li><a href="guide-salary-2026.html">가이드: 월급 명세서 해부</a></li>
+          <li><a href="guide-severance-unemployment.html">가이드: 퇴직금·실업급여</a></li>
+          <li><a href="guide-jeonse-vs-wolse.html">가이드: 전세 vs 월세</a></li>
+          <li><a href="about.html">사이트 소개</a></li>
+          <li><a href="contact.html">문의·피드백</a></li>
+          <li><a href="privacy.html">개인정보처리방침</a></li>
+          <li><a href="terms.html">이용약관</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> 생활금융 계산기 허브. All rights reserved.</span>
+      <span>본 사이트의 계산 결과는 참고용이며 법적·세무적 효력이 없습니다.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/yearend-core.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(function () {
+  'use strict';
+  var form = document.getElementById('yearend-form');
+  var panel = document.getElementById('yearend-result');
+  var notices = panel.querySelector('[data-out="notices"]');
+  var els = {
+    grossSalary: document.getElementById('grossSalary'),
+    creditCard: document.getElementById('creditCard'),
+    debitCash: document.getElementById('debitCash'),
+    marketTransit: document.getElementById('marketTransit'),
+    children: document.getElementById('children'),
+    switchAmount: document.getElementById('switchAmount'),
+    monthlyRent: document.getElementById('monthlyRent'),
+    pension: document.getElementById('pension')
+  };
+
+  function man(el) { return UI.inputValue(el) * 10000; }
+
+  function put(key, value) {
+    var el = panel.querySelector('[data-out="' + key + '"]');
+    if (el) el.textContent = value;
+  }
+
+  function render(res) {
+    put('totalSaving', UI.won(res.totalSaving));
+    put('totalSaving2', UI.won(res.totalSaving));
+    put('savingSub', '총급여 대비 ' + UI.percent(res.savingRate * 100, 1) + ' · 추정치');
+    put('threshold', UI.won(res.card.threshold));
+    put('eligible', UI.won(res.card.eligibleAmount));
+    put('cardDeduction', UI.won(res.card.total));
+    put('cardSaving', UI.won(res.cardSaving));
+    put('rentSaving', UI.won(res.rent.saving));
+    put('pensionSaving', UI.won(res.pension.saving));
+    put('cap', UI.comma(res.card.capTotal / 10000) + '만원');
+    put('room', UI.comma(res.card.roomLeft / 10000) + '만원');
+    put('switchExtra', res.switchGain.extra > 0 ? '+' + UI.comma(res.switchGain.extra) + '원' : '0원');
+    put('marginalRate', UI.percent(res.marginalRate * 100, 0));
+
+    var html = '';
+    res.messages.forEach(function (m) {
+      var cls = m.type === 'good' ? 'notice good' : (m.type === 'warn' ? 'notice' : 'notice info');
+      html += '<div class="' + cls + '" style="margin-top:10px;">' + m.text + '</div>';
+    });
+    notices.innerHTML = html;
+  }
+
+  function calculate() {
+    var res = YearEndCore.calc({
+      grossSalary: man(els.grossSalary),
+      creditCard: man(els.creditCard),
+      debitCash: man(els.debitCash),
+      marketTransit: man(els.marketTransit),
+      children: Number(els.children.value || 0),
+      switchAmount: man(els.switchAmount),
+      monthlyRent: man(els.monthlyRent),
+      pension: man(els.pension),
+      household: UI.segmentValue('#house-seg', 'owner')
+    });
+    render(res);
+    return res;
+  }
+
+  var timer = null;
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(calculate, 160);
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    calculate();
+    UI.showResult(panel, true);
+  });
+  form.addEventListener('input', schedule);
+  form.addEventListener('change', schedule);
+  document.getElementById('house-seg').addEventListener('segmentchange', calculate);
+
+  calculate();
+})();
+</script>
+</body>
+</html>
