@@ -35,6 +35,7 @@
       <a href="housing.html">전세·월세</a>
       <a href="living.html">난방비·정산</a>
       <a href="yearend-tax.html">연말정산</a>
+      <a href="health-insurance.html">건강보험</a>
       <a href="hwpx-check.html">HWPX 점검</a>
       <a href="about.html">소개</a>
     </nav>
@@ -66,6 +67,9 @@
           <li><a href="severance.html">퇴직금·실업급여·연차수당</a> — 평균임금 기반 퇴직금, 소정급여일수 기반 실업급여, 통상임금 기반 연차수당을 계산합니다.</li>
           <li><a href="housing.html">전세 vs 월세·대출이자</a> — 보증금 기회비용까지 반영해 총비용을 비교하고, 상환방식별 이자를 계산합니다.</li>
           <li><a href="living.html">난방비·1/N 정산</a> — 사용량 기반 요금 예측과 개별 항목을 반영한 더치페이를 제공합니다.</li>
+          <li><a href="yearend-tax.html">연말정산 미리보기</a> — 카드 소득공제 문턱·한도, 12월 체크카드 전환 효과, 월세·연금저축 세액공제를 계산합니다.</li>
+          <li><a href="health-insurance.html">건강보험료·피부양자 자격</a> — 직장가입자 보험료와 피부양자 요건(소득·재산·부양)을 점검하고, 퇴직 후 임의계속가입과 지역가입자 부담을 비교합니다.</li>
+          <li><a href="hwpx-check.html">HWPX 서식 규격 점검</a> — .hwpx 파일의 글자 수·문단·표·자리표시자를 브라우저에서만 검사합니다.</li>
         </ul>
 
         <h2>계산 기준과 출처</h2>
@@ -92,6 +96,8 @@
               <tr><th scope="row">국민연금</th><td>총 9.5% (근로자 4.75%), 기준소득월액 41만~659만원</td><td>국민연금법 개정(2025.4) · 국민연금공단</td></tr>
               <tr><th scope="row">건강보험</th><td>총 7.19% (근로자 3.595%)</td><td>국민건강보험공단 보험료율 고시</td></tr>
               <tr><th scope="row">장기요양보험</th><td>건강보험료의 13.14%</td><td>노인장기요양보험법 시행령</td></tr>
+              <tr><th scope="row">피부양자 자격</th><td>소득 연 2,000만원 이하 · 재산세 과세표준 5.4억 이하(5.4~9억은 소득 1,000만원 이하)</td><td>국민건강보험법 시행규칙 별표 1·1의2</td></tr>
+              <tr><th scope="row">지역가입자 보험료</th><td>소득월액 × 7.19% + 재산 부과점수 × 211.5원</td><td>국민건강보험공단 2026년 안내 · 시행령 별표 4</td></tr>
               <tr><th scope="row">고용보험(실업급여)</th><td>총 1.8% (근로자 0.9%)</td><td>고용보험법 · 고용노동부</td></tr>
               <tr><th scope="row">소득세</th><td>기본세율 6~45%, 근로소득공제·근로소득세액공제</td><td>소득세법 제47조·제55조·제59조</td></tr>
               <tr><th scope="row">퇴직금</th><td>1일 평균임금 × 30 × (재직일수 ÷ 365)</td><td>근로자퇴직급여보장법 · 근로기준법 제2조</td></tr>
@@ -109,6 +115,7 @@
           <li><a href="guide-salary-2026.html">2026년 월급 명세서 해부</a> — 4대보험 인상 폭, 비과세 식대 20만원의 실제 효과, 부양가족별 실수령액 비교표, 이직·연봉협상 체크리스트.</li>
           <li><a href="guide-severance-unemployment.html">퇴직금 vs 실업급여 vs 연차수당</a> — 평균임금에 상여금이 포함되는 구조, 180일 피보험단위기간과 소정급여일수, 퇴사 전 체크리스트.</li>
           <li><a href="guide-jeonse-vs-wolse.html">전세 vs 월세 손익분기</a> — 대출이자·기회비용·보증보험료를 월 단위로 비교하는 법, 보증금을 지키는 확인 항목.</li>
+          <li><a href="guide-yearend-tax-2026.html">연말정산 월세 세액공제 108만원</a> — 108만원이 나오는 계산 구조, 미리보기 12월 18일 마감, 카드 25% 문턱과 12월 전환 전략, 증빙 3종.</li>
         </ul>
 
         <h2>편집 원칙</h2>
@@ -135,7 +142,7 @@
         확인하는 것을 목표로 합니다.</p>
         <p>계산 결과에 대한 법적·세무적 판단은 제공하지 않으며, 계약이나 신고 전에는 국민연금공단,
         국민건강보험공단, 근로복지공단, 고용24, 국세청 홈택스 또는 세무사·노무사의 확인을 권합니다.</p>
-        <p class="meta">최초 게시: 2026년 11월 · 최근 개정: 2026년 11월 16일 · 계산 기준: 2026년 요율</p>
+        <p class="meta">최초 게시: 2026년 11월 · 최근 개정: 2026년 11월 18일 · 계산 기준: 2026년 요율</p>
       </article>
     </div>
   </section>
@@ -157,6 +164,7 @@
           <li><a href="housing.html">전세 vs 월세·대출이자</a></li>
           <li><a href="living.html">난방비·1/N 정산</a></li>
           <li><a href="yearend-tax.html">연말정산 미리보기</a></li>
+          <li><a href="health-insurance.html">건강보험료·피부양자</a></li>
           <li><a href="hwpx-check.html">HWPX 서식 점검</a></li>
         </ul>
       </div>
@@ -166,6 +174,7 @@
           <li><a href="guide-salary-2026.html">가이드: 월급 명세서 해부</a></li>
           <li><a href="guide-severance-unemployment.html">가이드: 퇴직금·실업급여</a></li>
           <li><a href="guide-jeonse-vs-wolse.html">가이드: 전세 vs 월세</a></li>
+          <li><a href="guide-yearend-tax-2026.html">가이드: 월세 세액공제 108만원</a></li>
           <li><a href="about.html">사이트 소개</a></li>
           <li><a href="contact.html">문의·피드백</a></li>
           <li><a href="privacy.html">개인정보처리방침</a></li>
