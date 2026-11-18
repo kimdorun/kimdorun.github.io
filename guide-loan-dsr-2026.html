@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 하반기 스트레스 DSR 3단계·주담대 상환방식·대환 손익분기점 총정리 | 수도권 3.0%p vs 지방 0.75%p</title>
+<meta name="description" content="2026년 7월 1일부터 12월 31일까지 시행되는 스트레스 DSR 3단계를 표로 정리했습니다. 수도권 3.0%p와 지방 1.5%p×50%, 혼합형·주기형 반영비율, 신용대출 1억원 기준, 원리금균등·원금균등·만기일시 총 이자 차이, 대환 손익분기점 계산법까지 실제 숫자로 확인하세요.">
+<meta name="keywords" content="스트레스 DSR 3단계, 2026 하반기 DSR, 수도권 주담대 3.0%p, 지방 주담대 0.75%p, 혼합형 주기형 반영비율, 신용대출 1억원 초과, 원리금균등 원금균등 차이, 대환 손익분기점, 중도상환수수료, DSR 40%">
+<meta name="robots" content="index,follow">
+<meta name="naver-site-verification" content="55b7a76e51ff5834807ed6a75e122349536f48b0" />
+<link rel="canonical" href="https://kimdorun.github.io/guide-loan-dsr-2026.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026 하반기 스트레스 DSR 3단계·상환방식·대환 손익분기점 총정리">
+<meta property="og:description" content="수도권 3.0%p, 지방 0.75%p, 신용대출 1.5%p. 세 숫자의 곱으로 정해지는 스트레스 금리와 한도, 상환방식별 총 이자 차이, 갈아타기 손익분기점을 한 편에 정리했습니다.">
+<meta property="og:url" content="https://kimdorun.github.io/guide-loan-dsr-2026.html">
+<meta property="og:locale" content="ko_KR">
+<meta name="theme-color" content="#2257e0">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<link rel="stylesheet" href="assets/style.css">
+<!-- ADSENSE: 승인 후 주석 해제 + 게시자 ID 교체
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "2026 하반기 스트레스 DSR 3단계·주담대 상환방식·대환 손익분기점 총정리",
+  "description": "금융위원회 2026년 하반기 스트레스 DSR 행정지도 기준으로 수도권 3.0%p·지방 0.75%p·신용대출 1.5%p의 계산 구조, 혼합형·주기형 반영비율표, 상환방식 3종의 총 이자 비교, 대환 손익분기점을 정리한 가이드.",
+  "url": "https://kimdorun.github.io/guide-loan-dsr-2026.html",
+  "mainEntityOfPage": "https://kimdorun.github.io/guide-loan-dsr-2026.html",
+  "inLanguage": "ko-KR",
+  "datePublished": "2026-11-19",
+  "dateModified": "2026-11-19",
+  "author": { "@type": "Organization", "name": "생활금융 계산기 허브 편집팀" },
+  "publisher": { "@type": "Organization", "name": "생활금융 계산기 허브" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "2026 하반기 3단계 DSR은 상반기와 무엇이 달라졌나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "수도권·규제지역 주담대에 스트레스 금리 3.0%p가 100% 적용되는 구조는 2025년 10·15 대책 이후 유지됐고, 2026년 하반기에는 지방 주담대의 2단계 적용이 12월 31일까지 한 차례 더 연장된 것이 핵심 변화입니다. 2026년 6월 18일 금융위원회가 유예 연장을 예고했고, 6월 30일 은행연합회가 하반기 운영방안을 발표해 7월 1일부터 12월 31일까지 시행에 들어갔습니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "수도권 3.0%p와 지방 0.75%p는 한도에서 얼마나 차이 나나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "연소득 6,000만원, 기존 대출 연간 원리금 1,200만원, 신규 3억원·4.2%·30년·원리금균등 조건이라면 수도권은 스트레스 적용 금리 7.2%로 DSR 60.7%, 최대 한도 약 1억 4,732만원입니다. 같은 조건에서 지방이면 적용 금리 4.95%로 DSR 52.0%, 최대 한도 약 1억 8,734만원입니다. 지역만 바꿨는데 한도가 약 4,002만원 달라집니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "고정금리 비중이 70% 이상이면 스트레스 금리가 0인가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "주담대 혼합형·주기형에서 만기 대비 고정금리 기간 또는 금리변동주기 비중이 70% 이상이면 대출유형별 적용비율이 0%가 되어 스트레스 금리가 붙지 않습니다. 변동형과 고정금리 기간 5년 미만 상품은 비중과 관계없이 100%가 적용되므로, 같은 고정금리라도 전체 만기에서 차지하는 비중이 중요합니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "신용대출이 1억원 이하면 정말 스트레스 금리가 0인가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "네. 신용대출은 총 잔액이 1억원을 초과하는 경우에만 스트레스 금리를 부과합니다. 1억원 이하이면 가산금리가 0%입니다. 다만 총 잔액은 여러 금융회사의 신용대출을 합한 금액이므로, 은행 두 곳에서 6,000만원씩 받아 1억 2,000만원이 되면 전체에 스트레스 금리가 적용됩니다. 만기 5년 이상 고정금리는 0%, 3~5년 고정은 60%, 변동금리 등은 100%를 반영합니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "원리금균등과 원금균등 중 무엇이 유리한가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "총 이자만 보면 원금균등이 유리합니다. 3억원·4.2%·30년 기준으로 원금균등의 총 이자는 1억 8,953만원으로 원리금균등(2억 2,814만원)보다 3,861만원 적습니다. 다만 원금균등은 첫 달 상환액이 188만 3,333원으로 원리금균등(146만 7,052원)보다 41만 6,281원 많고, DSR 심사에서도 첫해 상환액이 커서 한도가 줄어듭니다. 현금흐름이 빠듯하거나 한도가 필요한 경우에는 원리금균등이 현실적입니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "대환 손익분기 14개월이면 갈아타야 하나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "손익분기 개월이 잔여 기간보다 짧으면 수수료를 회수하고도 이득이 남는다는 뜻입니다. 잔여 원금 3억원, 기존 5.2%, 신규 4.2%, 수수료율 1.2%라면 월 25만원을 아껴 360만원의 수수료를 14.4개월에 회수하고, 잔여 240개월 기준 순절감액은 5,640만원입니다. 다만 이 계산은 단순 이자차 모델이므로 인지세·설정비·보증료와 원금 감소에 따른 절감액 축소를 함께 따져야 합니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "DSR 한도가 부족하면 어떻게 해야 하나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "먼저 기존 대출을 정리해 연간 원리금을 줄이고, 다음으로 지역·금리유형(고정금리 비중), 상환방식, 만기 순서로 조정합니다. 원리금균등으로 바꾸거나 만기를 늘리면 연간 상환액이 줄어 한도가 늘지만 총 이자는 늘어납니다. 부부 합산 소득으로 공동명의 대출을 받으면 한도가 커지지만 두 사람 모두 채무자가 되고 이후 각자의 DSR 여력이 줄어듭니다. 최종 한도는 은행 심사로 확정됩니다." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로 가기</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">₩</span>
+      <span class="brand-text">생활금융 계산기<small>LIFE FINANCE CALC</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">메뉴</button>
+    <nav class="site-nav" id="site-nav" aria-label="주요 메뉴">
+      <a href="salary.html">실수령액</a>
+      <a href="wage.html">시급·주휴</a>
+      <a href="severance.html">퇴직금·실업급여</a>
+      <a href="housing.html">전세·월세</a>
+      <a href="living.html">난방비·정산</a>
+      <a href="yearend-tax.html">연말정산</a>
+      <a href="health-insurance.html">건강보험</a>
+      <a href="loan.html">대출·DSR</a>
+      <a href="hwpx-check.html">HWPX 점검</a>
+      <a href="about.html">소개</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap">
+      <ol class="breadcrumb">
+        <li><a href="index.html">홈</a></li>
+        <li>가이드</li>
+      </ol>
+      <span class="eyebrow">2026.7.1 ~ 12.31 시행 · 금융위 행정지도</span>
+      <h1>2026 하반기 스트레스 DSR 3단계·주담대 상환방식·대환 손익분기점 총정리</h1>
+      <p class="lede">스트레스 DSR은 “금리가 오르면 얼마를 갚아야 하는가”를 미리 계산해 대출 한도를 줄이는 제도입니다.
+      2026년 하반기에는 수도권 3.0%p, 지방 0.75%p, 신용대출 1.5%p라는 세 갈래 숫자가 기준입니다.
+      이 숫자가 어디서 나오고, 내 한도와 상환 계획에 어떻게 작용하는지 표와 실제 계산으로 정리했습니다.</p>
+      <p class="guide-meta">기준일 2026년 11월 19일 · 금융위원회 행정지도 제2024-002호(2026.7.1.~12.31.) · 은행연합회 2026년 하반기 운영방안</p>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="wrap wrap-narrow">
+      <article class="card card-pad doc">
+
+        <h2>한 줄 요약: 이번 하반기의 핵심은 ‘지방 유예 연장’</h2>
+        <p>2026년 하반기 스트레스 DSR의 뼈대는 2025년 10·15 대책 때 만들어졌습니다. 수도권·규제지역 주택담보대출에는
+        스트레스 금리 3.0%p를 100% 적용하고, 신용대출과 기타대출에도 3단계 기준을 적용하는 구조입니다.
+        이번 하반기에서 달라진 것은 <strong>지방(비수도권·비규제지역) 주담대의 3단계 적용을 2026년 12월 31일까지
+        한 차례 더 미룬 것</strong>입니다. 금융위원회는 2026년 6월 18일 유예 연장을 예고했고, 6월 30일
+        은행연합회가 “2026년 하반기 스트레스 DSR 운영방안”을 내면서 7월 1일부터 시행에 들어갔습니다.</p>
+        <p>그래서 지금 대출을 준비한다면 알아야 할 숫자는 세 개입니다. 수도권·규제지역 주담대 3.0%p,
+        지방 주담대 1.5%p에 기본 적용비율 50%를 곱한 0.75%p, 신용대출 1.5%p입니다.
+        여기에 대출유형별 적용비율이 한 번 더 곱해져 최종 가산금리가 정해집니다. 같은 3억원이라도
+        어디에 사는지, 어떤 금리유형을 고르는지에 따라 한도가 수천만원씩 달라지는 이유입니다.</p>
+
+        <h2>스트레스 금리는 어떻게 정해지나</h2>
+        <p>스트레스 금리는 임의의 숫자가 아닙니다. 예금은행 가계대출 신규취급 가중평균금리(한국은행 기준)를 바탕으로
+        <strong>과거 5년간 최고 금리와 현재 금리의 차이</strong>를 산정해 상·하한 범위 안에서 결정하고,
+        매년 6월과 12월에 발표해 다음 6개월 동안 적용합니다. 2026년 하반기 기준으로 과거 5년 최고 금리는 5.64%로
+        제시됐고, 이 차이를 바탕으로 수도권·규제지역 주담대에는 3.0%p, 그 밖의 대출에는 1.5%p가 기준으로 쓰입니다.</p>
+        <p>중요한 것은 이 금리가 <strong>실제 납부 이자에 붙지 않는다</strong>는 점입니다. 계약 금리가 4.2%라면
+        매달 내는 이자는 4.2%로 계산되지만, 한도를 심사할 때는 7.2%(4.2% + 3.0%p)를 가정해
+        “금리가 오르더라도 갚을 수 있는가”를 봅니다. 그래서 스트레스 DSR이 강화되면 금리가 그대로여도
+        대출 가능 금액이 줄어듭니다. 반대로 말하면, 이미 받은 대출의 이자 부담이 갑자기 늘어나는 것은 아닙니다.</p>
+
+        <h2>세 숫자의 곱: 기본 적용비율까지 곱해야 실제 가산금리</h2>
+        <p>뉴스에서 “수도권 3.0%p, 지방 0.75%p”라고 할 때 뒤의 숫자는 이미 기본 적용비율 50%를 곱한 값입니다.
+        실제 최종 가산금리는 여기에 대출유형별 적용비율까지 곱해서 나옵니다. 2026년 하반기 기준은 다음과 같습니다.</p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption>2026년 하반기 스트레스 금리 기본 구조</caption>
+            <thead>
+              <tr><th scope="col">구분</th><th scope="col" class="num">스트레스 금리</th><th scope="col" class="num">기본 적용비율</th><th scope="col" class="num">기본 가산금리</th><th scope="col">비고</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">수도권·규제지역 주담대</th><td class="num">3.0%p</td><td class="num">100%</td><td class="num">3.00%p</td><td>오피스텔 담보대출 포함</td></tr>
+              <tr><th scope="row">지방(비수도권·비규제) 주담대</th><td class="num">1.5%p</td><td class="num">50%</td><td class="num">0.75%p</td><td>2026-12-31까지 2단계 유지</td></tr>
+              <tr><th scope="row">신용대출 (총 잔액 1억원 초과)</th><td class="num">1.5%p</td><td class="num">100%</td><td class="num">1.50%p</td><td>만기별 차등 별도</td></tr>
+              <tr><th scope="row">신용대출 (총 잔액 1억원 이하)</th><td class="num">1.5%p</td><td class="num">0%</td><td class="num">0.00%p</td><td>부과하지 않음</td></tr>
+              <tr><th scope="row">기타대출</th><td class="num">1.5%p</td><td class="num">100%</td><td class="num">1.50%p</td><td>오피스텔 외 담보대출은 주담대 방식 준용</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>표를 읽는 순서는 이렇습니다. 먼저 내 대출이 주담대인지 신용대출인지 확인하고, 주담대라면 수도권인지
+        지방인지 봅니다. 그다음 금리유형(변동형·혼합형·주기형)에 따라 대출유형별 적용비율을 곱합니다.
+        예를 들어 지방 주담대이면서 고정금리 비중이 30% 미만인 혼합형이라면 1.5%p × 50% × 60% = 0.45%p가 됩니다.
+        기본 가산금리 0.75%p보다 0.3%p 낮아지는 셈입니다.</p>
+
+        <h2>혼합형·주기형 반영비율표</h2>
+        <p>주담대는 금리유형에 따라 스트레스 금리를 반영하는 비율이 다릅니다. 고정금리 기간이나 금리변동주기가
+        길수록 금리 상승 위험에 덜 노출되기 때문입니다. 만기 대비 고정금리 기간(혼합형) 또는 금리변동주기(주기형)
+        비중을 기준으로 아래 비율을 곱합니다.</p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption>주담대 대출유형별 스트레스 금리 반영비율 (2026년 하반기)</caption>
+            <thead>
+              <tr><th scope="col">구분</th><th scope="col" class="num">변동형·고정 5년 미만</th><th scope="col" class="num">30% 미만</th><th scope="col" class="num">30~50%</th><th scope="col" class="num">50~70%</th><th scope="col" class="num">70% 이상</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">혼합형 — 수도권·규제지역</th><td class="num">100%</td><td class="num">80%</td><td class="num">60%</td><td class="num">40%</td><td class="num">0%</td></tr>
+              <tr><th scope="row">혼합형 — 지방(2단계)</th><td class="num">100%</td><td class="num">60%</td><td class="num">40%</td><td class="num">20%</td><td class="num">0%</td></tr>
+              <tr><th scope="row">주기형 — 수도권·규제지역</th><td class="num">100%</td><td class="num">40%</td><td class="num">30%</td><td class="num">20%</td><td class="num">0%</td></tr>
+              <tr><th scope="row">주기형 — 지방(2단계)</th><td class="num">100%</td><td class="num">30%</td><td class="num">20%</td><td class="num">10%</td><td class="num">0%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="guide-table-note">‘변동형·고정 5년 미만’은 비중과 관계없이 100%가 적용됩니다. 70% 이상 구간은 스트레스 금리가 아예 붙지 않지만, 그만큼 장기 고정금리 상품의 금리가 높게 형성되는 경우가 많아 실제 총비용은 함께 비교해야 합니다.</p>
+        <p>예를 들어 수도권에서 3억원을 빌린다면 변동형은 3.00%p, 혼합형(30% 미만)은 2.40%p, 혼합형(30~50%)은
+        1.80%p, 혼합형(50~70%)은 1.20%p, 주기형(30% 미만)은 1.20%p가 붙습니다. 적용 금리가 4.2%라면
+        심사 금리는 7.2%에서 5.4%까지 내려가는 셈이고, 그 차이가 그대로 한도가 됩니다. 반면 지방에서는
+        같은 혼합형이라도 0.45%p·0.30%p·0.15%p로 더 낮아집니다. 지방 유예가 끝나면 이 비율들이
+        수도권과 같아지므로, 2027년 이후 계획이라면 여유를 두고 봐야 합니다.</p>
+
+        <h2>사례: 연소득 6,000만원으로 3억원을 빌릴 수 있을까</h2>
+        <p>숫자로 확인해 보겠습니다. 연소득 6,000만원, 기존 대출 연간 원리금 1,200만원, 신규 3억원·금리 4.2%·30년·원리금균등
+        조건입니다. 은행권 DSR 한도는 40%이므로 1년에 갚을 수 있는 원리금은 2,400만원입니다.
+        기존 대출 1,200만원을 빼면 신규 대출에 쓸 수 있는 여력은 1,200만원입니다.</p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption>같은 3억원, 지역과 금리유형에 따른 한도 차이 (연소득 6,000만원·기존 원리금 1,200만원)</caption>
+            <thead>
+              <tr><th scope="col">조건</th><th scope="col" class="num">가산금리</th><th scope="col" class="num">적용 금리</th><th scope="col" class="num">신규 연간 원리금</th><th scope="col" class="num">DSR</th><th scope="col" class="num">최대 한도</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">수도권 · 변동형</th><td class="num">3.00%p</td><td class="num">7.20%</td><td class="num">2,443만 6,376원</td><td class="num">60.7%</td><td class="num">1억 4,732만원</td></tr>
+              <tr><th scope="row">지방 · 변동형</th><td class="num">0.75%p</td><td class="num">4.95%</td><td class="num">1,921만 5,720원</td><td class="num">52.0%</td><td class="num">1억 8,734만원</td></tr>
+              <tr><th scope="row">지방 · 혼합형(30% 미만)</th><td class="num">0.45%p</td><td class="num">4.65%</td><td class="num">1,856만 2,925원</td><td class="num">50.9%</td><td class="num">1억 9,393만원</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>세 경우 모두 3억원은 한도를 넘습니다. 수도권 변동형은 DSR이 60.7%로 기준 40%를 20.7%p 초과하고,
+        한도는 1억 4,732만원입니다. 지방 변동형은 52.0%로 여전히 초과지만 한도가 1억 8,734만원까지 올라갑니다.
+        지역만 바꿨는데 4,002만원이 늘어난 것입니다. 지방 혼합형까지 선택하면 1억 9,393만원으로
+        4,661만원이 늘어납니다. 여기에 만기를 40년으로 늘리면 수도권 기준 한도가 1억 5,723만원까지 올라가고,
+        제2금융권(50%)으로 바꾸면 2억 2,098만원이 됩니다. 다만 2금융권은 금리가 높아 총비용이 커지는
+        trade-off가 있습니다.</p>
+
+        <h2>상환방식 3종: 총 이자가 1억 8,848만원 벌어진다</h2>
+        <p>대출 한도만큼 중요한 것이 상환방식입니다. 같은 3억원·4.2%·30년이라도 원금을 언제 갚느냐에 따라
+        이자가 크게 달라집니다. 아래 표는 세 방식의 상환액과 총 이자를 정리한 것입니다.</p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <caption>원리금균등 vs 원금균등 vs 만기일시 (3억원·4.2%·30년, 원 단위 반올림)</caption>
+            <thead>
+              <tr><th scope="col">구분</th><th scope="col" class="num">원리금균등</th><th scope="col" class="num">원금균등</th><th scope="col" class="num">만기일시</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">첫 달 상환액</th><td class="num">1,467,052</td><td class="num">1,883,333</td><td class="num">1,050,000</td></tr>
+              <tr><th scope="row">마지막 달 상환액</th><td class="num">1,467,052</td><td class="num">836,250</td><td class="num">301,050,000</td></tr>
+              <tr><th scope="row">1년차 상환액</th><td class="num">17,604,618</td><td class="num">22,407,500</td><td class="num">12,600,000</td></tr>
+              <tr><th scope="row">총 이자</th><td class="num">228,138,548</td><td class="num">189,525,000</td><td class="num">378,000,000</td></tr>
+              <tr><th scope="row">총 상환액</th><td class="num">528,138,548</td><td class="num">489,525,000</td><td class="num">678,000,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>원리금균등은 매달 같은 금액을 내므로 가계 현금흐름 계획을 세우기 쉽습니다. 원금균등은 첫 달 188만원에서
+        시작해 마지막 달 83만원으로 줄어들어, 초반 부담이 크지만 총 이자가 3,861만원 적습니다.
+        만기일시는 매달 이자 105만원만 내다가 30년 뒤 3억 1,050만원을 한꺼번에 갚아야 하고, 총 이자는
+        3억 7,800만원으로 가장 많습니다. 원금균등과 만기일시의 차이는 1억 8,848만원입니다.</p>
+        <p>DSR 관점에서는 순서가 뒤집힙니다. 원금균등의 1년차 상환액은 2,241만원으로 원리금균등(1,760만원)보다
+        480만원 많습니다. 같은 소득이라면 원금균등을 선택했을 때 한도가 그만큼 줄어듭니다.
+        반대로 만기일시는 이자만 연간 상환액으로 잡혀 한도가 커 보이지만, 만기 원금을 마련할 계획이 없다면
+        위험한 선택입니다. 결국 “총 이자를 줄일 것인가, 지금 더 많이 빌릴 것인가”의 문제입니다.</p>
+
+        <h2>대환 손익분기점: 수수료를 회수하는 시간</h2>
+        <p>금리가 높은 대출을 낮은 금리로 갈아타는 것이 항상 이득은 아닙니다. 기존 대출을 중도 상환할 때
+        수수료가 붙기 때문입니다. 손익분기점은 이렇게 계산합니다.</p>
+        <div class="formula">월 이자 절감액 = 잔여 원금 × (기존 금리 − 신규 금리) ÷ 12
+중도상환수수료 = 잔여 원금 × 수수료율
+손익분기 개월 = 중도상환수수료 ÷ 월 이자 절감액
+잔여 기간 순절감액 = 월 이자 절감액 × 잔여 개월 − 중도상환수수료</div>
+        <p>잔여 원금 3억원, 기존 금리 5.2%, 신규 금리 4.2%라면 월 이자 절감액은 25만원입니다.
+        수수료율 1.2%를 적용하면 중도상환수수료는 360만원이고, 360만원 ÷ 25만원 = 14.4개월이 손익분기입니다.
+        잔여 기간이 240개월이라면 수수료를 빼고도 5,640만원이 남습니다. 반대로 잔여 기간이 12개월뿐이라면
+        수수료를 회수하지 못하고 60만원을 손해 봅니다.</p>
+        <p>중도상환수수료는 은행별로 다르지만 통상 대출 실행일부터 3년 동안 잔여 원금의 0.5~1.4% 수준이고,
+        3년이 지나면 대부분 면제됩니다. 3년 이내라도 경과 기간에 비례해 요율이 줄어드는 구조가 많으므로,
+        대환 시점을 조금 늦추면 수수료가 줄어듭니다. 또 신규 대출에는 인지세(5,000만원 초과 구간),
+        근저당권 설정비, 보증료가 붙을 수 있어 계산기의 순절감액보다 실제 이득이 작을 수 있습니다.
+        수수료율을 0으로 넣어 금리 차이만의 효과를 먼저 확인하고, 실제 비용을 더해 최종 판단하는 순서를 권합니다.</p>
+
+        <h2>신용대출은 ‘1억원’과 ‘만기’를 함께 봐야 합니다</h2>
+        <p>신용대출은 총 잔액이 1억원을 넘을 때만 스트레스 금리 1.5%p가 부과됩니다. 여기서 총 잔액은
+        신규 대출 한 건이 아니라 <strong>모든 금융회사의 신용대출 합계</strong>입니다. 은행 두 곳에서 6,000만원씩
+        받아 1억 2,000만원이 되면 전체에 스트레스 금리가 붙고, 9,000만원 한 건이면 붙지 않습니다.
+        또 만기 5년 이상 고정금리는 0%, 만기 3~5년 고정금리는 60%, 변동금리 등 그 외는 100%가 반영되므로
+        같은 1억원 초과라도 상품에 따라 가산 폭이 0%p에서 1.5%p까지 벌어집니다.</p>
+        <p>신용대출은 금리가 주담대보다 높아 DSR에서 차지하는 비중이 큽니다. 연소득 6,000만원인 사람이
+        금리 7%의 신용대출 5,000만원을 갖고 있다면 연간 이자만 350만원으로, 은행권 한도 2,400만원의
+        15%를 이미 쓰는 셈입니다. 여기에 스트레스 금리까지 붙으면 주담대 한도가 그만큼 줄어듭니다.
+        주택을 사기 전에 신용대출을 정리하는 것이 유리한 이유입니다.</p>
+
+        <h2>한도가 모자랄 때 조정 순서</h2>
+        <ol>
+          <li><strong>기존 대출 정리</strong> — DSR은 모든 대출의 연간 원리금을 합산합니다. 마이너스통장은 쓰지 않아도 한도가 잡히는 경우가 있어, 불필요한 한도를 줄이면 여력이 생깁니다.</li>
+          <li><strong>지역·금리유형</strong> — 지방(0.75%p)과 수도권(3.0%p)의 차이가 가장 크고, 고정금리 비중 70% 이상이면 스트레스 금리가 0%가 됩니다.</li>
+          <li><strong>상환방식</strong> — 원리금균등이 원금균등보다 1년차 상환액이 작아 한도에 유리합니다. 총 이자는 늘어납니다.</li>
+          <li><strong>만기</strong> — 30년을 40년으로 늘리면 연간 원리금이 줄어 한도가 늘지만, 총 이자와 상환 기간이 늘어납니다. 취급 가능 여부는 은행별로 다릅니다.</li>
+          <li><strong>소득 합산·공동명의</strong> — 부부 합산으로 한도는 늘지만 두 사람 모두 채무자가 되고, 이후 각자의 DSR 여력이 줄어듭니다.</li>
+        </ol>
+        <p>이 순서는 “빌릴 수 있는 금액을 늘리는 방법”이지 “빌려야 하는 금액”을 정하는 기준이 아닙니다.
+        한도가 늘어난 만큼 상환 부담도 늘어난다는 점을 함께 보고, 총 이자와 월 현금흐름을 같이 계산하세요.</p>
+
+        <h2>계산 기준과 한계</h2>
+        <div class="notice" style="margin-bottom:1.2em;">
+          <p><strong>기준</strong> — 금융위원회 “스트레스 DSR 제도” 금융행정지도 변경시행(관리번호 제2024-002호,
+          공고 제2025-954호, 유효기간 2026.7.1.~2026.12.31.), 은행연합회 “2026년 하반기 스트레스 DSR 운영방안”(2026.6.30.),
+          금융위원회 2026년 6월 18일 행정지도 예고를 반영했습니다. DSR 한도는 은행권 40%·제2금융권 50%입니다.</p>
+          <p><strong>한계</strong> — 실제 한도는 LTV·DTI, 담보 감정가, 신용등급, 기존 대출의 실제 상환 스케줄,
+          금융회사 내부 기준에 따라 달라집니다. 스트레스 금리는 매년 6월·12월 다시 발표되므로 실행 시점의 값을
+          확인해야 합니다. 이 가이드의 계산은 스트레스 DSR과 상환방식만 반영했고, 취득세·등기비용·보증료는
+          포함하지 않았습니다. 모든 수치는 참고용이며 금융상품 중개나 자문이 아닙니다.</p>
+        </div>
+
+        <h2>자주 묻는 질문</h2>
+        <div class="faq">
+          <details open>
+            <summary>2026 하반기 3단계 DSR은 상반기와 무엇이 달라졌나요?</summary>
+            <div class="faq-body">
+              <p>수도권·규제지역 주담대에 스트레스 금리 3.0%p가 100% 적용되는 구조는 2025년 10·15 대책 이후
+              유지됐고, 2026년 하반기에는 <strong>지방 주담대의 2단계 적용이 12월 31일까지 한 차례 더 연장된 것</strong>이
+              핵심 변화입니다. 2026년 6월 18일 금융위원회가 유예 연장을 예고했고, 6월 30일 은행연합회가
+              하반기 운영방안을 발표해 7월 1일부터 12월 31일까지 시행에 들어갔습니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>수도권 3.0%p와 지방 0.75%p는 한도에서 얼마나 차이 나나요?</summary>
+            <div class="faq-body">
+              <p>연소득 6,000만원, 기존 대출 연간 원리금 1,200만원, 신규 3억원·4.2%·30년·원리금균등 조건이라면
+              수도권은 스트레스 적용 금리 7.2%로 DSR 60.7%, 최대 한도 약 1억 4,732만원입니다. 같은 조건에서
+              지방이면 적용 금리 4.95%로 DSR 52.0%, 최대 한도 약 1억 8,734만원입니다. 지역만 바꿨는데
+              한도가 약 4,002만원 달라집니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>고정금리 비중이 70% 이상이면 스트레스 금리가 0인가요?</summary>
+            <div class="faq-body">
+              <p>주담대 혼합형·주기형에서 만기 대비 고정금리 기간 또는 금리변동주기 비중이 70% 이상이면
+              대출유형별 적용비율이 0%가 되어 스트레스 금리가 붙지 않습니다. 변동형과 고정금리 기간 5년 미만
+              상품은 비중과 관계없이 100%가 적용되므로, 같은 고정금리라도 전체 만기에서 차지하는 비중이 중요합니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>신용대출이 1억원 이하면 정말 스트레스 금리가 0인가요?</summary>
+            <div class="faq-body">
+              <p>네. 신용대출은 총 잔액이 1억원을 초과하는 경우에만 스트레스 금리를 부과합니다. 1억원 이하이면
+              가산금리가 0%입니다. 다만 총 잔액은 여러 금융회사의 신용대출을 합한 금액이므로, 은행 두 곳에서
+              6,000만원씩 받아 1억 2,000만원이 되면 전체에 스트레스 금리가 적용됩니다. 만기 5년 이상 고정금리는
+              0%, 3~5년 고정은 60%, 변동금리 등은 100%를 반영합니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>원리금균등과 원금균등 중 무엇이 유리한가요?</summary>
+            <div class="faq-body">
+              <p>총 이자만 보면 원금균등이 유리합니다. 3억원·4.2%·30년 기준으로 원금균등의 총 이자는
+              1억 8,953만원으로 원리금균등(2억 2,814만원)보다 3,861만원 적습니다. 다만 원금균등은 첫 달
+              상환액이 188만 3,333원으로 원리금균등(146만 7,052원)보다 41만 6,281원 많고, DSR 심사에서도
+              첫해 상환액이 커서 한도가 줄어듭니다. 현금흐름이 빠듯하거나 한도가 필요한 경우에는
+              원리금균등이 현실적입니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>대환 손익분기 14개월이면 갈아타야 하나요?</summary>
+            <div class="faq-body">
+              <p>손익분기 개월이 잔여 기간보다 짧으면 수수료를 회수하고도 이득이 남는다는 뜻입니다.
+              잔여 원금 3억원, 기존 5.2%, 신규 4.2%, 수수료율 1.2%라면 월 25만원을 아껴 360만원의 수수료를
+              14.4개월에 회수하고, 잔여 240개월 기준 순절감액은 5,640만원입니다. 다만 이 계산은 단순 이자차
+              모델이므로 인지세·설정비·보증료와 원금 감소에 따른 절감액 축소를 함께 따져야 합니다.</p>
+            </div>
+          </details>
+          <details>
+            <summary>DSR 한도가 부족하면 어떻게 해야 하나요?</summary>
+            <div class="faq-body">
+              <p>먼저 기존 대출을 정리해 연간 원리금을 줄이고, 다음으로 지역·금리유형(고정금리 비중),
+              상환방식, 만기 순서로 조정합니다. 원리금균등으로 바꾸거나 만기를 늘리면 연간 상환액이 줄어
+              한도가 늘지만 총 이자는 늘어납니다. 부부 합산 소득으로 공동명의 대출을 받으면 한도가 커지지만
+              두 사람 모두 채무자가 되고 이후 각자의 DSR 여력이 줄어듭니다. 최종 한도는 은행 심사로 확정됩니다.</p>
+            </div>
+          </details>
+        </div>
+
+        <h2>공식 기준과 출처</h2>
+        <ul>
+          <li>금융위원회 “스트레스 DSR 제도” 금융행정지도 변경시행 — 관리번호 제2024-002호, 유효기간 2026.7.1.~2026.12.31., 첨부 “3단계 스트레스DSR 행정지도 변경시행”(공고 제2025-954호)</li>
+          <li>은행연합회 “2026년 하반기 스트레스 DSR 운영방안”(2026.6.30.) — 지방 주담대 2단계 유지, 대출유형별 적용비율</li>
+          <li>금융위원회 2026년 6월 18일 행정지도 예고 — 지방 주담대 3단계 적용 연말까지 연장</li>
+          <li>은행업감독규정·상호저축은행업감독규정·상호금융업감독규정·여신전문금융업감독규정 — DSR 규제 근거</li>
+        </ul>
+
+        <h2>함께 보면 좋은 도구</h2>
+        <ul class="related">
+          <li><a href="loan.html">2026 대출 이자·상환방식·스트레스 DSR 계산기</a></li>
+          <li><a href="housing.html">전세 vs 월세·대출이자 계산</a></li>
+          <li><a href="guide-jeonse-vs-wolse.html">전세 vs 월세 손익분기 가이드</a></li>
+          <li><a href="salary.html">연봉·월급 실수령액 계산</a></li>
+          <li><a href="index.html">전체 계산기 보기</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><span class="brand-mark" aria-hidden="true">₩</span> 생활금융 계산기 허브</div>
+        <p>직장인과 1인가구가 매일 마주치는 돈 계산을 2026년 기준 요율로 정리했습니다.
+        모든 계산은 이용자의 브라우저에서만 이루어지며 참고용입니다.</p>
+      </div>
+      <div>
+        <h3>계산기</h3>
+        <ul>
+          <li><a href="salary.html">연봉·월급 실수령액</a></li>
+          <li><a href="wage.html">시급·주휴수당</a></li>
+          <li><a href="severance.html">퇴직금·실업급여</a></li>
+          <li><a href="housing.html">전세 vs 월세·대출이자</a></li>
+          <li><a href="living.html">난방비·1/N 정산</a></li>
+          <li><a href="yearend-tax.html">연말정산 미리보기</a></li>
+          <li><a href="health-insurance.html">건강보험료·피부양자</a></li>
+          <li><a href="loan.html">대출·스트레스 DSR</a></li>
+          <li><a href="hwpx-check.html">HWPX 서식 점검</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>사이트</h3>
+        <ul>
+          <li><a href="guide-salary-2026.html">가이드: 월급 명세서 해부</a></li>
+          <li><a href="guide-weekly-holiday-2026.html">가이드: 최저시급·주휴수당·3.3%</a></li>
+          <li><a href="guide-severance-unemployment.html">가이드: 퇴직금·실업급여</a></li>
+          <li><a href="guide-jeonse-vs-wolse.html">가이드: 전세 vs 월세</a></li>
+          <li><a href="guide-yearend-tax-2026.html">가이드: 월세 세액공제 108만원</a></li>
+          <li><a href="guide-loan-dsr-2026.html">가이드: 스트레스 DSR·상환방식·대환</a></li>
+          <li><a href="about.html">사이트 소개</a></li>
+          <li><a href="contact.html">문의·피드백</a></li>
+          <li><a href="privacy.html">개인정보처리방침</a></li>
+          <li><a href="terms.html">이용약관</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> 생활금융 계산기 허브. All rights reserved.</span>
+      <span>본 사이트의 계산 결과는 참고용이며 법적·세무적 효력이 없습니다.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/common.js"></script>
+</body>
+</html>
