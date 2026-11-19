@@ -94,13 +94,15 @@ small { font-size: .8125rem; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   min-height: 64px;
 }
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  flex: 0 0 auto;
+  white-space: nowrap;
   color: var(--ink);
   font-weight: 800;
   font-size: 1.02rem;
@@ -127,17 +129,27 @@ small { font-size: .8125rem; }
   color: var(--ink-mute);
   line-height: 1.1;
 }
-.site-nav { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+/* v6.1: 내비 10항목(도구 9 + 소개)은 데스크톱에서 절대 줄바꿈되지 않는다.
+   flex: none + white-space: nowrap 으로 링크가 찌그러지거나 두 줄이 되는 경로를 없애고,
+   폰트 메트릭(Pretendard·Noto Sans KR·맑은 고딕·DejaVu 등) 차이는 1000px 이하 햄버거 전환으로 흡수한다. */
+.site-nav { display: flex; align-items: center; gap: 2px; flex-wrap: nowrap; flex: 0 0 auto; }
 .site-nav a {
-  /* v6: 내비 10항목(도구 9 + 소개)이 1080px 컨테이너에서 한 줄에 들어가도록 좌우 여백을 1px 줄임 */
-  padding: 8px 11px;
+  /* v6.1: 10항목 한 줄 고정 — 좌우 여백 8px·글자 .84rem·간격 2px (가장 넓은 폰트에서도 1000px 선에서 여유) */
+  padding: 7px 8px;
   border-radius: 999px;
-  font-size: .9rem;
+  font-size: .84rem;
   font-weight: 600;
   color: var(--ink-soft);
+  white-space: nowrap;
+  flex: none;
 }
 .site-nav a:hover { background: var(--bg-deep); color: var(--ink); text-decoration: none; }
 .site-nav a[aria-current="page"] { background: var(--brand-soft); color: var(--brand-deep); }
+/* v6.1: 1200px 이상은 폭에 여유가 있으므로 내비 글자를 v6 수준(.88rem)으로 되돌려 가독성을 지킨다.
+   1200px에서도 가장 넓은 폰트 기준 여유 79px가 남아 한 줄이 깨지지 않는다. */
+@media (min-width: 1200px) {
+  .site-nav a { font-size: .88rem; padding: 8px 10px; }
+}
 .nav-toggle {
   display: none;
   border: 1px solid var(--line-strong);
@@ -766,11 +778,10 @@ select { appearance: none; background-image: none; padding-right: 34px; }
   to { opacity: 1; transform: none; }
 }
 
-/* ---------- 모바일 ---------- */
-@media (max-width: 760px) {
-  body { font-size: 15.5px; }
-  /* iOS Safari는 16px 미만 입력창에 포커스하면 화면을 확대한다 */
-  input, input[type="text"], input[type="number"], input[type="email"], select, textarea { font-size: 16px; }
+/* ---------- 태블릿·모바일: 햄버거 메뉴 (v6.1에서 760px → 1000px로 분기) ----------
+   1000px 이하에서는 상단 10항목을 접고 .nav-toggle 드롭다운으로 보여 준다.
+   데스크톱 한 줄 내비가 필요한 최소 폭(가장 넓은 폰트 기준 약 959px)보다 41px 여유를 둔 값이다. */
+@media (max-width: 1000px) {
   .nav-toggle { display: inline-flex; }
   .site-nav {
     display: none;
@@ -781,6 +792,8 @@ select { appearance: none; background-image: none; padding-right: 34px; }
     flex-direction: column;
     align-items: stretch;
     gap: 2px;
+    max-height: calc(100vh - 78px);
+    overflow-y: auto;
     padding: 10px;
     background: #fff;
     border: 1px solid var(--line);
@@ -788,7 +801,13 @@ select { appearance: none; background-image: none; padding-right: 34px; }
     box-shadow: var(--shadow-md);
   }
   .site-nav.is-open { display: flex; }
-  .site-nav a { padding: 11px 12px; border-radius: 9px; }
+  .site-nav a { padding: 11px 12px; border-radius: 9px; flex: 1 1 auto; }
+}
+
+@media (max-width: 760px) {
+  body { font-size: 15.5px; }
+  /* iOS Safari는 16px 미만 입력창에 포커스하면 화면을 확대한다 */
+  input, input[type="text"], input[type="number"], input[type="email"], select, textarea { font-size: 16px; }
   .page-hero { padding-top: 26px; }
   .card-pad, .calc-panel, .result-panel, .content .card-pad { padding: 18px; }
   .footer-bottom { flex-direction: column; }
