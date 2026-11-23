@@ -172,6 +172,28 @@ small { font-size: .8125rem; }
 }
 .page-hero h1 { font-size: clamp(1.6rem, 4.2vw, 2.3rem); }
 .page-hero .lede { max-width: 62ch; color: var(--ink-soft); font-size: 1rem; margin-bottom: 0; }
+
+/* ---------- 홈 히어로 주제 칩 (v6.3) ---------- */
+.hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.hero-chips a {
+  display: inline-block;
+  padding: 7px 12px;
+  border: 1px solid #cfe0ff;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--brand-deep);
+  font-size: .8125rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.hero-chips a:hover { border-color: var(--brand); text-decoration: none; }
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
@@ -603,17 +625,24 @@ select { appearance: none; background-image: none; padding-right: 34px; }
 }
 .related a:hover { border-color: var(--brand); color: var(--brand); text-decoration: none; }
 
-.ad-slot {
-  display: grid;
-  place-items: center;
+/* ---------- 광고 슬롯 (v6.3) ----------
+   AdSense 승인 전에는 레이아웃에서 완전히 빠진다(방문자에게 빈 점선 박스 노출 0).
+   승인 후에는 해당 페이지의 <div class="ad-slot"> 에 is-live 클래스만 더하면 된다. */
+.ad-slot { display: none; }
+.ad-slot.is-live {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-height: 96px;
   margin: 22px 0;
+  padding: 0 16px;
   border: 1px dashed var(--line-strong);
   border-radius: 12px;
   background: repeating-linear-gradient(45deg, #fafcff, #fafcff 10px, #f4f7fd 10px, #f4f7fd 20px);
   color: var(--ink-mute);
   font-size: .75rem;
   letter-spacing: .08em;
+  text-align: center;
 }
 
 /* ---------- 파일 점검기 (hwpx-check) ---------- */
@@ -726,6 +755,38 @@ select { appearance: none; background-image: none; padding-right: 34px; }
 .calc-cta p { margin: 0; font-size: .9rem; color: #22428f; }
 .calc-cta .btn { padding: 11px 18px; font-size: .9rem; }
 
+/* ---------- 가이드 → 계산기 CTA (v6.2) ----------
+   기존 .calc-cta의 색·radius 토큰을 그대로 쓰고, 라벨·문단·버튼을 담는 변형만 추가한다. */
+.calc-cta-guide {
+  gap: 14px;
+  margin: 24px 0 28px;
+  padding: 18px 20px;
+  border: 1px solid #cfe0ff;
+  background: linear-gradient(180deg, #f6f9ff 0%, var(--brand-soft) 100%);
+  box-shadow: var(--shadow-sm);
+}
+.calc-cta-guide .calc-cta-text { flex: 1 1 280px; min-width: 0; }
+.calc-cta-guide .calc-cta-kicker {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 3px 10px;
+  border: 1px solid #cfe0ff;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--brand-deep);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+.calc-cta-guide p { color: #1f3d84; line-height: 1.6; }
+.calc-cta-guide .btn { white-space: nowrap; }
+@media (max-width: 560px) {
+  .calc-cta-guide { flex-direction: column; align-items: stretch; padding: 16px; }
+  /* 세로 배치에서는 flex-basis가 '높이'가 되므로 280px를 해제한다 */
+  .calc-cta-guide .calc-cta-text { flex: 0 0 auto; }
+  .calc-cta-guide .btn { width: 100%; }
+}
+
 /* ---------- 푸터 ---------- */
 .site-footer {
   margin-top: 40px;
@@ -808,7 +869,14 @@ select { appearance: none; background-image: none; padding-right: 34px; }
   body { font-size: 15.5px; }
   /* iOS Safari는 16px 미만 입력창에 포커스하면 화면을 확대한다 */
   input, input[type="text"], input[type="number"], input[type="email"], select, textarea { font-size: 16px; }
-  .page-hero { padding-top: 26px; }
+  .page-hero { padding: 16px 0 4px; }
+  .page-hero .lede { font-size: .9375rem; line-height: 1.55; }
+  .hero-chips { margin-top: 10px; gap: 6px; }
+  .hero-chips a { padding: 6px 10px; font-size: .7813rem; }
+  .section { padding: 18px 0; }
+  .section-head { margin-bottom: 12px; }
+  .section-head p { font-size: .875rem; }
+  .tool-card { padding: 18px; }
   .card-pad, .calc-panel, .result-panel, .content .card-pad { padding: 18px; }
   .footer-bottom { flex-direction: column; }
 }

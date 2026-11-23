@@ -3,6 +3,7 @@
    · 모바일 내비게이션 토글
    · 금액 입력 콤마 포맷 / 숫자 파싱
    · 세그먼트(탭) 버튼 · 결과 패널 표시 · 결과 복사
+   · UTM 보존(sessionStorage) · 로컬 측정 훅 __hubTrack (v6.3, 외부 전송 없음)
    ========================================================================== */
 (function () {
   'use strict';
@@ -174,6 +175,117 @@
     document.body.removeChild(ta);
   }
 
+  /* ---------- UTM 보존 + 측정 훅 (v6.3) ----------
+     · 외부 서버로 아무것도 보내지 않는다. sessionStorage와 CustomEvent만 쓴다.
+     · 유입 UTM(utm_source/medium/campaign/content)은 sessionStorage('hub_utm')에 남기고,
+       같은 출처의 내부 .html 링크로 이동할 때만 자동으로 이어 붙인다.
+       외부 링크·mailto·tel·해시 전용 링크는 건드리지 않고, 이미 있는 키는 중복으로 넣지 않는다.
+     · window.__hubTrack(name, detail)은 CustomEvent('hub:track')만 발행하는 로컬 훅이다.
+       GA4 등을 붙일 때 document.addEventListener('hub:track', ...)로 받아 쓰면 된다.
+       detail에는 페이지·계산기 이름·링크 같은 비식별 정보만 담고 입력 금액은 담지 않는다. */
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+  var UTM_STORE = 'hub_utm';
+
+  function pageId() {
+    var p = location.pathname.split('/').pop();
+    return p && p !== '' ? p : 'index.html';
+  }
+
+  function pickUtm(params) {
+    var out = {};
+    UTM_KEYS.forEach(function (k) {
+      var v = params.get(k);
+      if (v) out[k] = String(v).slice(0, 120);
+    });
+    return out;
+  }
+
+  function readStoredUtm() {
+    try {
+      var raw = sessionStorage.getItem(UTM_STORE);
+      if (!raw) return {};
+      var parsed = JSON.parse(raw);
+      return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch (e) { return {}; }
+  }
+
+  function currentUtm() {
+    var stored = readStoredUtm();
+    var incoming = pickUtm(new URLSearchParams(location.search));
+    if (Object.keys(incoming).length) {
+      var merged = {};
+      UTM_KEYS.forEach(function (k) {
+        if (incoming[k] || stored[k]) merged[k] = incoming[k] || stored[k];
+      });
+      try { sessionStorage.setItem(UTM_STORE, JSON.stringify(merged)); } catch (e) { /* noop */ }
+      return merged;
+    }
+    return stored;
+  }
+
+  function decorateLink(a, utm) {
+    var keys = Object.keys(utm);
+    if (!keys.length) return;
+    var raw = a.getAttribute('href') || '';
+    if (!raw || raw.charAt(0) === '#' || /^(mailto|tel|javascript):/i.test(raw)) return;
+    var url;
+    try { url = new URL(raw, location.href); } catch (e) { return; }
+    if (url.origin !== location.origin || !/\.html?$/i.test(url.pathname)) return;
+    var changed = false;
+    keys.forEach(function (k) {
+      if (!url.searchParams.has(k)) { url.searchParams.set(k, utm[k]); changed = true; }
+    });
+    if (!changed) return;
+    a.setAttribute('href', url.pathname + url.search + url.hash);
+  }
+
+  function initUtm() {
+    var utm = currentUtm();
+    if (!Object.keys(utm).length) return;
+    var links = document.querySelectorAll('a[href]');
+    Array.prototype.forEach.call(links, function (a) { decorateLink(a, utm); });
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if (a) decorateLink(a, utm);
+    }, true);
+  }
+
+  function hubTrack(name, detail) {
+    if (!name) return;
+    var safe = { page: pageId() };
+    var utm = readStoredUtm();
+    UTM_KEYS.forEach(function (k) { if (utm[k]) safe[k] = utm[k]; });
+    if (detail && typeof detail === 'object') {
+      ['calc', 'href', 'label', 'target'].forEach(function (k) {
+        if (typeof detail[k] === 'string') safe[k] = detail[k].replace(/\s+/g, ' ').trim().slice(0, 80);
+      });
+    }
+    try {
+      document.dispatchEvent(new CustomEvent('hub:track', {
+        detail: { name: name, data: safe }
+      }));
+    } catch (e) { /* noop */ }
+  }
+
+  function initTrack() {
+    if (document.querySelector('.calc-panel')) hubTrack('calc_view', { calc: pageId() });
+    document.addEventListener('submit', function (e) {
+      var form = e.target;
+      if (form && form.classList && form.classList.contains('calc-panel')) {
+        hubTrack('calc_run', { calc: pageId() });
+      }
+    }, true);
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest
+        ? e.target.closest('a.btn, a.tool-card, .calc-cta-guide a') : null;
+      if (!a) return;
+      hubTrack('cta_click', {
+        href: a.getAttribute('href') || '',
+        label: a.textContent || ''
+      });
+    }, true);
+  }
+
   /* ---------- 초기화 ---------- */
   document.addEventListener('DOMContentLoaded', function () {
     initNav();
@@ -181,6 +293,8 @@
     initSegments();
     bindMoneyInputs(document);
     initCopyButtons();
+    initUtm();
+    initTrack();
   });
 
   window.UI = {
@@ -192,6 +306,11 @@
     setValue: setValue,
     segmentValue: segmentValue,
     showResult: showResult,
-    bindMoneyInputs: bindMoneyInputs
+    bindMoneyInputs: bindMoneyInputs,
+    track: hubTrack,
+    utm: currentUtm
   };
+
+  // 외부 요청 없는 로컬 측정 훅 (GA4 연결 지점)
+  window.__hubTrack = hubTrack;
 })();

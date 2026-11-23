@@ -231,7 +231,8 @@
       messages.push({
         type: 'good',
         text: '12월에 ' + comma(sw.amount) + '원을 체크카드로 결제하면 소득공제가 ' +
-          comma(sw.extra) + '원 늘고, 세금은 약 ' + comma(sw.extra * rate) + '원 줄어듭니다.'
+          comma(sw.extra) + '원 늘고, 세금은 소득세 기준 약 ' + comma(sw.extra * rate) +
+          '원, 지방소득세 10%를 더하면 약 ' + comma(Math.round(sw.extra * rate * 1.1)) + '원 줄어듭니다.'
       });
     } else if (sw.wasted > 0) {
       messages.push({
