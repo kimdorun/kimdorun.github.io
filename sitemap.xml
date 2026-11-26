@@ -10,6 +10,7 @@
   · v6.3(2026-11-23): 광고 슬롯 숨김·모바일 히어로 축약+주제 칩·연말정산 절세 표기 정합·UTM 보존 훅. 20개 URL 전부 수정 → lastmod 일괄 갱신.
   · v6.4-hotfix-2(2026-11-25): housing.html 전월세전환율 판단 방향 문장 2건 정정. 해당 1개 URL만 수정 → housing.html lastmod만 갱신(나머지 19개는 2026-11-23 유지).
   · v6.5(2026-11-25): 문장·수치 정정 5건(health-insurance·yearend-tax·guide-weekly·guide-jeonse·loan·about), meta description·title 길이 정리(index·guide-weekly), og:description 보완(privacy·terms), FAQPage 구조화 데이터 4페이지 추가(index·severance·housing·living), yearend 엔진 상수 1건. 수정된 12개 URL만 lastmod 갱신.
+  · v6.5.1(2026-11-26): yearend-tax.html 332행 세대주·세대원 문구 정정, 한국은행 기준금리 3.00%→3.25%(2026-11-26 09:50) 반영한 전월세전환율 법정 상한(5.25%) 안내(guide-jeonse-vs-wolse·housing·about). 수정된 4개 URL만 lastmod 갱신.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -38,7 +39,7 @@
   </url>
   <url>
     <loc>https://kimdorun.github.io/housing.html</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -50,7 +51,7 @@
   </url>
   <url>
     <loc>https://kimdorun.github.io/yearend-tax.html</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -92,7 +93,7 @@
   </url>
   <url>
     <loc>https://kimdorun.github.io/guide-jeonse-vs-wolse.html</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -110,7 +111,7 @@
   </url>
   <url>
     <loc>https://kimdorun.github.io/about.html</loc>
-    <lastmod>2026-11-25</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
