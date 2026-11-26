@@ -48,7 +48,7 @@
       [1000000000, 0.42],
       [Infinity, 0.45]
     ],
-    PENSION_BASE_CAP: 3130250   // 국민연금 기준소득월액 상한 659만원 × 4.75% × 12개월 근사
+    PENSION_BASE_CAP: 3756300   // 국민연금 기준소득월액 상한 659만원 × 4.75% × 12개월 = 3,756,300(주석의 ×12와 값 일치)
   };
 
   function num(value) {
@@ -244,7 +244,7 @@
     if (rent.eligible) {
       messages.push({ type: 'info', text: '월세 세액공제는 무주택 세대주 요건과 전입일·계약서·주민등록등본 확인이 필요합니다.' });
     } else if (rent.reason === 'member') {
-      messages.push({ type: 'info', text: '무주택 세대원은 월세 세액공제 대상이 아닙니다. 세대주만 신청할 수 있어 월세 공제액은 0원으로 계산했습니다.' });
+      messages.push({ type: 'info', text: '월세 세액공제는 원칙적으로 무주택 세대주가 신청합니다. 세대주가 주택 관련 공제를 받지 않는 경우에는 세대원도 받을 수 있어, 이 계산기는 세대원을 0원으로 계산했습니다. 해당된다면 홈택스 미리보기에서 확인하세요.' });
     } else if (rent.reason === 'income') {
       messages.push({ type: 'warn', text: '총급여 8,000만원을 넘으면 월세 세액공제가 적용되지 않습니다. 월세 공제액은 0원입니다.' });
     }
