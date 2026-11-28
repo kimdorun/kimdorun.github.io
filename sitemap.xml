@@ -12,6 +12,7 @@
   · v6.5(2026-11-25): 문장·수치 정정 5건(health-insurance·yearend-tax·guide-weekly·guide-jeonse·loan·about), meta description·title 길이 정리(index·guide-weekly), og:description 보완(privacy·terms), FAQPage 구조화 데이터 4페이지 추가(index·severance·housing·living), yearend 엔진 상수 1건. 수정된 12개 URL만 lastmod 갱신.
   · v6.5.1(2026-11-26): yearend-tax.html 332행 세대주·세대원 문구 정정, 한국은행 기준금리 3.00%→3.25%(2026-11-26 09:50) 반영한 전월세전환율 법정 상한(5.25%) 안내(guide-jeonse-vs-wolse·housing·about). 수정된 4개 URL만 lastmod 갱신.
   · v6.5.2(2026-11-28): about.html 하단 '최근 개정' 표기를 2026년 11월 19일 → 2026년 11월 26일로 정정(v6.5.1 반영일과 일치). 내용 변경이 표기 1건뿐이라 20개 URL lastmod는 그대로입니다(about.html 2026-11-26 유지).
+  · v6.6(2026-11-29): 전 페이지 GA4(gtag.js, G-K3FJG9YZ3G) 삽입, blogboost/·privacy·terms 3개 URL 추가(20→23 URL) 및 두 페이지 canonical·og 메타 보완.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -132,6 +133,24 @@
     <loc>https://kimdorun.github.io/terms.html</loc>
     <lastmod>2026-11-25</lastmod>
     <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://kimdorun.github.io/blogboost/</loc>
+    <lastmod>2026-11-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kimdorun.github.io/blogboost/privacy.html</loc>
+    <lastmod>2026-11-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://kimdorun.github.io/blogboost/terms.html</loc>
+    <lastmod>2026-11-29</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 </urlset>
